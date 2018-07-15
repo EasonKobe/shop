@@ -1,0 +1,21 @@
+<div >
+	<div class="layui-form">
+	<!-- <div jf-grid="数据权限模式" paging="true" search="searchDataauthModel" params="queryDataauthModelParam"
+		resource="dataauth.modelSelector" name="modelList"> -->
+	<div jf-grid="dataAuthModalGridOpts" >
+		<table>
+			<thead>
+				<tr>
+					<th>模式编号</th>
+					<th>模式名称</th>
+				</tr>
+			</thead>
+			<tbody class="tbody">
+				<tr>
+					<td align="center" ng-bind="item.modelCode"></td>
+					<td align="center" ng-bind="item.modelName"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

@@ -1,0 +1,17 @@
+<div class="layui-form addborder" ng-controller="adminChangeCtrl">
+	<table border="0" cellspacing="0" cellpadding="0" class="layui-table dataTable no-footer" lay-even lay-skin="nob">
+		<thead>
+			<tr> 
+		      <th align="left">代码</th>
+			  <th align="left">角色</th>
+			</tr>
+		</thead>
+		<tbody >
+			<tr ng-repeat="role in roleList" ng-click="changer(role,2)"> 
+				<td align="left" class="intercept" ng-bind="role.roleCode"></td>
+			    <td align="left" class="intercept" ng-bind="role.roleName"></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+

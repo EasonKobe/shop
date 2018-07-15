@@ -1,0 +1,70 @@
+<div class="body_mg20" ng-controller="eventResListDialogCtrl">
+	<div class="layui-form">
+		<div class="search_mian">
+			<div class="layui-form-item">
+				<div class="layui-inline">
+					<label class="layui-form-label">事件名称：</label>
+					<div class="layui-input-inline">
+<!-- 						<input class="layui-input" type="text"
+							ng-model="queryParam.menuName"> -->
+						<input class="layui-input" type="text"
+							ng-model="queryEventParam.menuName">
+							
+					</div>
+				</div>
+				<div class="layui-inline">
+					<label class="layui-form-label">事件URL：</label>
+					<div class="layui-input-inline">
+						<!-- <input class="layui-input" type="text" ng-model="queryParam.url"> -->
+						 <input class="layui-input" type="text" ng-model="queryEventParam.url">
+					</div>
+				</div>
+			</div>
+			<div class="search_button">'
+			
+				<button class="layui-btn" ng-click="eventResList.search()">
+					<i class="layui-icon">&#xe615;</i> 查询
+				</button>
+				<button class="layui-btn" ng-click="resetEventQueryParam()">
+					<i class="layui-icon">&#x1002;</i> 重置
+				</button>
+			</div>
+		</div>
+	</div>
+	<div class="button_contain">
+		
+<!-- 		<button class="layui-btn layui-btn-primary" jf-click="dialog($event,'eventResEditDialog','add')"> -->
+		<button class="layui-btn layui-btn-primary" ng-click="modal('/sysmanage/menu/eventResEditDialog.html',
+					eventResInfo={},{title :'事件维护',size : ['800px','350px'],callbacks : [saveConfirm]})">
+			<i class="layui-icon">&#xe61f;</i> 新增
+		</button>
+<!-- 		<button class="layui-btn layui-btn-primary" ng-click="dialog($event,'eventResEditDialog','update')"> -->
+		<button class="layui-btn layui-btn-primary" ng-click="editEventDialog()">
+			<i class="layui-icon">&#xe642;</i> 修改
+		</button>
+<!-- 				<button class="layui-btn layui-btn-danger" jf-click="eventRes.delete"> -->
+		<button class="layui-btn layui-btn-primary" ng-click="eventResList.request('eventResManage.delete?id')" jf-click="eventRes.delete">
+			<i class="layui-icon">&#xe640;</i> 删除
+		</button>
+	</div>
+<!-- 	<div jf-grid="资源列表" paging="true" search="searchEvent" params="queryEventParam"
+		resource="eventResManage.query" name="eventResList"> -->
+			<div jf-grid="eventResList" name="eventResList">
+		<table>
+			<thead>
+				<tr>
+					<th>事件编号</th>
+					<th>事件名称</th>
+					<th>事件URL</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td align="left" ng-bind="item.eventCode"></td>
+					<td align="left" ng-bind="item.eventName"></td>
+					<td align="left" ng-bind="item.url"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

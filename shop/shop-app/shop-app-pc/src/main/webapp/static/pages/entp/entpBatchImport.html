@@ -1,0 +1,35 @@
+<div class="layout_body" ng-controller="entpBatchImportCtrl">
+    <div class="subposition" ng-bind-html="getCurrentLoaction('')"></div>
+    <div class="layui-row">
+        <div class="layui-col-md8 layui-col-md-offset2">
+            <h3>批量导入用户机构树</h3>
+        </div>
+        <div class="layui-col-md8 layui-col-md-offset2 layui-form">
+            <div class="allcontent " style="border:0px">
+                <div class="col_tr">
+                    <div class="col4 text_right">
+                        选择文件：
+                    </div>
+                    <div class="wd190 float_left">
+                        <input class="layui-input" type="file" onchange="angular.element(this).scope().fileChanged(this)" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+                    </div>
+                </div>
+                <div class="button_contain" style="padding-left: 40%">
+                    <button class="layui-btn layui-btn-primary" ng-click="importFile()">
+                        <i class="layui-icon">&#xe61f;</i> 导入
+                    </button>
+                    <button class="layui-btn layui-btn-primary" ng-click="back()">
+                        <i class="layui-icon">&#xe61f;</i> 返回
+                    </button>
+                </div>
+                <div class="col_tr">
+                    <p style="color:#FF5722">{{message}}</p>
+                    <pre class="layui-code">{{result | json}}</pre>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>

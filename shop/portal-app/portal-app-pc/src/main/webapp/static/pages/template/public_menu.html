@@ -1,0 +1,19 @@
+<div class="menu-index" ng-controller="publicMenuCtrl" ng-mouseleave="mouseleave()">
+    <ul class="nav_list">
+        <li class="nav_li"><a class="btn_nav" ng-mouseover="mouseover()"><i class="ic_more png"></i>更多</a>
+            <div class="more_nav" ng-style="moreNav">
+                <!--[if lt IE 9]>
+                <span class="opc_bg"></span>
+                <![endif]-->
+                <i class="ic_bdot png" id="h_bdot" ng-style="bdot"></i>
+                <ul id="h_nav">
+                    <li><a href="javascript:void(0);" ng-click="goHome()" class="btn_snav cur">首页</a></li>
+                    <li><a href="javascript:void(0);" ng-click="turn('/index/aboutus')" class="btn_snav">关于我们</a></li>
+                    <li><a href="javascript:void(0);" ng-click="turn('/index/contactus')" class="btn_snav">联系我们</a>
+                    </li>
+                    <li><a href="javascript:void(0);" ng-click="turn('/index/helper')" class="btn_snav">帮助中心</a></li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+</div>

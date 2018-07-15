@@ -1,0 +1,33 @@
+<style>
+.mydiv {
+  margin: 0 auto;
+  width: 300px;
+  height: 200px;
+  line-height: 40px;
+}
+
+.link {
+  text-align: center;
+}
+
+.link a {
+  color: #00b1f9;
+}
+</style>
+<div ng-controller="withdrawCtrl">
+  <div class="declare-box">
+    <i class="icon-tip tip-danger"></i>提示：请通过网银或银行柜台转账到下列账户，完成充值。
+  </div>
+  <div class="mydiv">
+    <div class="col10">
+      用户名称：<span ng-bind="cstNm"></span>
+    </div>
+    <div class="col10">
+      收款账号： <span ng-bind="accNo"></span>
+    </div>
+    <div class="col10">中信银行将实时反馈贵公司的账户余额，可在【账户总览】-【账户余额】中查询。</div>
+    <div class="link">
+      <a>打印历史回单</a>|<a>资金流水查询</a>
+    </div>
+  </div>
+</div>

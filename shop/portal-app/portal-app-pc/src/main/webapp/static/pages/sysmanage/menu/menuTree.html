@@ -1,0 +1,216 @@
+<div class="layout_body" ng-controller="menuTreeCtrl">
+	<div class="subposition" ng-bind-html="getCurrentLoaction('')"></div>
+	<div class="layui-form">
+		<div class="maintree_contain">
+			<div class="layui-tab layui-tab-card" style="margin:0px">
+				<ul class="layui-tab-title">
+					<li class="layui-this" jf-permission="tree.back">前台树</li>
+					<li jf-permission="tree.fro">后台树</li>
+				</ul>
+				<div class="layui-tab-content">
+					<div class="layui-tab-item layui-show">
+						<!-- 			<div class="maintree_title">功能菜单树-后台</div> -->
+						<div jf-tree="ztree" ng-class="maintree_content"></div>
+						<div class="maintree_button">
+							<button class="layui-btn layui-btn-mini" ng-click="addRootMenu()">添加树</button>
+							<button class="layui-btn layui-btn-mini" ng-click="addMenu()">添加节点</button>
+							<button class="layui-btn layui-btn-mini layui-btn-normal" ng-click="delMenu()">删除</button>
+						</div>
+					</div>
+					<div class="layui-tab-item">
+						<!-- 				<div class="maintree_title" >功能菜单树-前台</div> -->
+						<div jf-tree="ztreeFro" ng-class="maintree_content"></div>
+						<div class="maintree_button">
+							<!-- 					<div id="menuDia" url="/sysmanage/menu/addMenu.html"
+						style="display: none;" title="添加树" size="600px,350px"
+						callback="addMenuSub()"></div> -->
+							<button class="layui-btn layui-btn-mini" ng-click="addRootMenu()">添加树</button>
+							<button class="layui-btn layui-btn-mini" ng-click="addMenu()">添加节点</button>
+							<button class="layui-btn layui-btn-mini layui-btn-normal" ng-click="delMenu()">删除</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="maintree_right">
+			<div id="container">
+				<div class="layui-tab layui-tab-card">
+					<ul class="layui-tab-title">
+						<li class="layui-this">菜单基本信息</li>
+						<li>按钮事件</li>
+					</ul>
+					<div class="layui-tab-content">
+						<div class="layui-tab-item layui-show">
+							<div class="layui-form">
+								<div class="allcontent " style="border: 0px">
+									<div class="col_td">
+										<div class="col4 text_right">
+											<i class="red_input"></i>上级功能：
+										</div>
+										<div class="col3 float_left">
+											<!-- <input class="layui-input" type="text" ng-model="menu.parentMenuName" disabled> -->
+											<input class="layui-input" type="text" ng-model="menu.parentMenuName"
+												selector="selectMenu" placeholder="请选择"> <input class="layui-input"
+												type="hidden" ng-model="menu.parentMenuCode" name="menuCode" validator="required">
+										</div>
+									</div>
+									<div class="col_td">
+										<div class="col4 text_right">
+											<i class="red_input">*</i>名称 ：
+										</div>
+										<div class="wd190 float_left">
+											<input class="layui-input" type="text" ng-model="menu.menuName">
+										</div>
+									</div>
+									<div class="col_td">
+										<div class="col4 text_right">排序 ：</div>
+										<div class="wd190 float_left">
+											<input class="layui-input" type="text" ng-model="menu.sort"
+												onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+												onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
+										</div>
+									</div>
+									<div class="col_td">
+										<div class="col4 text_right">
+											<i class="red_input">*</i>资源类型 ：
+										</div>
+										<div class="wd190 float_left">
+											<select lay-ignore ng-model="menu.menuTypeCd" jf-select="builder.option('MenuType')"
+												class="layui-input" name="menuTypeCd" validator="required"
+												ng-change="checkMenuType(menu)"></select>
+										</div>
+									</div>
+									<div class="col_td">
+										<div class="col4 text_right">资源URL ：</div>
+										<div class="wd190 float_left">
+											<input class="layui-input" type="text" ng-model="menu.url" ng-disabled="menu.urlDisabled">
+										</div>
+									</div>
+									<div class="col_td">
+										<div class="col4 text_right">
+											<i class="red_input">*</i>状态 ：
+										</div>
+										<div class="wd190 float_left">
+											<select lay-ignore ng-model="menu.statusCd" jf-select="builder.option('StCd')"
+												class="layui-input" name="statusCd" validator="required"></select>
+										</div>
+									</div>
+									<div class="col_td">
+										<div class="col4 text_right">描述 ：</div>
+										<div class="wd190 float_left">
+											<input class="layui-input" type="text" ng-model="menu.remark">
+										</div>
+									</div>
+									<div class="col_td">
+										<div ng-if="menu.leafFlagCd=='0'">
+											<div class="col4 text_right">图标 ：</div>
+											<div class="wd190 float_left">
+
+												<div style="display: inline;">
+													<input class="layui-input" type="hidden" ng-model="menu.icon" style="width: 70%"
+														disabled="disabled">
+													<ul class="site-doc-icon">
+														<li class="secmenupic"><i class="{{menu.icon}} sceposition"
+															ng-click="iconSelect()"></i></li>
+													</ul>
+													<button ng-if="menu.icon==''||menu.icon==null" ng-click="iconSelect()"
+														style="height: 28px; float: left; margin-top: 10px;"
+														class="layui-btn layui-btn-primary layui-btn-small">
+														<i class="layui-icon"></i>
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="scrbtn">
+										<button class="layui-btn" ng-click="save()">
+											<i class="layui-icon">&#x1005;</i> 确认
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="layui-tab-item">
+							<div class="layui-form">
+								<div class="search_mian">
+									<div class="layui-form-item">
+										<div class="layui-inline">
+											<label class="layui-form-label">事件名称：</label>
+											<div class="layui-input-inline">
+												<input class="layui-input" type="text" ng-model="menuEventResList.params.eventName">
+											</div>
+										</div>
+										<div class="layui-inline">
+											<label class="layui-form-label">事件URL：</label>
+											<div class="layui-input-inline">
+												<input class="layui-input" type="text" ng-model="menuEventResList.params.url">
+											</div>
+										</div>
+									</div>
+									<div class="search_button">
+										<button class="layui-btn" ng-click="menuEventResList.search()">
+											<i class="layui-icon">&#xe615;</i> 查询
+										</button>
+										<button class="layui-btn" ng-click="resetMenuEvenQueryParam()">
+											<i class="layui-icon">&#x1002;</i> 重置
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class="button_contain">
+								<div id="menuEventEditDialog" url="/sysmanage/menu/eventResSelector.html"
+									style="display: none;" title="事件列表" size="800px,300px" tbNm="menuEventList"
+									callback="saveConfirm"></div>
+								<div id="eventResEditDialog" url="/sysmanage/menu/eventResEditDialog.html"
+									style="display: none;" title="事件维护" size="800px,300px" tbNm="menuEventResList"
+									callback="saveConfirm"></div>
+								<!-- 	<button class="layui-btn layui-btn-primary" jf-click="menuEvent.add"> -->
+								<button class="layui-btn layui-btn-primary" ng-click="addmenuEvent()">
+									<i class="layui-icon">&#xe61f;</i> 新增
+								</button>
+								<!--    <button class="layui-btn layui-btn-primary" jf-click="menuEvent.delete"> -->
+								<button class="layui-btn layui-btn-primary"
+									ng-click="menuEventResList.request('menuEventRelManage.delete?id')">
+									<i class="layui-icon">&#xe640;</i> 删除
+								</button>
+							</div>
+							<div jf-grid="menuEventResList" name="menuEventResList">
+								<table>
+									<thead>
+										<tr>
+											<th align="left">事件编号</th>
+											<th align="left">事件名称</th>
+											<th align="left">事件URL</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td align="left" ng-bind="item.eventCode"></td>
+											<td align="left" ng-bind="item.eventName"></td>
+											<td align="left" ng-bind="item.url"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	layui.use('element', function() {
+		var $ = layui.jquery, element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+
+		//Hash地址的定位
+		var layid = location.hash.replace(/^#test=/, '');
+		element.tabChange('test', layid);
+
+		element.on('tab(test)', function(elem) {
+			location.hash = 'test=' + $(this).attr('lay-id');
+		});
+
+	});
+</script>

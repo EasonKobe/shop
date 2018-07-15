@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jeedev.msdp.sys.dept.dao.ISysDepartmentDao">
+	<resultMap id="sysDepartmentMap" type="java.util.Map" >
+		<result column="ID" property="id" javaType="java.lang.Integer" />
+		<result column="DEPT_CODE" property="deptCode" javaType="java.lang.String" />
+		<result column="DEPT_NAME" property="deptName" javaType="java.lang.String" />
+		<result column="PARENT_DEPT_CODE" property="parentDeptCode"
+			javaType="java.lang.String" />
+		<result column="DEPT_LEVEL_CD" property="deptLevelCd" javaType="java.lang.String" />
+		<result column="SORT" property="sort" javaType="java.lang.Integer" />
+		<result column="STATUS_CD" property="statusCd" javaType="java.lang.String" />
+		<result column="CREATE_TIME" property="createTime" javaType="java.util.Date" />
+		<result column="CREATE_USER" property="createUser" javaType="java.lang.String" />
+		<result column="UPDATE_TIME" property="updateTime" javaType="java.util.Date" />
+		<result column="UPDATE_USER" property="updateUser" javaType="java.lang.String" />
+		<result column="EXPD_ID" property="expdId" javaType="java.lang.String" />
+		<result column="DEL_IND" property="delInd" javaType="java.lang.String" />
+		<result column="VERSION" property="version" javaType="java.lang.Integer" />
+		<result column="REMARK" property="remark" javaType="java.lang.String" />
+		<result column="TENANT_ID" property="tenantId" javaType="java.lang.String" /> 
+		<result column="CLNTEND_ID" property="clntendId" javaType="java.lang.String" />
+	</resultMap>
+
+	<sql id="column_list">
+		SD.ID, SD.DEPT_CODE, SD.DEPT_NAME, SD.PARENT_DEPT_CODE, SD.DEPT_LEVEL_CD, SD.SORT,
+		SD.STATUS_CD, SD.CREATE_TIME, SD.CREATE_USER, SD.UPDATE_TIME, SD.UPDATE_USER,
+		SD.EXPD_ID, SD.DEL_IND, SD.VERSION, SD.REMARK, SD.TENANT_ID,SD.CLNTEND_ID
+	</sql>
+
+	<sql id="where_filters">
+		<where>
+			<if test="id!=null and id!=''">
+				AND SD.ID = #{id}
+			</if>
+
+			<if test="orgCode!=null and orgCode!=''">
+				AND SODR.ORG_CODE = #{orgCode}
+			</if>
+
+			<if test="deptCode!=null and deptCode!=''">
+				AND SD.DEPT_CODE = #{deptCode}
+			</if>
+			<if test="deptCodes != null and deptCodes.size() > 0">
+				AND SD.DEPT_CODE IN
+				<foreach collection="deptCodes" item="deptCode" index="index" open="(" close=")" separator=",">
+					#{deptCode}
+				</foreach>
+			</if>
+			
+			<if test="deptName!=null and deptName!=''">
+				AND SD.DEPT_NAME LIKE concat(concat('%',#{deptName}),'%') 
+			</if>
+			<if test="parentDeptCode!=null and parentDeptCode!=''">
+				AND SD.PARENT_DEPT_CODE = #{parentDeptCode}
+			</if>
+			<if test="deptLevelCd!=null and deptLevelCd!=''">
+				AND SD.DEPT_LEVEL_CD = #{deptLevelCd}
+			</if>
+			<if test="sort!=null and sort!=''">
+				AND SD.SORT = #{sort}
+			</if>
+			<if test="statusCd!=null and statusCd!=''">
+				AND SD.STATUS_CD = #{statusCd}
+			</if>
+			<if test="delInd!=null and delInd!=''">
+				AND SD.DEL_IND = #{delInd} AND SODR.DEL_IND = #{delInd}
+			</if>
+			<if test="version!=null and version!=''">
+				AND SD.VERSION = #{version}
+			</if>
+			<if test="tenantId!=null and tenantId!=''">
+				AND SD.TENANT_ID = #{tenantId}
+			</if>
+			<if test="clntendId!=null and clntendId!=''">
+				AND SD.CLNTEND_ID = #{clntendId}
+			</if>
+		</where>
+	</sql>
+
+	<!--根据条件查询列表 --> 
+	<select id="findDeptList" parameterType="map" resultMap="sysDepartmentMap">
+		SELECT
+		<include refid="column_list" />
+		FROM SYS_DEPARTMENT SD
+		JOIN SYS_ORG_DEPT_REL SODR ON SD.DEPT_CODE = SODR.DEPT_CODE
+		<include refid="where_filters" />
+		ORDER BY SD.SORT,SD.ID DESC
+	</select>
+
+</mapper>

@@ -1,0 +1,320 @@
+<div class="layout_body" ng-controller="roleTreeCtrl">
+		<div class="subposition" ng-bind-html="getCurrentLoaction('')">
+		</div>
+		<div class="layui-form">
+
+			<div class="maintree_contain">
+				<div class="layui-tab layui-tab-card" style="margin:0px">
+					<ul class="layui-tab-title">
+						<li class="layui-this" ng-click="menuClick('10002')" jf-permission="tree.back">后台角色</li>
+						<li ng-click="menuClick('10001')" jf-permission="tree.fro">前台角色</li>
+					</ul>
+					<div class="layui-tab-content">
+						<div class="layui-tab-item layui-show">
+							<div jf-tree="radioRole" ng-class="maintree_content"></div>
+							<div class="maintree_button">
+								<button class="layui-btn layui-btn-mini" ng-click="addRole()">添加树</button>
+								<button class="layui-btn layui-btn-mini" ng-click="addRoleNode()">添加节点</button>
+								<button class="layui-btn layui-btn-mini layui-btn-normal" ng-click="delRole()">删除</button>
+							</div>
+						</div>
+						<div class="layui-tab-item">
+							<div jf-tree="radioRoleFront" ng-class="maintree_content"></div>
+							<div class="maintree_button">
+								<button class="layui-btn layui-btn-mini" ng-click="addRole()">添加树</button>
+								<button class="layui-btn layui-btn-mini" ng-click="addRoleNode()">添加节点</button>
+								<button class="layui-btn layui-btn-mini layui-btn-normal" ng-click="delRole()">删除</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="maintree_right">
+				<div id="container">
+					<div class="layui-tab layui-tab-card">
+						<ul class="layui-tab-title">
+							<li class="layui-this">角色信息</li>
+							<li>用户</li>
+							<li>菜单分配</li>
+							<li>数据权限分配</li>
+						</ul>
+						<div class="layui-tab-content">
+							<div class="layui-tab-item layui-show">
+								<div class="layui-form">
+									<div class="allcontent " style="border:0px">
+										<div class="col_tr">
+											<div class="col4 text_right">
+												<i class="red_input">*</i>上级角色：
+											</div>
+											<div class="wd190 float_left">
+												<input class="layui-input" type="text"
+													ng-model="role.parentRoleName" disabled>
+											</div>
+										</div>
+										<div class="col_tr">
+											<div class="col4 text_right">
+												<i class="red_input">*</i>名称 ：
+											</div>
+											<div class="wd190 float_left">
+												<input class="layui-input" type="text"
+													ng-model="role.roleName" validator="required,maxlength"
+													maxlength="10">
+											</div>
+										</div>
+
+										<div class="col_tr">
+											<div class="col4 text_right">
+												<i class="red_input">*</i>编号 ：
+											</div>
+											<div class="wd190 float_left">
+												<input class="layui-input" type="text" ng-model="role.roleCode" readonly>
+											</div>
+										</div>
+
+										<div class="col_tr">
+											<div class="col4 text_right">
+												<i class="red_input">*</i>状态 ：
+											</div>
+											<div class="col3 float_left">
+												<div class="wd190 float_left">
+													<a href="javascript:void(0);"
+														ng-click="role.statusCd = '0'"><input title="无效"
+														ng-model="role.statusCd" name="statusCd" value="0"
+														type="radio"></a> <a href="javascript:void(0);"
+														ng-click="role.statusCd = '1
+													'"><input
+														title="有效" ng-model="role.statusCd" name="statusCd"
+														value="1" type="radio"></a>
+												</div>
+											</div>
+										</div>
+										<div class="col_tr">
+											<div class="col4 text_right">
+												<i class="red_input"></i>排序：
+											</div>
+											<div class="wd190 float_left">
+												<input class="layui-input" type="text" ng-model="role.sort"
+													onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+													onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
+											</div>
+										</div>
+										<div class="col_tr">
+											<div class="col4 text_right">描述 ：</div>
+											<div class="wd190 float_left">
+												<input class="layui-input" type="text"
+													ng-model="role.remark">
+											</div>
+										</div>
+
+										<div class="col_td" ng-if="role.roleName">
+											<div class="col4 text_right"></div>
+											<div class="col15 text_right">
+												<button class="layui-btn"
+													ng-click="updateRole()">
+													<i class="layui-icon">&#x1005;</i> 确认
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="layui-tab-item">
+								<div class="layui-form">
+									<div class="search_mian">
+										<div class="layui-form-item">
+											<div class="layui-inline">
+												<label class="layui-form-label">登录名:</label>
+												<div class="layui-input-inline">
+													<input class="layui-input" type="text"
+														ng-model="userList.params.userLoginName">
+												</div>
+											</div>
+											<div class="layui-inline">
+												<label class="layui-form-label">姓名:</label>
+												<div class="layui-input-inline">
+													<input class="layui-input" type="text"
+														ng-model="userList.params.userRealname">
+												</div>
+											</div>
+										</div>
+										<div class="search_button">
+											<button class="layui-btn" ng-click="userList.search()">
+												<i class="layui-icon">&#xe615;</i> 查询
+											</button>
+											<button class="layui-btn" ng-click="resetQueryParam()">
+												<i class="layui-icon">&#x1002;</i> 重置
+											</button>
+										</div>
+									</div>
+								</div>
+								<div jf-grid="userList">
+									<table>
+										<thead>
+											<tr>
+												<th>用户编号</th>
+												<th>登陆名称</th>
+												<th>姓名</th>
+												<th>性别</th>
+												<th>电话</th>
+												<th>状态</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td align="left" ng-bind="item.userNum"></td>
+												<td align="left" ng-bind="item.userLoginName"></td>
+												<td align="left" ng-bind="item.userRealname"></td>
+												<td align="left"
+													ng-bind="item.userSexCd | jfConvert : 'dict' : 'Gnd'"></td>
+												<td align="left" ng-bind="item.userMobile"></td>
+												<td align="left"
+													ng-bind="item.userStatusCd |jfConvert:'dict':'StCd'"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="layui-tab-item">
+								<div class="allcontent " style="border:0px">
+									<div class="col_tr">
+										<div class="col2 text_right" title="aaa">
+											<div jf-tree="menu" class="maintree_content"></div>
+										</div>
+										<div class="col8 float_left">
+											<div>
+												<strong>按钮事件权限 </strong>
+											</div>
+											<div jf-grid="eventResList" name="eventResList">
+												<table>
+													<thead>
+														<tr>
+															<th>选择</th>
+															<th align="left" >按钮名称</th>
+															<th align="left" >事件编号</th>
+															<th align="left" >事件名称</th>
+															<th align="left" >事件URL</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td align="left" width="40"><input type="checkbox"
+																name="id" title=" " lay-skin="primary"
+																value='{{item.menuCode}}' ng-checked="item.hasPerm"
+																disabled="disabled">
+															<td align="left" ng-bind="item.menuName"></td>
+															<td align="left" ng-bind="item.eventCode"></td>
+															<td align="left" ng-bind="item.eventName"></td>
+															<td align="left" ng-bind="item.url"></td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+
+									</div>
+
+									<div class="scrbtn">
+											<button class="layui-btn"
+												ng-click="saveRoleMenuRel()">
+												<i class="layui-icon">&#x1005;</i> 确认
+											</button>
+											<button class="layui-btn"
+												ng-click="closePage()">
+												<i class="layui-icon">&#xe60c;</i> 取消
+											</button>
+									</div>
+
+
+								</div>
+							</div>
+							<div class="layui-tab-item">
+								<div class="allcontent" style="border:0px">
+									<div class="col_tr" style="border:solid 1px #E2E2E2; padding-top:20px;padding-bottom:20px; margin-bottom:30px;">
+										<div class="col2 text_right">角色名称 ：</div>
+										<div class="col2 float_left">
+											<input class="layui-input" type="text"
+												ng-model="role.roleName" disabled="disabled">
+										</div>
+										<div class="col2 text_right">默认数据权限 ：</div>
+										<div class="col2 float_left">
+											<input class="layui-input" type="text"
+												ng-model="defaultDataauth.modelName" name="modelName"
+												selector="selectModel" placeholder="请选择" disabled>
+ 											 <input class="layui-input" type="hidden"
+												ng-model="defaultDataauth.modelCode" name="modelCode"
+												validator="required">
+										</div>
+									</div>
+									<div class="col_tr" ng-show='queryMenu.roleCode'>
+										<div style="width:220px; float:left;border:solid 1px #E2E2E2; display:table; min-height:220px">
+											<div style="width:210px; padding-left:10px; heigth:30px; line-height:30px; background:#4586E0; color:#FFF;"><strong>角色已分配菜单</strong></div>
+											<div jf-tree="menuAssigned" class="maintree_content"></div>
+										</div>
+										<div style="margin-left:240px;>
+
+											<div class="allcontent">
+											    <div class="leftmenu_navtitle">角色-场景数据权限信息</div>
+												<div class="col_tr" style="border:solid 1px #E2E2E2; padding-top:10px; padding-bottom:10px;">
+													<div class="col2 text_right">场景 ：</div>
+													<div class="col2 float_left">
+														<input class="layui-input" type="text"
+															ng-model="dataauth.bizSceneName" name="bizSceneName"
+															disabled="disabled"> <input class="layui-input"
+															type="hidden" ng-model="dataauth.bizScene">
+													</div>
+													<div class="col2 text_right">数据权限 ：</div>
+													<div class="col2 float_left">
+														<input class="layui-input" type="text" ng-model="dataauth.modelName" name="modelNamebtn" selector="selectModel2" placeholder="请选择">
+														<input class="layui-input" type="hidden" ng-model="dataauth.modelCode">
+													</div>
+												</div>
+												<div>
+													<strong>资源列表 </strong>
+												</div>
+												<div jf-grid="menuEventDataAuthList" name="menuEventDataAuthList">
+													<table>
+														<thead>
+															<tr>
+																<th>按钮名称</th>
+																<th>事件编号</th>
+																<th>事件名称</th>
+																<th>事件URL</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td align="left" ng-bind="item.menuName"></td>
+																<td align="left" ng-bind="item.eventCode"></td>
+																<td align="left" ng-bind="item.eventName"></td>
+																<td align="left" ng-bind="item.url"></td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	</div>
+</div>
+</div>
+<script>
+	layui.use('element', function() {
+		var $ = layui.jquery, element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+
+		//Hash地址的定位
+		var layid = location.hash.replace(/^#test=/, '');
+		element.tabChange('test', layid);
+
+		element.on('tab(test)', function(elem) {
+			location.hash = 'test=' + $(this).attr('lay-id');
+		});
+
+	});
+</script>

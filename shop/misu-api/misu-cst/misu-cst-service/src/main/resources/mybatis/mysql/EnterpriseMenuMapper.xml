@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tansun.tb.entp.dao.IEnterpriseMenuDao">
+
+    <resultMap id="enterpriseMenuMap" type="java.util.Map">
+        <result column="ID" property="id" javaType="java.lang.Integer"/>
+
+        <result column="ENTP_CODE" property="entpCode" javaType="java.lang.String"/>
+        <result column="MENU_CODE" property="menuCode" javaType="java.lang.String"/>
+
+        <result column="CREATE_TIME" property="createTime" javaType="java.lang.String"/>
+        <result column="CREATE_USER" property="createUser" javaType="java.lang.String"/>
+        <result column="UPDATE_TIME" property="updateTime" javaType="java.lang.String"/>
+        <result column="UPDATE_USER" property="updateUser" javaType="java.lang.String"/>
+        <result column="EXPD_ID" property="expdId" javaType="java.lang.String"/>
+        <result column="DEL_IND" property="delInd" javaType="java.lang.String"/>
+        <result column="VERSION" property="version" javaType="java.lang.Integer"/>
+        <result column="TENANT_ID" property="tenantId" javaType="java.lang.String"/>
+    </resultMap>
+
+    <sql id="column_list">
+        ID,
+        ENTP_CODE,
+        MENU_CODE,
+        CREATE_TIME, CREATE_USER, UPDATE_TIME, UPDATE_USER, EXPD_ID, DEL_IND, VERSION, TENANT_ID
+    </sql>
+
+    <sql id="where_filters">
+        <where>
+            <if test="id!=null and id!=''">AND ID = #{id}</if>
+
+            <if test="entpCode!=null and entpCode!=''">AND ENTP_CODE = #{entpCode}</if>
+            <if test="menuCode!=null and menuCode!=''">AND MENU_CODE = #{menuCode}</if>
+
+            <if test="expdId!=null and expdId!=''">AND EXPD_ID = #{expdId}</if>
+            <if test="delInd!=null and delInd!=''">AND DEL_IND = #{delInd}</if>
+            <if test="version!=null and version!=''">AND VERSION = #{version}</if>
+            <if test="tenantId!=null and tenantId!=''">AND TENANT_ID = #{tenantId}</if>
+        </where>
+    </sql>
+
+    <!--根据条件查询列表-->
+    <select id="findEnterpriseMenuList" parameterType="map" resultMap="enterpriseMenuMap">SELECT
+        <include refid="column_list"/>
+        FROM BIZ_ENTP_MENU
+        <include refid="where_filters"/>
+        ORDER BY ID ASC
+    </select>
+
+</mapper>

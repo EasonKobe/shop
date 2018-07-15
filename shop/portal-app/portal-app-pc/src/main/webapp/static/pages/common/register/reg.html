@@ -1,0 +1,122 @@
+<div class="register-cont" ng-controller="regCtrl" style="height: 100%;">
+    <div class="reg-box">
+        <form name="regForm">
+            <div ng-if="tab==1">
+                <h2>
+                    <a href="index.html">
+                        <img width="120px" src="{{ctx}}/static/images/login/logo-login.png">
+                    </a>
+                </h2>
+                <div class="reg-txt">
+                    <h3>企业名称 </h3>
+                </div>
+                <div class="reg-input">
+                    <input type="text" name="cstNm" class="reg-input-in" ng-model="reg.cstNm" validator="required"
+                           required-error-message="请输入企业名称" placeholder="请输入企业名称">
+                </div>
+                <div class="reg-txt">
+                    <h3>社会信用代码 </h3>
+                </div>
+                <div class="reg-input">
+                    <input type="text" name="cstOrgCode" class="reg-input-in" ng-model="reg.cstOrgCode"
+                           validator="required,creditCode" required-error-message="请输入企业的社会信用代码"
+                           placeholder="请输入企业的社会信用代码">
+                </div>
+                <div class="reg-txt">
+                    <h3>邀请码 </h3>
+                </div>
+                <div class="reg-input">
+                    <input type="text" name="inviteCode" class="reg-input-in middle" ng-model="reg.inviteCode"
+                           validator="required" required-error-message="请输入手机收到的邀请码"
+                           placeholder="请输入手机收到的邀请码">
+                    <a id="getInviteCodeBtn" class="reg-get-code" ng-disabled="enabledInviteCodeBtn"
+                       ng-click="getInviteCode()">重新获取</a>
+                </div>
+                <div class="reg-txt">
+                    <a class="fl white" href="javascript:void(0)">
+                        <input type="checkbox" ng-click="reg.ctrFlag = !reg.ctrFlag"
+                               style="width: 10px; height: 11px;">
+                        <span style="padding-left: 10px;">同意《蔷薇大树金融平台服务协议》</span>
+                    </a>
+                    <a class="reg-txt-back fr white" style="padding-top: 5px;" ng-click="noteDialog.open()">详细>></a>
+                </div>
+                <div class="reg-btn">
+                    <a class="register-next" validation-submit="regForm" ng-click="toTwoStep()">注册 </a>
+                </div>
+                <div class="reg-txt text_center mb20">
+                    <span class="white">已有账号？<a class="reg-txt-back white" ng-click="toLogin()">请登录</a></span>
+                </div>
+            </div>
+            <div ng-if="tab==2">
+                <h2>
+                    <a href="index.html">
+                        <img width="100px" height="100px" src="{{ctx}}/static/images/login/logo-login.png">
+                    </a>
+                </h2>
+                <div class="reg-txt">
+                    <h3>登录账号 </h3>
+                </div>
+                <div class="reg-input">
+                    <input onfocus="this.type='text'" autocomplete="off" class="reg-input-in short" name="loginName"
+                           ng-model="reg.loginName" validator="required" required-error-message="请输入登录账号"
+                           placeholder="请输入登录账号" style="width: 240px;">
+                    <a class="reg-get-code" jf-code="reg" mode="SMS" target="reg.mobile" handle="preHandle()"
+                       captcha="reg.captcha">获取验证码</a>
+                </div>
+                <div class="reg-txt">
+                    <h3>验证码 </h3>
+                </div>
+                <div class="reg-input">
+                    <input type="hidden" name="mobile" ng-model="reg.mobile">
+                    <input type="text" class="reg-input-in" name="code"
+                           validator="required,minlength,maxlength" minlength="6" maxlength="6" ng-model="reg.code"
+                           minlength-error-message="手机验证码由6个字符组成" maxlength-error-message="手机验证码由6个字符组成"
+                           required-error-message="请输入您手机收到的验证码" placeholder="请输入您手机收到的验证码">
+                </div>
+                <div class="reg-txt">
+                    <div class="password">登录密码</div>
+                    <div class="confirm">确认登录密码</div>
+                </div>
+                <div class="reg-input">
+                    <input onfocus="this.type='password'" autocomplete="off" class="reg-input-in short" name="password"
+                           ng-model="reg.password" validator="required,password" required-error-message="请设置您的登录密码"
+                           password-error-message="密码必须由6-20个字母、数字或符号组成" placeholder="请设置您的登录密码"
+                           style="margin-right: 1px;">
+                    <!--<span class="tip inform" ng-if="!!reg.password && reg.confirmPswd===reg.password"> {{passwordDegree(reg.password)}} </span>-->
+                    <input onfocus="this.type='password'" autocomplete="off" class="reg-input-in short"
+                           name="confirmPswd"
+                           ng-model="reg.confirmPswd" validator="required,equals,password" equals="password"
+                           required-error-message="请确认您的登录密码" password-error-message="密码必须由6-20个字母、数字或符号组成"
+                           equals-error-message="确认密码必须与登录密码一致" placeholder="请确认您的登录密码">
+                </div>
+                <div class="reg-txt">
+                    <h3>密保邮箱</h3>
+                </div>
+                <div class="reg-input">
+                    <input type="text" class="reg-input-in" name="email" ng-model="reg.email" validator="email"
+                           email-error-message="请输入正确的邮箱地址" placeholder="请设置您的邮箱">
+                </div>
+                <div class="reg-btn">
+                    <a class="register-next" validation-submit="regForm" ng-click="toThreeStep()">下一步 </a>
+                </div>
+                <div class="reg-txt text_center mb20">
+                    <span class="white">已有账号？<a class="reg-txt-back white" ng-click="toLogin()">请登录</a></span>
+                    <a class="reg-txt-back fr white" href="#" ng-click="back()">返回</a>
+                </div>
+            </div>
+            <div class="reg-result" ng-if="tab==3">
+                <div class="reg-redult-pic">
+                    <a href="index.html"><img src="{{ctx}}/static/images/reg-succeed.png"></a>
+                </div>
+                <h2 class="reg-redult-txt">注册成功！</h2>
+                <div class="reg-redult-btn">
+                    <a ng-click="toLogin()">{{time}}s后跳转，返回</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- 协议详情 -->
+    <div class="overlay-box" style="display: none;" id="law">
+        <div ng-if="noteDialog.showDialog" ng-include="noteDialog.pageUri" class="overlay-box-content"></div>
+    </div>
+</div>

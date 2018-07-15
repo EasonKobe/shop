@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 当前应用名称 -->
+	<dubbo:application name="msdp-sys-service" />
+	<!-- 使用zookeeper注册中心暴露服务地址 -->
+    <dubbo:registry protocol="${dubbo.registry.protocol}" address="${dubbo.registry.address}" file="${dubbo.registry.file}" />
+    <!-- dubbo协议缺省端口为20880，rmi协议缺省端口为1099，http和hessian协议缺省端口为80; 设置-1为动态分配端口，端口号 为 缺省值自增长 -->
+    <dubbo:protocol name="dubbo" port="-1"  accesslog="${dubbo.accesslog}" />
+    
+	<!-- 增加暴露远程服务配置 -->
+	<dubbo:service interface="com.jeedev.msdp.sys.user.api.UserApi" ref="userApi" version="${dubbo.api.version}" />
+	<dubbo:service interface="com.jeedev.msdp.sys.client.api.IClientApi" ref="clientApi" version="${dubbo.api.version}" />
+	<dubbo:service interface="com.jeedev.msdp.sys.dept.api.DeptApi" ref="deptApi" version="${dubbo.api.version}" />
+	<dubbo:service interface="com.jeedev.msdp.sys.menu.api.MenuApi" ref="menuApi" version="${dubbo.api.version}" />
+	<dubbo:service interface="com.jeedev.msdp.sys.org.api.OrgApi" ref="orgApi" version="${dubbo.api.version}" />
+	<dubbo:service interface="com.jeedev.msdp.sys.perm.api.PermApi" ref="permApi" version="${dubbo.api.version}" />
+	<dubbo:service interface="com.jeedev.msdp.sys.role.api.RoleApi" ref="roleApi" version="${dubbo.api.version}" />
+	<dubbo:service interface="com.jeedev.msdp.sys.dict.api.DictApi" ref="sysDictApi"  version="${dubbo.api.version}" />
+	<dubbo:service interface="com.jeedev.msdp.sys.param.api.SysParamApi" ref="sysParamApi" version="${dubbo.api.version}" />
+	<dubbo:service interface="com.jeedev.msdp.sys.area.api.BaseNationAreaApi" ref="baseNationAreaApi" version="${dubbo.api.version}" />
+	<dubbo:service interface="com.jeedev.msdp.sys.dataauth.api.DataAuthApi" ref="dataAuthApi"  version="${dubbo.api.version}"/>
+	<dubbo:service interface="com.jeedev.msdp.sys.quickmenu.api.QuickMenuApi" ref="quickMenuApi"  version="${dubbo.api.version}"/>
+	<dubbo:service interface="com.jeedev.msdp.sys.tenant.api.TenantApi" ref="tenantApi"  version="${dubbo.api.version}"/>
+	<dubbo:service interface="com.jeedev.msdp.sys.event.api.EventApi" ref="eventApi"  version="${dubbo.api.version}"/>
+	
+	
+</beans>
+    

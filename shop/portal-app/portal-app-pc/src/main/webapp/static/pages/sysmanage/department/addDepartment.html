@@ -1,0 +1,39 @@
+<div ng-controller="departmentAddCtrl">
+<form name="departmentAddForm" class="layui-form">
+	<div class="col_tr">
+		<div class="col4 text_right">
+			<i class="red_input">*</i>所属机构编号：
+		</div>
+		<div class="wd190 float_left">
+			<input class="layui-input" type="hidden" ng-model="addDepartment.parentDeptCode">
+			<input class="layui-input" type="hidden" ng-model="addDepartment.parentDeptName">
+			<input class="layui-input" type="text" ng-model="addDepartment.orgCode" name="orgCode" disabled="disabled" validator="required">
+		</div>
+	</div>
+	<div class="col_tr">
+		<div class="col4 text_right">
+			<i class="red_input">*</i>所属机构名称 ：
+		</div>
+		<div class="wd190 float_left">
+			<input class="layui-input" type="hidden" ng-model="addDepartment.orgName" name="orgName" validator="required">
+			<input class="layui-input" type="text" ng-model="addDepartment.orgName" selector="selectOrg" placeholder="请选择">
+		</div>
+	</div>
+	<div class="col_tr">
+		<div class="col4 text_right">
+			<i class="red_input">*</i>部门编号：
+		</div>
+		<div class="wd190 float_left">
+			<input class="layui-input" type="text" ng-model="addDepartment.deptCode" name="deptCode" validator="required,maxlength" maxlength="10">
+		</div>
+	</div>
+	<div class="col_tr">
+		<div class="col4 text_right">
+			<i class="red_input">*</i>部门名称：
+		</div>
+		<div class="wd190 float_left">
+			<input class="layui-input" type="text" ng-model="addDepartment.deptName" name="deptName" validator="required,maxlength" maxlength="10">
+		</div>
+	</div>
+</form>
+</div>

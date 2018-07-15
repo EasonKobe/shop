@@ -1,0 +1,259 @@
+<div class="main" ng-controller="securityCenterCtrl">
+	<div class="title-items">
+		<h2>安全中心</h2>
+		<b class="line"></b>
+	</div>
+	<div class="block-list">
+		<ul class="ul-table">
+			<li class="list_1"><span>企业名称</span></li>
+			<li class="list_2"><i class="icon-20 icon-set-succeed"></i><span
+				ng-bind="security.cstNm"></span></li>
+			<li class="list_3"></li>
+		</ul>
+		<ul class="ul-table">
+			<li class="list_1"><span>社会信用代码</span></li>
+			<li class="list_2"><i class="icon-20 icon-set-succeed"></i><span
+				ng-bind="security.orgCode"></span></li>
+			<li class="list_3"></li>
+		</ul>
+		<ul class="ul-table">
+			<li class="list_1"><span>手机号码</span></li>
+			<li class="list_2"><i class="icon-20 icon-set-succeed"></i><span
+				ng-bind="security.mobile|hide:'mobile':4"></span></li>
+			<li class="list_3"><a class="btn-toggle"
+				ng-click="phoneDiv=!phoneDiv">修改</a></li>
+		</ul>
+		<div class="ul-table-edit" ng-show="phoneDiv">
+			<form name="phoneForm" novalidate>
+				<input type="hidden" ng-model="security.mobile" name="mobile"
+					validator="required">
+				<div class="table-edit-title">修改手机号</div>
+				<div class="input-group">
+					<label class="input-short"><span class="label-icon"><i
+							class="icon-code"></i></span></label> <input type="text" class="input-short"
+						placeholder="请输入验证码" name="captcha" ng-model="mobileData.captcha"
+						ng-keydown="enter($event)" validator="required"
+						required-error-message="请输入验证码">
+					<div jf-captcha="mobile" class="valid-img"></div>
+				</div>
+				<div class="input-group">
+					<input type="text" class="input-short"
+						validator="required,minlength,maxlength" minlength="6"
+						ng-model="mobileData.oriCode" name="oriCode"
+						minlength-error-message="手机验证码由6个字符组成" maxlength="6"
+						maxlength-error-message="手机验证码由6个字符组成"
+						required-error-message="请输入短信验证码" placeholder="请输入验证码">
+					<button class="btn btn-getcode" jf-code="mobile" mode="SMS"
+						target="security.mobile" handle="preHandleMobile()"
+						captcha="mobileData.captcha">免费获取验证码</button>
+				</div>
+				<div class="input-group">
+					<input type="text" placeholder="请输入新手机号"
+						ng-model="mobileData.newMobile" name="newMobile" maxlength="11"
+						validator="required,phone" required-error-message="请输入手机号"
+						phone-error-message="请输入正确的手机号">
+				</div>
+				<div class="input-group">
+					<input type="text" class="input-short"
+						validator="required,minlength,maxlength" minlength="6"
+						maxlength="6" ng-model="mobileData.code" name="code"
+						minlength-error-message="手机验证码由6个字符组成"
+						maxlength-error-message="手机验证码由6个字符组成"
+						required-error-message="请输入短信验证码" placeholder="请输入验证码">
+					<button class="btn btn-getcode" jf-code="mobile" mode="SMS"
+						target="mobileData.newMobile" handle="preHandleNewMobile()"
+						captcha="mobileData.newCaptcha">免费获取验证码</button>
+				</div>
+				<div class="input-button">
+					<button class="btn btn-cancle close" ng-click="phoneDiv=!phoneDiv">取消</button>
+					<button class="btn btn-sure close" validation-submit="phoneForm"
+						ng-click="modifyMobile()">确定</button>
+				</div>
+			</form>
+		</div>
+		<ul class="ul-table">
+			<li class="list_1"><span>登录密码</span></li>
+			<li class="list_2"><i
+				ng-class="{true: 'icon-20 icon-set-succeed', false: 'icon-20 icon-set-failed'}[security.passwordFlag]"></i><span
+				ng-if="security.passwordFlag">已设置</span><span
+				ng-if="!security.passwordFlag">未设置</span></li>
+			<li class="list_3"><a class="btn-toggle"
+				ng-click="pswdDiv=!pswdDiv">修改</a></li>
+		</ul>
+		<div class="ul-table-edit" ng-show="pswdDiv">
+			<form name="pwdForm" novalidate>
+				<div class="table-edit-title">修改登录密码</div>
+				<div class="input-group">
+					<input onfocus="this.type='text'" autocomplete="off"
+						class="input-short" validator="required,minlength,maxlength"
+						minlength="6" maxlength="6" ng-model="pwdData.code" name="code"
+						minlength-error-message="手机验证码由6个字符组成"
+						maxlength-error-message="手机验证码由6个字符组成"
+						required-error-message="请输入短信验证码" placeholder="请输入验证码">
+					<button class="btn btn-getcode" jf-code="pwd" mode="SMS"
+						target="security.mobile" handle="preHandleMobile()"
+						captcha="pwdData.captcha">免费获取验证码</button>
+				</div>
+				<div class="input-group">
+					<input onfocus="this.type='password'" autocomplete="off"
+						ng-model="pwdData.oriPswd" placeholder="请输入原始密码" name="oriPswd"
+						validator="required,password" required-error-message="请输入原始密码"
+						password-error-message="密码必须由6-20个字母、数字或符号组成">
+				</div>
+				<div class="input-group">
+					<input onfocus="this.type='password'" ng-model="pwdData.newPswd"
+						placeholder="请输入新密码" name="newPswd" validator="required,password"
+						required-error-message="请输入新密码"
+						password-error-message="密码必须由6-20个字母、数字或符号组成">
+				</div>
+				<div class="input-group">
+					<input onfocus="this.type='password'"
+						ng-model="pwdData.confirmPswd" placeholder="请再次输入新密码"
+						name="confirmPswd" validator="required,equals,password"
+						equals="newPswd" required-error-message="请再次输入新密码"
+						password-error-message="密码必须由6-20个字母、数字或符号组成"
+						equals-error-message="确认密码必须与新密码一致">
+				</div>
+				<div class="input-button">
+					<button class="btn btn-cancle close" ng-click="pswdDiv=!pswdDiv">取消</button>
+					<button class="btn btn-sure close" validation-submit="pwdForm"
+						ng-click="modifyPswd()">确定</button>
+				</div>
+			</form>
+		</div>
+		<ul class="ul-table">
+			<li class="list_1"><span>邮箱</span></li>
+			<li class="list_2"><i
+				ng-class="{true: 'icon-20 icon-set-succeed', false: 'icon-20 icon-set-failed'}[security.emailFlag]"></i>
+				<span ng-if="security.emailFlag"
+				ng-bind="security.email|hide:'email'">已设置</span> <span
+				ng-if="!security.emailFlag">未设置</span></li>
+			<li class="list_3"><a class="btn-toggle"
+				ng-click="emailDiv=!emailDiv"><p ng-if="!security.emailFlag">绑定</p>
+					<p ng-if="security.emailFlag">修改</p> </a></li>
+		</ul>
+		<div class="ul-table-edit" ng-show="emailDiv">
+			<form name="mailForm" novalidate>
+				<input type="hidden" ng-model="security.email" name="email"
+					validator="required">
+				<div ng-if="!security.aprvSt" class="table-edit-title">绑定邮箱</div>
+				<div ng-if="security.aprvSt" class="table-edit-title">修改邮箱</div>
+				<div class="input-group" ng-show="security.emailFlag">
+					<input type="text" class="input-short"
+						validator="required,minlength,maxlength" minlength="6"
+						maxlength="6" ng-model="emailData.code" name="code"
+						minlength-error-message="验证码由6个字符组成"
+						maxlength-error-message="验证码由6个字符组成"
+						required-error-message="请输入验证码" placeholder="请输入验证码">
+					<button class="btn btn-getcode" jf-code="email" mode="EMAIL"
+						target="security.email" handle="preHandleEmail()"
+						captcha="emailData.captcha">免费获取验证码</button>
+				</div>
+				<div class="input-group">
+					<input type="text" name="newEmail" ng-model="emailData.newEmail"
+						placeholder="请输入邮箱" validator="required,email"
+						required-error-message="请输入邮箱" email-error-message="请输入正确的邮箱地址">
+				</div>
+				<div class="input-group">
+					<input type="text" class="input-short"
+						validator="required,minlength,maxlength" minlength="6"
+						maxlength="6" ng-model="emailData.newCode" name="newCode"
+						minlength-error-message="验证码由6个字符组成"
+						maxlength-error-message="验证码由6个字符组成"
+						required-error-message="请输入验证码" placeholder="请输入验证码">
+					<button class="btn btn-getcode" jf-code="email" mode="EMAIL"
+						target="emailData.newEmail" handle="preHandleNewEmail()"
+						captcha="emailData.newCaptcha">免费获取验证码</button>
+				</div>
+				<div class="input-button">
+					<button class="btn btn-cancle close" ng-click="emailDiv=!emailDiv">取消</button>
+					<button class="btn btn-sure close" ng-click="modifyEmail()">确定</button>
+				</div>
+			</form>
+		</div>
+		<ul class="ul-table">
+			<li class="list_1"><span>我的认证信息</span></li>
+			<li class="list_2"><i
+				ng-class="{'1': 'icon-20 icon-set-succeed', '2': 'icon-20 icon-set-failed', '0': 'icon-20 icon-set-failed'}[security.aprvSt]"></i>
+				<span ng-if="security.aprvSt===''">您还未认证</span> <span
+				ng-if="security.aprvSt==='1'">您已认证</span> <span
+				ng-if="security.aprvSt==='2'">认证被退回</span> <span
+				ng-if="security.aprvSt==='0'">认证审批中</span></li>
+			<li class="list_3" ng-if="security.aprvSt===''"><a
+				class="btn-toggle" href="{{ctx}}/user/staticapprove">立即认证</a></li>
+			<li class="list_3" ng-if="security.aprvSt==='0'"><span>审批中
+					&nbsp;&nbsp;<a class="btn-toggle" href="{{ctx}}/user/staticapprove">查看详情</a>
+			</span></li>
+			<li class="list_3" ng-if="security.aprvSt==='1'"><span>认证通过&nbsp;&nbsp;<a
+					class="btn-toggle" href="{{ctx}}/user/staticapprove">查看详情</a></span></li>
+			<li class="list_3" ng-if="security.aprvSt==='2'"><a
+				class="btn-toggle" href="{{ctx}}/user/staticapprove">重新认证</a></li>
+		</ul>
+		<ul class="ul-table">
+			<li class="list_1"><span>交易密码</span></li>
+			<li class="list_2"><i
+				ng-class="{true: 'icon-20 icon-set-succeed', false: 'icon-20 icon-set-failed'}[security.txnPswdFlag]"></i>
+				<span ng-if="security.txnPswdFlag">已设置</span> <span
+				ng-if="!security.txnPswdFlag">未设置</span></li>
+			<li ng-if="security.txnPswdFlag" class="list_3"><a
+				class="btn-toggle"
+				ng-click="$parent.txnPswdDiv= !$parent.txnPswdDiv">修改</a> <a
+				class="btn-toggle" ng-click="findTxnPwd()">忘记密码?</a></li>
+		</ul>
+		<div class="ul-table-edit" ng-show="txnPswdDiv">
+			<div style="display: none;" id="page">
+				<div ng-include="page"></div>
+			</div>
+			<form name="txnPwdForm" novalidate>
+				<div class="table-edit-title">修改交易密码</div>
+				<div class="input-group">
+					<input type="text" class="input-short"
+						validator="required,minlength,maxlength" minlength="6"
+						maxlength="6" ng-model="txnPswd.code" name="code"
+						minlength-error-message="手机验证码由6个字符组成"
+						maxlength-error-message="手机验证码由6个字符组成"
+						required-error-message="请输入短信验证码">
+					<button class="btn btn-getcode" jf-code="txnPwd" mode="SMS"
+						target="security.mobile" handle="preHandleMobile()"
+						captcha="txnPswd.captcha">免费获取验证码</button>
+				</div>
+				<div class="input-group">
+					<input onfocus="this.type='password'" ng-model="txnPswd.oriPswd"
+						placeholder="请输入原始密码" name="oriPswd" validator="required,password"
+						required-error-message="请输入原始密码"
+						password-error-message="密码必须由6-20个字母、数字或符号组成">
+				</div>
+				<div class="input-group">
+					<input onfocus="this.type='password'" ng-model="txnPswd.newPswd"
+						placeholder="请输入新密码" name="newPswd" validator="required,password"
+						required-error-message="请输入新密码"
+						password-error-message="密码必须由6-20个字母、数字或符号组成">
+				</div>
+				<div class="input-group">
+					<input onfocus="this.type='password'"
+						ng-model="txnPswd.confirmPswd" placeholder="请再次输入新密码"
+						name="confirmPswd" validator="required,equals,password"
+						equals="newPswd" required-error-message="请再次输入新密码"
+						password-error-message="密码必须由6-20个字母、数字或符号组成"
+						equals-error-message="确认密码必须与新密码一致">
+				</div>
+				<div class="input-group">
+					<span class="red">*</span>授权委托书：<a href="javascript:;"
+						class="inputfile">选择文件 <input type="file"
+						filters="fileTypeFilter,fileSizeFilter" nv-file-select
+						uploader="authDocFile.plugin" ng-if="!!security.aprvId">
+					</a>
+					<a ng-if="authDocFile.files.length>0" target="_blank"
+					   href="javascript:;" class="btn-line" ng-click="downLoad(authDocFile.getFullPath(authDocFile.files[0]))">{{authDocFile.files[0]['fileNm']}}</a>
+					<a href="javascript:;" class="btn-line" ng-click="downLoad(ctx+'/static/template/circleExcel.xlsx')">模板下载</a>
+				</div>
+				<div class="input-button">
+					<button class="btn btn-cancle close"
+						ng-click="txnPswdDiv=!txnPswdDiv">取消</button>
+					<button class="btn btn-sure close" validation-submit="txnPwdForm"
+						ng-click="modifyTxnPswd()">确定</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

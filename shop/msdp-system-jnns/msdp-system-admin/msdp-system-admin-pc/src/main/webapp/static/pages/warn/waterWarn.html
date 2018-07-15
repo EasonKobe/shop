@@ -1,0 +1,82 @@
+<div ng-controller="warnCtrl">
+<div  ><!-- 池模式融资水位预警 -->
+	<div class="allcontent">
+	<form class="layui-form layui-form-pane" name="form1">
+			<div class="search_mian">
+				<div class="layui-form-item">
+					<div class="layui-inline">
+						<label class="layui-form-label">合同编号</label>
+						<div class="layui-input-inline">
+							<input class="layui-input" type="text" ng-model="queryParam.ctrId">
+						</div>
+					</div>
+					<div class="layui-inline">
+						<label class="layui-form-label">客户名称</label>
+						<div class="layui-input-inline">
+							<input class="layui-input" type="text" ng-model="queryParam.cstNm">
+						</div>
+					</div>
+					
+				</div>
+				<div class="search_button">
+					<button class="layui-btn" ng-click="search()">
+						<i class="layui-icon">&#xe615;</i> 查询
+					</button>
+					<button class="layui-btn" ng-click="queryParam={}">
+						<i class="layui-icon">&#x1002;</i> 重置
+					</button>
+				</div>
+				</div>
+			</div>
+			<!--search_mian_end-->
+			
+				</form>
+		<div class="button_contain">
+		<button class="layui-btn layui-btn-danger" ng-click="$del($event, '/user/cst/delete?cstId')">
+				<i class="layui-icon">&#xe640;</i> 解除预警
+			</button>
+		</div>		
+	<div jf-grid="用款申请列表" paging="true" search="search" resource="warnPoolList.list" params="queryParam">
+	<div class="subposition">
+			合同信息列表
+		</div>
+			<div class="layui-form">
+			<table>
+				<thead>
+					<tr>
+						<th>选择</th>
+						<th>合同编号</th>
+						<th>业务模式</th>
+						<th>产品名称</th>
+						<th>客户名称</th>
+						<th>币种</th>
+						<th>出账总余额</th>
+						<th>池水位</th>
+						<th>警戒线%</th>
+						<th>登记人</th>
+						<th>登记机构</th>
+					</tr>
+				</thead>
+				<tbody class="tbody">
+					<tr>
+						<td align="center" width="40"><a ng-click="selectItem(item.cstId)" ><input type="radio" name="cstId" title=" " lay-skin="primary"></a></td>
+						<td align="center" ng-bind="item.ctrId"></td>
+						<td align="center" ng-bind="item.bsnModeCd"></td>
+						<td align="center" ng-bind="item.pdNm"></td>
+						<td align="center" ng-bind="item.cstNm"></td>
+						<td align="center" ng-bind="item.ctrCcyCd"></td>
+						<td align="center" ng-bind="item.alrThsFncTAmt"></td>
+						<td align="center" ng-bind="item.poolTAmt"></td>
+						<td align="center" ng-bind="item.poolWaterAlrtLn"></td>
+						<td align="center" ng-bind="item.rspbPsnId"></td>
+						<td align="center" ng-bind="item.hdlInstId"></td>
+					</tr>
+				</tbody>
+			</table>
+			</div>
+		</div>
+		
+	</div>
+	
+</div>
+</div>

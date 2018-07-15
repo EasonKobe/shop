@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jeedev.msdp.sys.user.dao.ISysUserOrgRelDao">
+	<resultMap  id="sysUserOrgRelMap" type="java.util.Map" >
+		<result column="ID" property="id" javaType="java.lang.Integer" />
+		<result column="ORG_CODE" property="orgCode" javaType="java.lang.String" />
+		<result column="ORG_LEVEL_CD" property="orgLevelCd" javaType="java.lang.String" />
+		<result column="USER_NUM" property="userNum" javaType="java.lang.String" />
+		<result column="CREATE_TIME" property="createTime" javaType="java.util.Date" />
+		<result column="CREATE_USER" property="createUser" javaType="java.lang.String" />
+		<result column="UPDATE_TIME" property="updateTime" javaType="java.util.Date" />
+		<result column="UPDATE_USER" property="updateUser" javaType="java.lang.String" />
+		<result column="EXPD_ID" property="expdId" javaType="java.lang.String" />
+		<result column="DEL_IND" property="delInd" javaType="java.lang.String" />
+		<result column="VERSION" property="version" javaType="java.lang.Integer" />
+		<result column="STATUS_CD" property="statusCd" javaType="java.lang.String" />
+		<result column="DEFAULT_IND" property="defaultInd" javaType="java.lang.String" />
+		<!-- 关联表字段 -->
+		<result column="ORG_NAME" property="orgName" javaType="java.lang.String" />
+		<result column="USER_REALNAME" property="userRealname" javaType="java.lang.String" />
+		<result column="USER_LOGIN_NAME" property="userLoginName" javaType="java.lang.String" />
+		<result column="USER_STATUS_CD" property="userStatusCd" javaType="java.lang.String" />
+		<result column="USER_SEX_CD" property="userSexCd" javaType="java.lang.String" />
+		<result column="USER_EMAIL" property="userEmail" javaType="java.lang.String" />
+	</resultMap>
+<resultMap  id="sysUserOrgDeptRelMap" type="java.util.Map" >
+		<result column="ID" property="id" javaType="java.lang.Integer" />
+		<result column="ORG_CODE" property="orgCode" javaType="java.lang.String" />
+		<result column="USER_NUM" property="userNum" javaType="java.lang.String" />
+		<result column="CREATE_TIME" property="createTime" javaType="java.util.Date" />
+		<result column="CREATE_USER" property="createUser" javaType="java.lang.String" />
+		<result column="UPDATE_TIME" property="updateTime" javaType="java.util.Date" />
+		<result column="UPDATE_USER" property="updateUser" javaType="java.lang.String" />
+		<result column="EXPD_ID" property="expdId" javaType="java.lang.String" />
+		<result column="DEL_IND" property="delInd" javaType="java.lang.String" />
+		<result column="VERSION" property="version" javaType="java.lang.Integer" />
+		<result column="STATUS_CD" property="statusCd" javaType="java.lang.String" />
+		<result column="DEFAULT_IND" property="defaultInd" javaType="java.lang.String" />
+		<!-- 关联表字段 -->
+		<result column="ORG_NAME" property="orgName" javaType="java.lang.String" />
+		<result column="DEPT_NAME" property="deptName" javaType="java.lang.String" />
+		<result column="DEPT_CODE" property="deptCode" javaType="java.lang.String" />
+		
+		<result column="USER_REALNAME" property="userRealname" javaType="java.lang.String" />
+		<result column="USER_LOGIN_NAME" property="userLoginName" javaType="java.lang.String" />
+		<result column="USER_STATUS_CD" property="userStatusCd" javaType="java.lang.String" />
+		<result column="USER_SEX_CD" property="userSexCd" javaType="java.lang.String" />
+		<result column="USER_EMAIL" property="userEmail" javaType="java.lang.String" />
+	</resultMap>
+	<sql id="column_list">
+		 SUOR.ID, SUOR.ORG_CODE, SUOR.USER_NUM, SUOR.CREATE_TIME, SUOR.CREATE_USER, SUOR.UPDATE_TIME,
+		SUOR.UPDATE_USER, SUOR.EXPD_ID, SUOR.DEL_IND, SUOR.VERSION,SUOR.STATUS_CD,SUOR.DEFAULT_IND
+		,SO.ORG_NAME
+		,SU.REALNAME AS USER_REALNAME
+		,SO.ORG_LEVEL_CD AS ORG_LEVEL_CD
+		,SU.LOGIN_NAME AS USER_LOGIN_NAME
+		,SU.STATUS_CD AS USER_STATUS_CD
+		,SU.SEX_CD AS USER_SEX_CD
+		,SU.EMAIL AS USER_EMAIL
+		
+	</sql>
+<sql id="column_org_dept_list">
+		 DISTINCT SUOR.ID, SUOR.ORG_CODE, SUOR.USER_NUM, SUOR.CREATE_TIME, SUOR.CREATE_USER, SUOR.UPDATE_TIME,
+		SUOR.UPDATE_USER, SUOR.EXPD_ID, SUOR.DEL_IND, SUOR.VERSION,SUOR.STATUS_CD,SUOR.DEFAULT_IND
+		,SO.ORG_NAME
+		,DP.DEPT_CODE
+		,DP.DEPT_NAME
+		,SU.REALNAME AS USER_REALNAME
+		,SU.LOGIN_NAME AS USER_LOGIN_NAME
+		,SU.STATUS_CD AS USER_STATUS_CD
+		,SU.SEX_CD AS USER_SEX_CD
+		,SU.EMAIL AS USER_EMAIL
+		
+	</sql>
+	<sql id="where_filters">
+		<where>
+			SUOR.ORG_CODE=SO.ORG_CODE
+			and SU.USER_NUM=SUOR.USER_NUM
+			<if test="id!=null and id!=''">
+				AND SUOR.ID = #{id}
+			</if>
+			<if test="orgCode!=null and orgCode!=''">
+				AND SUOR.ORG_CODE = #{orgCode}
+			</if>
+			<if test="userNum!=null and userNum!=''">
+				AND SUOR.USER_NUM = #{userNum}
+			</if>
+
+			<if test="loginName!=null and loginName!=''">
+				AND SU.LOGIN_NAME = #{loginName}
+			</if>
+			<if test="realname!=null and realname!=''">
+				AND SU.REALNAME LIKE concat(concat('%', #{realname}), '%')
+			</if>
+
+
+			<if test="delInd!=null and delInd!=''">
+				AND SUOR.DEL_IND = #{delInd}
+				AND SO.DEL_IND = #{delInd}
+				AND SU.DEL_IND = #{delInd}
+			</if>
+			<if test="version!=null and version!=''">
+				AND SUOR.VERSION = #{version}
+			</if>
+			<if test="defaultInd!=null and defaultInd!=''">
+				AND SUOR.DEFAULT_IND = #{defaultInd}
+			</if>
+		</where>
+	</sql>
+	<sql id="where_org_dept_filters">
+		<where>
+			SUOR.ORG_CODE=SO.ORG_CODE
+			AND SDP.USER_NUM = SU.USER_NUM
+			AND SDP.DEPT_CODE= DP.DEPT_CODE
+			AND SU.USER_NUM=SUOR.USER_NUM
+			<if test="id!=null and id!=''">
+				AND SUOR.ID = #{id}
+			</if>
+			<if test="orgCode!=null and orgCode!=''">
+				AND SUOR.ORG_CODE = #{orgCode}
+			</if>
+			<if test="userNum!=null and userNum!=''">
+				AND SUOR.USER_NUM = #{userNum}
+			</if>
+			<if test="delInd!=null and delInd!=''">
+				AND SUOR.DEL_IND = #{delInd}
+				AND SO.DEL_IND = #{delInd}
+				AND SU.DEL_IND = #{delInd}
+			</if>
+			<if test="version!=null and version!=''">
+				AND SUOR.VERSION = #{version}
+			</if>
+			<if test="defaultInd!=null and defaultInd!=''">
+				AND SUOR.DEFAULT_IND = #{defaultInd}
+			</if>
+		</where>
+	</sql>
+	
+	<!--根据条件查询用户机构列表 -->
+	<select id="findUserOrgRelList" parameterType="map" resultMap="sysUserOrgRelMap">
+		SELECT
+		<include refid="column_list" />
+		FROM SYS_USER_ORG_REL SUOR,SYS_ORGANIZATION SO,SYS_USER SU
+		<include refid="where_filters" />
+		ORDER BY SUOR.ID DESC
+	</select>
+	
+	<!--根据条件查询用户机构部门列表 -->
+	<select id="findUserOrgDeptRelList" parameterType="map" resultMap="sysUserOrgDeptRelMap">
+		SELECT
+		<include refid="column_org_dept_list" />
+		FROM SYS_USER_ORG_REL SUOR,
+		 SYS_USER_DEPT_REL SDP ,
+		SYS_DEPARTMENT DP, 		
+		SYS_ORGANIZATION SO,SYS_USER SU
+		<include refid="where_org_dept_filters" />
+		ORDER BY SUOR.ID DESC
+	</select>
+	
+	<resultMap type="java.util.Map" id="userRoleMap">
+		<result column="USER_NUM" property="userNum" javaType="java.lang.String" />
+	
+		<result column="REALNAME" property="realName" javaType="java.lang.String" />
+		<result column="ROLE_CODE" property="roleCode" javaType="java.lang.String" />
+		<result column="ORG_CODE" property="orgCode" javaType="java.lang.String" />
+		<result column="ORG_NAME" property="orgName" javaType="java.lang.String" />
+	</resultMap>
+	
+	<select id="findUserByOrgRoleRel" parameterType="map" resultMap="userRoleMap">
+		SELECT
+		U.USER_NUM,
+		U.REALNAME,
+		RLREL.ROLE_CODE,
+		INSTREL.ORG_CODE,
+		ORGINFO.ORG_NAME
+		FROM
+			SYS_USER U,
+			SYS_USER_ORG_REL INSTREL,
+			SYS_ORGANIZATION ORGINFO,
+			SYS_USER_ROLE_REL RLREL
+		WHERE
+			U.USER_NUM = INSTREL.USER_NUM
+			AND U.USER_NUM = RLREL.USER_NUM
+			AND ORGINFO.ORG_CODE = INSTREL.ORG_CODE
+			AND U.DEL_IND= '0'
+			AND INSTREL.DEL_IND='0'
+			AND ORGINFO.DEL_IND='0'
+			AND RLREL.DEL_IND='0'
+		<if test="orgCodes!=null and orgCodes.size>0">
+				AND INSTREL.ORG_CODE IN
+			 <foreach item="item" index="index" collection="orgCodes" open="("  
+	            separator="," close=")">  
+	            #{item}  
+	        </foreach> 
+		</if>
+		<if test="roleCodes !=null and roleCodes.size>0">
+			AND RLREL.ROLE_CODE IN 
+			 <foreach item="roleCode" index="index" collection="roleCodes" open="("  
+	            separator="," close=")">  
+	            #{roleCode}  
+	        </foreach> 
+		</if>
+	</select>
+</mapper>

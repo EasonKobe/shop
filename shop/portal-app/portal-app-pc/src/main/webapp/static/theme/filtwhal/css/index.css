@@ -1,0 +1,189 @@
+.index_body{
+	width: 100%;
+	margin-top: 105px;
+}
+.index_b_video{
+	width: 100%;
+	height: 100%;
+	min-width: 960px;
+	cursor: pointer;
+}
+.swiper-container {
+    width: 100%;
+    height: 100%;
+}
+.swiper-s-img{
+	width: 100%;
+	height: 100%;
+}
+/*.index_b_video video{
+	width: 100%;
+	height: 100%;
+}*/
+.index_b_btn{
+	background:  #eeeded;
+	width: 100%;
+	min-width: 960px;
+	height: 150px;
+}
+.index_b_b{
+	width: 460px;
+	margin: 0 auto;
+	padding: 50px 0px;
+}
+.index_b_b_btn0{
+	float: left;
+	margin-left: -100px;
+	opacity: 0;
+	background: #eeeded;
+	color: #000;
+	transition: margin-left 1s, opacity 2.5s, background 1s, color 1s;
+	-moz-transition: margin-left 1s, opacity 2.5s, background 1s, color 1s;	/* Firefox 4 */
+	-webkit-transition: margin-left 1s, opacity 2.5s, background 1s, color 1s;	/* Safari 和 Chrome */
+	-o-transition: margin-left 1s, opacity 2.5s, background 1s, color 1s;	/* Opera */
+}
+.index_b_b_btn1{
+	float: right;
+	margin-right: -100px;
+	opacity: 0;
+	background: #eeeded;
+	color: #000;
+	transition: margin-right 1s, opacity 2.5s, background 1s, color 1s;
+	-moz-transition: margin-right 1s, opacity 2.5s, background 1s, color 1s;	/* Firefox 4 */
+	-webkit-transition: margin-right 1s, opacity 2.5s, background 1s, color 1s;	/* Safari 和 Chrome */
+	-o-transition: margin-right 1s, opacity 2.5s, background 1s, color 1s;	/* Opera */
+}
+.index_b_sbtn{
+	background: #fff;
+	color: #000;
+	transition: background 1s, color 1s;
+	-moz-transition: background 1s, color 1s;	/* Firefox 4 */
+	-webkit-transition: background 1s, color 1s;	/* Safari 和 Chrome */
+	-o-transition: background 1s, color 1s;	/* Opera */
+}
+.index_b_sbtn a{
+	transition: background 1s, color 1s;
+	-moz-transition: background 1s, color 1s;	/* Firefox 4 */
+	-webkit-transition: background 1s, color 1s;	/* Safari 和 Chrome */
+	-o-transition: background 1s, color 1s;	/* Opera */
+}
+.index_b_case{
+	margin-top: 50px;
+	/* height: 600px; */
+}
+.index_b_c{
+	width: 220px;
+	margin-top: 60px;
+	text-align: center;
+	opacity: 0;
+	transition: margin-top .8s, opacity 2s;
+	-moz-transition: margin-top .8s, opacity 2s;	/* Firefox 4 */
+	-webkit-transition: margin-top .8s, opacity 2s;	/* Safari 和 Chrome */
+	-o-transition: margin-top .8s, opacity 2s;	/* Opera */
+}
+.index_b_c img{
+	transform:scale(1);
+	-ms-transform:scale(1); 	/* IE 9 */
+	-moz-transform:scale(1); 	/* Firefox */
+	-webkit-transform:scale(1); /* Safari 和 Chrome */
+	-o-transform:scale(1); 	/* Opera */
+	transition: transform .8s;
+	-moz-transition: transform .8s;	/* Firefox 4 */
+	-webkit-transition: transform .8s;	/* Safari 和 Chrome */
+	-o-transition: transform .8s;	/* Opera */
+}
+.index_b_ser{
+	margin-top: 60px;
+	padding: 20px 0px;
+	width: 100%;
+	text-align: center;
+	min-width: 960px;
+}
+.index_b_simg{
+	/* border: 2px solid #000; */
+	width: 320px;
+	height: 180px;
+	display: flex;
+	display: -webkit-flex;
+	align-items: center;
+	margin-right: 20px;
+	box-shadow: 5px 5px 10px #8E8E8E;
+}
+.index_b_simg:nth-child(1){
+	/* margin-left: -120px; */
+}
+.index_b_simg img{
+	width: 320px;
+}
+.index_b_about{
+	margin-top: 60px;
+	 text-align: center;
+}
+.index_b_a{
+	width: 100%;
+	margin-top: 30px;
+	opacity: 0;
+	transform:translate(-150px, 0px);
+	-ms-transform:translate(-150px, 0px); 	/* IE 9 */
+	-moz-transform:translate(-150px, 0px); 	/* Firefox */
+	-webkit-transform:translate(-150px, 0px); /* Safari 和 Chrome */
+	-o-transform:translate(-150px, 0px); 	/* Opera */
+	transition: transform 1s, opacity 2s;
+	-moz-transition: transform 1s, opacity 2s;	/* Firefox 4 */
+	-webkit-transition: transform 1s, opacity 2s;	/* Safari 和 Chrome */
+	-o-transition: transform 1s, opacity 2s;	/* Opera */
+}
+.index_b_a_p{
+	width: 100%;
+	line-height: 30px;
+	font-size: 16px;
+	margin-top: 30px;
+	/* position: absolute; */
+/* 	top: 130px;
+	right: -150px; */
+	/* margin-left: 300px; */
+	opacity: 0;
+	transform:translate(150px, 0px);
+	-ms-transform:translate(150px, 0px); 	/* IE 9 */
+	-moz-transform:translate(150px, 0px); 	/* Firefox */
+	-webkit-transform:translate(150px, 0px); /* Safari 和 Chrome */
+	-o-transform:translate(150px, 0px); 	/* Opera */
+	transition: transform 1s, opacity 2s;
+	-moz-transition: transform 1s, opacity 2s;	/* Firefox 4 */
+	-webkit-transition: transform 1s, opacity 2s;	/* Safari 和 Chrome */
+	-o-transition: transform 1s, opacity 2s;	/* Opera */
+}
+.index_b_cus{
+	margin-top: 60px;
+	width: 100%;
+	height: 300px;
+	text-align: center;
+	background-image: url('../image/bg2.png');
+}
+.index_b_c_cnt{
+	position: relative;
+	height: 300px;
+	background-image: url('../image/bg0.png');
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+.index_b_cli{
+	height: 292px;
+	margin-top: 80px;
+	margin-bottom: 50px;
+	text-align: center;
+}
+.index_b_c_i{
+	width: 176px;
+	height: 0px;
+	background: #fafafa;
+	float: left;
+	margin-right: 20px;
+	vertical-align: middle;
+	padding-top: 15px;
+	opacity: 0;
+	transition: height 1.6s, opacity 1.6s;
+	-moz-transition: height 1.6s, opacity 1.6s;	/* Firefox 4 */
+	-webkit-transition: height 1.6s, opacity 1.6s;	/* Safari 和 Chrome */
+	-o-transition: height 1.6s, opacity 1.6s;	/* Opera */
+}

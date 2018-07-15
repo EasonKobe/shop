@@ -1,0 +1,73 @@
+<!-- <div ng-controller="dictAddCtrl"> -->
+		<form name="dictFrom" class="layui-form">
+				<div class="col_td">
+					<div class="col3 text_right"><i class="red_input">*</i>字典类型名称：</div>
+					<div class="wd190 float_left">
+						<input class="layui-input" type="text" name="dctTpNm"
+							ng-model="dict.dctTpNm" validator="required">
+					</div>
+				</div>
+				<div class="col_td">
+					<div class="col3 text_right"><i class="red_input">*</i>字典类型：</div>
+					<div class="wd190 float_left">
+						<input class="layui-input" type="text" name="dctTpCd"
+							ng-model="dict.dctTpCd" validator="required">
+					</div>
+				</div>
+				<div class="col_td"  >
+					<div class="col3 text_right">
+						<i class="red_input">*</i>字典键：
+					</div>
+					<div class="wd190 float_left">
+						<input class="layui-input" type="text" name="dctKey"
+							ng-model="dict.dctKey" validator="required">
+					</div>
+				</div>
+				<div class="col_td"  >
+					<div class="col3 text_right">
+						<i class="red_input">*</i>字典值：
+					</div>
+					<div class="wd190 float_left">
+						<input class="layui-input" type="text" name="dctVal"
+							ng-model="dict.dctVal" validator="required">
+					</div>
+				</div>
+				<div class="col_td">
+					<div class="col3 text_right">
+						<i class="red_input">*</i>字典值名称：
+					</div>
+					<div class="wd190 float_left">
+					<input class="layui-input" type="text" name="dctValNm"
+							ng-model="dict.dctValNm" validator="required">
+					</div>
+				</div>
+
+				<div class="col_td">
+					<div class="col3 text_right">状态：</div>
+					<div class="wd190 float_left">
+						
+					<select ng-model="dict.stCd" jf-select="builder.option('StCd')"
+					class="layui-input" placeholder="请选择" name="stCd"
+					validator="required"></select>
+					</div>
+				</div>
+				<div class="col_td">
+					<div class="col3 text_right">字典组：</div>
+					<div class="wd190 float_left">
+						<input class="layui-input" type="text" ng-model="dict.dctGrp">
+					</div>
+				</div>
+				<div class="col_td">
+					<div class="col3 text_right">排序：</div>
+					<div class="wd190 float_left">
+						<input class="layui-input" type="text" ng-model="dict.dctSeq">
+					</div>
+				</div>
+				<div class="col_td">
+					<div class="col3 text_right">描述：</div>
+					<div class="wd190 float_left">
+						<input class="layui-input" type="text" ng-model="dict.dctDsc">
+					</div>
+				</div>
+		</form>
+<!-- </div> -->

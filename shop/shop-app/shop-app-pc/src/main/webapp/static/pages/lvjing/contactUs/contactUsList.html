@@ -1,0 +1,81 @@
+<div class="layout_body" ng-controller="contactUsListCtrl">
+	<div class="body_mg20">
+		<div class="subposition" ng-bind-html="getCurrentLoaction('联系我们信息列表')">
+        </div>
+		<form class="layui-form layui-form-pane" name="form1">
+			<div class="search_mian">
+				<div class="layui-form-item">
+					<div class="layui-inline">
+						<label class="layui-form-label">名字：</label>
+						<div class="layui-input-inline">
+							<input class="layui-input" type="text"
+								ng-model="contactUsList.params.lastName">
+						</div>
+					</div>
+					<div class="layui-inline">
+						<label class="layui-form-label">联系方式：</label>
+						<div class="layui-input-inline">
+							<input class="layui-input" type="text"
+								ng-model="contactUsList.params.telephone">
+						</div>
+					</div>
+					<div class="layui-inline">
+						<label class="layui-form-label">留言内容：</label>
+						<div class="layui-input-inline">
+							<input class="layui-input" type="text"
+								ng-model="contactUsList.params.message">
+						</div>
+					</div>
+				</div>
+				<div class="search_button">
+					<button class="layui-btn" ng-click="contactUsList.search()">
+						<i class="layui-icon">&#xe615;</i> 查询
+					</button>
+	
+					<button class="layui-btn" type="button" ng-click="contactUsList.params={}">
+						<i class="layui-icon">&#x1002;</i> 重置
+					</button>
+				</div>
+			</div>
+		</form>
+		
+		<div class="button_contain">
+			<button class="layui-btn layui-btn-primary"
+				ng-click="contactUsList.turn('/lvjing/contactUs/contactUsEdit?id')">
+				<i class="layui-icon">&#xe61f;</i> 详情
+			</button>
+			<!-- <button class="layui-btn layui-btn-primary"
+				ng-click="contactUsList.request('contactUsList.delete?id&accState','确认解绑该账户？')">
+				<i class="layui-icon">&#xe642;</i> 解绑
+			</button> -->
+		</div>
+		
+		<div jf-grid="contactUsList">
+			<table>
+				<thead>
+					<tr>
+						<th align="center" class="nosort">品牌</th>
+						<th align="center" class="nosort">邮箱</th>
+						<th align="center" class="nosort">联系方式</th>
+						<th align="center" class="nosort">姓氏</th>
+						<th align="center" class="nosort">名字</th>
+						<th align="center" class="nosort">留言内容</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td align="center" ng-bind="item.brand"></td>
+						<td align="center" ng-bind="item.email"></td>
+						<td align="center" ng-bind="item.telephone"></td>
+						<td align="center" ng-bind="item.firstName"></td>
+						<td align="center" ng-bind="item.lastName"></td>
+						<td align="center" ng-bind="item.message"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	<!--body_mg20end-->
+</div>
+
+
+

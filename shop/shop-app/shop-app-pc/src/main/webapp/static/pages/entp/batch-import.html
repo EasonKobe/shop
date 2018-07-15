@@ -1,0 +1,40 @@
+<div class="layout_body" ng-controller="batchImportCtrl">
+    <div class="subposition" ng-bind-html="getCurrentLoaction('')">
+    </div>
+    <div class="layui-row " style="border:0px">
+        <div class="layui-col-md12">
+            <div class="section">
+                <div class="leftmenu_navtitle">
+                    批量录入 <i class="follow_icon" title="关注该业务"></i>
+                </div>
+                <div class="layui-col-md12" >
+                    <p>请填写Excel文件在服务器上的位置</p>
+                </div>
+                <form name="batchImportForm">
+                    <div class="allcontent">
+                        <div class="col_td">
+                            <div class="col4 text_right">
+                                <i class="red_input">*</i>文件位置：
+                            </div>
+                            <div class="wd330 float_left">
+                                <input class="layui-input" type="text" name="file"
+                                       ng-model="file.path" validator="required">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="button_contain">
+                    <button class="layui-btn layui-btn-primary" ng-click="batchImport()" validation-submit="batchImportForm">
+                        <i class="layui-icon">&#xe61f;</i> 导入
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md12" ng-if="result">
+            <p>{{message}}</p>
+            <pre class="layui-code">
+                {{result}}
+            </pre>
+        </div>
+    </div>
+</div>

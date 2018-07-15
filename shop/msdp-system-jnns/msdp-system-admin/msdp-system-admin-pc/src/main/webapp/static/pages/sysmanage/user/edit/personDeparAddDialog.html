@@ -1,0 +1,38 @@
+<div ng-controller="userAndDeptRelEditCtrl">
+	<form name="userAndDeptRelForm">
+		<div class="col_tr" ng-if="false">
+			<div class="col4 text_right">
+				<i class="red_input">*</i>用户编号：
+			</div>
+			<div class="wd190 float_left">
+				<input class="layui-input" type="text" ng-model="userAndDeptRel.userNum">
+				<input class="layui-input" type="hidden" ng-model="userAndDeptRel.id">
+			</div>
+		</div>
+		<div class="col_tr">
+			<div class="col4 text_right">
+				<i class="red_input">*</i>机构名称：
+			</div>
+			<div class="wd190 float_left">
+				<input class="layui-input" type="text" ng-model="userAndDeptRel.orgName" selector="selectUserAndOrgRel" placeholder="请选择">
+				<input class="layui-input" type="hidden" ng-model="userAndDeptRel.orgCode" name="orgCode" validator="required" >
+			</div>
+		</div>
+		<div class="col_tr">
+			<div class="col4 text_right">
+				<i class="red_input">*</i>部门名称：
+			</div>
+			<div class="wd190 float_left">
+				<input class="layui-input" type="text" ng-model="userAndDeptRel.deptName" selector="selectDept" placeholder="请选择">
+				<input class="layui-input" type="hidden" ng-model="userAndDeptRel.deptCode" name="deptCode" validator="required">
+			</div>
+		</div>
+		<div class="col_tr">
+			<div class="col4 text_right">
+				<i class="red_input">*</i>部门用户关联状态：</div>
+			<div class="wd190 float_left">
+				<select  ng-model="userAndDeptRel.statusCd" jf-select="builder.option('StCd')" class="layui-input" placeholder="请选择" name="statusCd" validator="required"></select>
+			</div>
+		</div>
+	</form>
+</div>

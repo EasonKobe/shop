@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>msdp-system</artifactId>
+        <groupId>com.jeedev.msdp.system</groupId>
+        <version>2.0.0-jnns-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <name>msdp-system-admin</name>
+    <groupId>com.jeedev.msdp.system</groupId>
+    <artifactId>msdp-system-admin</artifactId>
+    <packaging>pom</packaging>
+
+    <profiles>
+        <!-- local_mysql -->
+        <profile>
+            <id>local_mysql</id>
+            <properties>
+                <env>local_mysql</env>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>mysql</groupId>
+                    <artifactId>mysql-connector-java</artifactId>
+                    <scope>runtime</scope>
+                </dependency>
+                <dependency>
+                    <groupId>redis.clients</groupId>
+                    <artifactId>jedis</artifactId>
+                    <scope>runtime</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+        <!-- local_mysql -->
+        <profile>
+            <id>local_oracle</id>
+            <properties>
+                <env>local_oracle</env>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>mysql</groupId>
+                    <artifactId>mysql-connector-java</artifactId>
+                    <scope>runtime</scope>
+                </dependency>
+                <dependency>
+                    <groupId>redis.clients</groupId>
+                    <artifactId>jedis</artifactId>
+                    <scope>runtime</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+        <!-- produce -->
+        <profile>
+            <id>produce</id>
+            <properties>
+                <env>produce</env>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>mysql</groupId>
+                    <artifactId>mysql-connector-java</artifactId>
+                    <scope>runtime</scope>
+                </dependency>
+                <dependency>
+                    <groupId>redis.clients</groupId>
+                    <artifactId>jedis</artifactId>
+                    <scope>runtime</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
+
+    <modules>
+        <module>msdp-system-admin-controller</module>
+        <module>msdp-system-admin-pc</module>
+    </modules>
+</project>

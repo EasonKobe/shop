@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>msdp-sys</artifactId>
+        <groupId>com.jeedev.msdp.system</groupId>
+        <version>2.0.0-jnns-SNAPSHOT</version>
+    </parent>
+
+    <groupId>com.jeedev.msdp.system</groupId>
+    <artifactId>msdp-sys-service-dubbo-boot</artifactId>
+    <name>msdp-sys-service-dubbo-boot</name>
+    <packaging>${module.packaging}</packaging>
+
+    <properties>
+        <jackson.version>2.8.10</jackson.version>
+        <junit.version>4.12</junit.version>
+    </properties>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <!-- 配置文件地址 -->
+        <filters>
+            <filter>${project.parent.relativePath}/../config/${env}.properties</filter>
+        </filters>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <!-- 要发布成dubbo服务的模块 -->
+        <dependency>
+            <groupId>com.jeedev.msdp.system</groupId>
+            <artifactId>msdp-sys-service</artifactId>
+        </dependency>
+        <!-- msdp 模块 -->
+        <dependency>
+            <groupId>com.jeedev.msdp</groupId>
+            <artifactId>msdp-data</artifactId>
+        </dependency>
+        <!-- 数据权限远程模式实现类 -->
+        <dependency>
+            <groupId>com.jeedev.msdp.system</groupId>
+            <artifactId>msdp-dataauth-impl</artifactId>
+        </dependency>
+        <!-- dubbo -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>dubbo</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.zookeeper</groupId>
+            <artifactId>zookeeper</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.sgroschupf</groupId>
+            <artifactId>zkclient</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.ruedigermoeller</groupId>
+            <artifactId>fst</artifactId>
+        </dependency>
+
+        <!-- test -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+        </dependency>
+        <!--给SpringBoot.java提供jar包，避免报错-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <scope>provided</scope>
+            <version>1.5.8.RELEASE</version>
+        </dependency>
+    </dependencies>
+    
+
+    <profiles>
+        <!--=======================环境配置开始=======================-->
+        <!-- 生产环境 -->
+        <profile>
+            <id>produce</id>
+            <properties>
+                <env>produce</env>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>mysql</groupId>
+                    <artifactId>mysql-connector-java</artifactId>
+                    <version>5.1.40</version>
+                    <scope>runtime</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+        <!-- 本地mysql环境 -->
+        <profile>
+            <id>local_mysql</id>
+            <properties>
+                <env>local_mysql</env>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>mysql</groupId>
+                    <artifactId>mysql-connector-java</artifactId>
+                    <version>5.1.40</version>
+                    <scope>runtime</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+        <!-- 本地mysql环境 -->
+        <profile>
+            <id>local_oracle</id>
+            <properties>
+                <env>local_oracle</env>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>mysql</groupId>
+                    <artifactId>mysql-connector-java</artifactId>
+                    <version>5.1.40</version>
+                    <scope>runtime</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+        <!--=======================环境配置结束=======================-->
+
+        <!--=======================发布配置开始=======================-->
+        <!--以下三个发布配置互相冲突，同时只能启用一个。-->
+        <!--请注意，使用deploy_jar或deploy_war时，只能运行DubboBoot.java-->
+        <!--使用deploy_springboot_jar时，只能运行SpringBoot.java-->
+        <!--dubbo服务发布成jar包，可被别的web应用集成-->
+        <profile>
+            <id>deploy_jar</id>
+            <properties>
+                <module.packaging>jar</module.packaging>
+                <!-- dubbo 服务版本 -->
+                <dubbo.api.version>1.0.0</dubbo.api.version>
+            </properties>
+        </profile>
+        <!--dubbo服务发布成war包，可被部署到web容器-->
+        <profile>
+            <id>deploy_war</id>
+          	  <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <module.packaging>war</module.packaging>
+                <!-- dubbo 服务版本 -->
+                <dubbo.api.version>1.0.0</dubbo.api.version>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-war-plugin</artifactId>
+                        <configuration>
+                            <webXml>war/web.xml</webXml>
+                            <failOnMissingWebXml>false</failOnMissingWebXml>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+            <dependencies>
+                <dependency>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-web</artifactId>
+                </dependency>
+            </dependencies>
+        </profile>
+        <!-- dubbo服务发布成基于springboot的可直接运行的jar包， 可通过执行`java -jar 包名`来运行 -->
+        <profile>
+          
+            <id>deploy_springboot_jar</id>
+<!--             <activation> -->
+<!--                 <activeByDefault>true</activeByDefault> -->
+<!--             </activation> -->
+            <properties>
+                <module.packaging>jar</module.packaging>
+                <!-- dubbo 服务版本 -->
+                <dubbo.api.version>1.0.0</dubbo.api.version>
+            </properties>
+            <build>
+                <plugins>
+                    <!--将项目打成可运行jar包的插件-->
+                    <plugin>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-maven-plugin</artifactId>
+                        <version>1.5.8.RELEASE</version>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>repackage</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+            <dependencies>
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-web</artifactId>
+                    <exclusions>
+                        <!-- 移除内嵌的tomcat运行容器 -->
+                        <exclusion>
+                            <groupId>org.springframework.boot</groupId>
+                            <artifactId>spring-boot-starter-tomcat</artifactId>
+                        </exclusion>
+                        <!-- 移除springboot的logging-->
+                        <exclusion>
+                            <groupId>org.springframework.boot</groupId>
+                            <artifactId>spring-boot-starter-logging</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+                <!-- 打war包时加入此项， 告诉spring-boot tomcat相关jar包用外部的，不要打进去 -->
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </dependency>
+                <!-- 整合MyBatis的核心依赖 -->
+                <dependency>
+                    <groupId>org.mybatis.spring.boot</groupId>
+                    <artifactId>mybatis-spring-boot-starter</artifactId>
+                    <version>1.3.0</version>
+                    <exclusions>
+                        <!-- 移除springboot的logging-->
+                        <exclusion>
+                            <groupId>org.springframework.boot</groupId>
+                            <artifactId>spring-boot-starter-logging</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+            </dependencies>
+            <dependencyManagement>
+                <dependencies>
+                    <dependency>
+                        <!-- Import dependency management from Spring Boot -->
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-dependencies</artifactId>
+                        <version>1.5.8.RELEASE</version>
+                        <type>pom</type>
+                        <scope>import</scope>
+                    </dependency>
+                </dependencies>
+            </dependencyManagement>
+        </profile>
+        <!--=======================发布配置结束=======================-->
+    </profiles>
+</project>

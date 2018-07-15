@@ -1,0 +1,55 @@
+<div ng-controller="paramAddCtrl">
+	<form name="paramFrom">
+		<div class="col_td">
+			<div class="col4 text_right">
+				<i class="red_input">*</i>参数类型：
+			</div>
+			<div class="wd190 float_left">
+				<input class="layui-input" type="text" name="parmTpCd"
+					ng-model="param.parmTpCd" validator="required">
+			</div>
+		</div>
+		<div class="col_td">
+			<div class="col4 text_right">
+				<i class="red_input">*</i>类型名称：
+			</div>
+			<div class="wd190 float_left">
+				<input class="layui-input" type="text" name="parmTpNm"
+					ng-model="param.parmTpNm" validator="required">
+			</div>
+		</div>
+		<div class="col_td">
+			<div class="col4 text_right">
+				<i class="red_input">*</i>参数编码：
+			</div>
+			<div class="wd190 float_left">
+				<input class="layui-input" type="text" name="parmId"
+					ng-model="param.parmId" validator="required">
+			</div>
+		</div>
+		<div class="col_td">
+			<div class="col4 text_right">
+				<i class="red_input">*</i>参数值：
+			</div>
+			<div class="wd190 float_left">
+				<input class="layui-input" type="text" name="parval"
+					ng-model="param.parval" validator="required">
+			</div>
+		</div>
+		<div class="col_td">
+			<div class="col4 text_right">
+			<i class="red_input">*</i>是否缓存：</div>
+			<div class="wd190 float_left">
+				<select lay-ignore ng-model="param.wthrCchCd" jf-select="builder.option('Indicator')"
+					class="layui-input" placeholder="请选择" name="wthrCchCd"
+					validator="required"></select>
+			</div>
+		</div>
+		<div class="col_td">
+			<div class="col4 text_right">描述：</div>
+			<div class="wd190 float_left">
+				<input class="layui-input" type="text" ng-model="param.parmDsc">
+			</div>
+		</div>
+	</form>
+</div>

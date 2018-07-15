@@ -1,0 +1,120 @@
+<div class="layout_body" ng-controller="departmentTreeCtrl">
+	<div >
+		<div class="subposition" ng-bind-html="getCurrentLoaction('')">
+        </div>
+		<div class="layui-form">
+
+			<div class="maintree_contain">
+				<div class="maintree_title">部门树</div>
+				<div jf-tree="deptTreeOpts" ng-class="maintree_content" ></div>
+				<div class="maintree_button">
+					<button class="layui-btn layui-btn-mini" ng-click="modal('/sysmanage/department/addDepartment.html', addDepartment={}, {title:'添加部门', buttons:['确认', '取消'], size : ['600px','400px'],callbacks : [addDeptCallback]})">新增</button>
+					<button class="layui-btn layui-btn-mini" ng-click="addDepartmentNode()">增加子部门</button>
+					<button class="layui-btn layui-btn-mini layui-btn-normal" ng-click="delDepartment()">删除</button>
+				</div>
+			</div>
+			<div class="maintree_right">
+				<div id="container">
+					<div class="layui-tab layui-tab-card">
+						<ul class="layui-tab-title">
+							<li class="layui-this">部门信息</li>
+							<li>用户</li>
+						</ul>
+						<div class="layui-tab-content">
+							<div class="layui-tab-item layui-show">
+								<div class="layui-form">
+								<form name="departmentUpdateForm">
+									<div class="allcontent " ng-if="department.id" style="border:0px">
+									
+										<div class="col_tr">
+											<div class="col4 text_right">
+												<i class="red_input">*</i>所属机构编号：
+											</div>
+											<div class="col3 float_left">
+												<input class="layui-input" type="hidden" ng-model="department.id">
+												<input class="layui-input" type="hidden" ng-model="department.orgDeptRelId">
+												<input class="layui-input" type="text" ng-model="department.orgCode" name="orgCode" validator="required" disabled="disabled">
+											</div>
+										</div>
+										<div class="col_tr">
+											<div class="col4 text_right">
+												<i class="red_input">*</i>所属机构名称 ：
+											</div>
+											<div class="col3 float_left">
+												<input class="layui-input" type="hidden" ng-model="department.orgName" name="orgName" validator="required" disabled="disabled">
+											    <input class="layui-input" type="text" ng-model="department.orgName" selector="selectOrgForUpdate"  >
+											</div>
+										</div>
+										<div class="col_tr">
+											<div class="col4 text_right">
+												<i class="red_input">*</i>部门编号：
+											</div>
+											<div class="col3 float_left">
+												<input class="layui-input" type="text" ng-model="department.deptCode" validator="required,maxlength" maxlength="10">
+											</div>
+										</div>
+										<div class="col_tr">
+											<div class="col4 text_right">
+												<i class="red_input">*</i>部门名称：
+											</div>
+											<div class="col3 float_left">
+												<input class="layui-input" type="text" ng-model="department.deptName" name="deptName" validator="required,maxlength" maxlength="10">
+											</div>
+										</div>
+										
+	                                     <div class="scrbtn">
+												<button class="layui-btn" ng-click="update()">
+													<i class="layui-icon">&#x1005;</i> 确认
+												</button>
+										</div>
+									</div>
+									</form>
+								</div>
+							</div>
+							<div class="layui-tab-item">
+								<div jf-grid="deptUserGrid" >
+									<table>
+										<thead>
+											<tr>
+												<th align="center">用户编号</th>
+												<th align="center">登陆名称</th>
+												<th align="center">姓名</th>
+												<th align="center">性别</th>
+												<th align="center">电话</th>
+												<th align="center">状态</th>
+											</tr>
+										</thead>
+										<tbody class="tbody">
+											<tr>
+												<td align="center" ng-bind="item.userNum"></td>
+												<td align="center" ng-bind="item.userLoginName"></td>
+												<td align="center" ng-bind="item.userRealname"></td>
+												<td align="center" ng-bind="item.userSexCd | jfConvert : 'dict' : 'Gnd'"></td>
+												<td align="center" ng-bind="item.userMobile"></td>
+												<td align="center" ng-bind="item.userStatusCd |jfConvert:'dict':'StCd'"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+	layui.use('element', function() {
+		var $ = layui.jquery, element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+
+		//Hash地址的定位
+		var layid = location.hash.replace(/^#test=/, '');
+		element.tabChange('test', layid);
+
+		element.on('tab(test)', function(elem) {
+			location.hash = 'test=' + $(this).attr('lay-id');
+		});
+
+	});
+</script>

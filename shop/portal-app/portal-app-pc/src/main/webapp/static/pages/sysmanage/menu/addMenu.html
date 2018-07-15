@@ -1,0 +1,85 @@
+<div  ng-controller="menuAddCtrl">
+	<div class="col_td">
+		<div class="col3 text_right">
+			<i class="red_input">*</i>上级功能：
+		</div>
+		<div class="wd190 float_left">
+			<input class="layui-input" type="text" ng-model="newMenu.parentMenuName" disabled>
+		</div>
+	</div>
+	<div class="col_td">
+		<div class="col3 text_right">
+			<i class="red_input">*</i>名称 ：
+		</div>
+		<div class="wd190 float_left">
+			<input class="layui-input" type="text" ng-model="newMenu.menuName" validator="required">
+		</div>
+	</div>
+	<div class="col_td">
+		<div class="col3 text_right">
+			排序 ：
+		</div>
+		<div class="wd190 float_left">
+			<input class="layui-input" type="text" ng-model="newMenu.sort" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
+		</div>
+	</div>
+	<div class="col_td">
+		<div class="col3 text_right">
+			<i class="red_input">*</i>资源类型 ：
+		</div>
+		<div class="wd190 float_left"> 
+			<select lay-ignore ng-model="newMenu.menuTypeCd" jf-select="builder.option('MenuType')"
+					class="layui-input" placeholder="请选择" name="menuTypeCd"
+					validator="required" ng-change="checkMenuType(newMenu)"></select> 
+		</div>
+	</div>
+	<div class="col_td">
+		<div class="col3 text_right">
+			资源 ：
+		</div>
+		<div class="wd190 float_left">
+			<input class="layui-input" type="text" ng-model="newMenu.url" ng-disabled="newMenu.urlDisabled">
+		</div>
+	</div>
+	<div class="col_td">
+		<div class="col3 text_right">
+			<i class="red_input">*</i>状态 ：
+		</div>
+		<div class="wd190 float_left">
+ 			
+			<select lay-ignore ng-model="newMenu.statusCd" jf-select="builder.option('StCd')"
+					class="layui-input" placeholder="请选择" name="statusCd"
+					validator="required"></select>
+		</div>
+	</div>
+	<div class="col_td">
+		<div class="col3 text_right">
+			描述 ：
+		</div>
+		<div class="wd190 float_left">
+			<input class="layui-input" type="text" ng-model="newMenu.remark">
+		</div>
+	</div>
+		<div class="col_td">
+		<div  ng-if="newMenu.leafFlagCd=='0'">
+		<div class="col3 text_right">
+			图标：
+		</div>
+		<div class="wd190 float_left">
+		    <div style="display:inline;">
+				<input  class="layui-input" type="hidden" ng-model="newMenu.icon" style="width: 70%" disabled="disabled">
+				<div ng-if="newMenu.icon">
+				 <ul class="site-doc-icon">
+				 <li class="secmenupic">
+				<i class="{{newMenu.icon}} sceposition" style="float:left;width:80px;"  ng-click="iconSelect()"></i>
+				</li></ul></div>
+				<button  ng-if="newMenu.icon==''||newMenu.icon==null"  ng-click="iconSelect()" style="height:28px;float:left;margin-top:10px;" class="layui-btn layui-btn-primary layui-btn-small"><i class="layui-icon"></i></button>
+	        </div>	
+		</div>
+		</div>
+		</div>
+	<div class="col_td">
+		<div class="col3 text_right"></div>
+		<div class="col5 float_left"></div>
+	</div>
+</div>

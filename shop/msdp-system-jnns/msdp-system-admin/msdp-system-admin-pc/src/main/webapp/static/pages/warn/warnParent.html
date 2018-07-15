@@ -1,0 +1,48 @@
+<div class="layout_body" ng-controller="parentCtrl">
+	<div id="page" style="display: none;" width="700px" height="350px">
+			<div ng-include="pageUrl"></div>
+    </div>
+	<div class="body_mg20">
+		<div class="subposition">
+			<i class="position_icon"></i>当前位置：工作台 > 风险预警
+		</div>
+		<jf-nav>
+			<div url="/static/pages/warn/beforeHandWarn.html" title="合同到期预警" icon="&#xe600;" ></div>
+			<div load url="/static/pages/warn/fncWarn.html" title="融资到期预警" icon="&#xe613;"></div>
+			<div load url="/static/pages/warn/waterWarn.html" title="池模式融资水位预警" icon="&#xe61d;" ></div>
+			<div load url="/static/pages/warn/overLndWarn.html" title="池模式融资超贷预警" icon="&#xe612;" ></div>
+			<div load url="/static/pages/warn/accdWarn.html" title="账款到期预警" icon="&#xe609;" ></div>
+			<div load url="/static/pages/warn/marketWarn.html" title="市场波动价幅度预警" icon="&#xe612;" ></div>
+			<div load url="/static/pages/warn/enSureWarn.html" title="担保不足额预警" icon="&#xe612;" ></div>
+			<div load url="/static/pages/warn/acctWarn.html" title="单笔溢拨 预警（应收账款）" icon="&#xe612;" ></div>
+			<div load url="/static/pages/warn/assyWarn.html" title="单笔溢拨 预警（组合账款）" icon="&#xe612;" ></div>
+			<div load url="/static/pages/warn/laterWarn.html" title="最迟发货预警 " icon="&#xe612;" ></div>
+		</jf-nav>
+		<!-- <div class="layui-form">
+			<div class="leftmenu_content" ng-init="pageNum = '1'">
+				<ul id="leftmenu_nav" ng-init="tmpUrl = ctx + '/static/pages/warn/beforeHandWarn.html'">
+					<li ng-class="pageNum == '1' ? 'current' : ''"><a href="javascript:void(0);" ng-click="showPage('1')">合同到期预警</a></li>
+					<li ng-class="pageNum == '2' ? 'current' : ''"><a href="javascript:void(0);" ng-click="showPage('2')">融资到期预警</a></li>
+					<li ng-class="pageNum == '3' ? 'current' : ''"><a href="javascript:void(0);" ng-click="showPage('3')">池模式融资水位预警</a></li>
+					<li ng-class="pageNum == '4' ? 'current' : ''"><a href="javascript:void(0);" ng-click="showPage('4')">池模式融资超贷预警</a></li>
+					<li ng-class="pageNum == '5' ? 'current' : ''"><a href="javascript:void(0);" ng-click="showPage('5')">账款到期预警</a></li>
+					<li ng-class="pageNum == '6' ? 'current' : ''"><a href="javascript:void(0);" ng-click="showPage('6')">市场波动价幅度预警</a></li>
+					<li ng-class="pageNum == '7' ? 'current' : ''"><a href="javascript:void(0);" ng-click="showPage('7')">担保不足额预警</a></li>
+					<li ng-class="pageNum == '8' ? 'current' : ''"><a href="javascript:void(0);" ng-click="showPage('8')">单笔溢拨 预警（应收账款）</a></li>
+					<li ng-class="pageNum == '9' ? 'current' : ''"><a href="javascript:void(0);" ng-click="showPage('9')">单笔溢拨 预警（组合账款）</a></li>
+					<li ng-class="pageNum == '10' ? 'current' : ''"><a href="javascript:void(0);" ng-click="showPage('10')">最迟发货预警</a></li>
+				</ul>
+			</div>
+			<div ng-show="pageNum == '1'" class="section"  ng-include="ctx + '/static/pages/warn/beforeHandWarn.html'"></div>
+			<div ng-if="pageNum == '2'" class="section"  ng-include="ctx + '/static/pages/warn/fncWarn.html'"></div>
+		    <div ng-if="pageNum == '3'" class="section"  ng-include="ctx + '/static/pages/warn/waterWarn.html'"></div>
+		    <div ng-if="pageNum == '4'" class="section"  ng-include="ctx + '/static/pages/warn/overLndWarn.html'"></div>
+		    <div ng-if="pageNum == '5'" class="section"  ng-include="ctx + '/static/pages/warn/accdWarn.html'"></div>
+		    <div ng-if="pageNum == '6'" class="section"  ng-include="ctx + '/static/pages/warn/marketWarn.html'"></div>
+		    <div ng-if="pageNum == '7'" class="section"  ng-include="ctx + '/static/pages/warn/enSureWarn.html'"></div>
+		    <div ng-if="pageNum == '8'" class="section"  ng-include="ctx + '/static/pages/warn/acctWarn.html'"></div>
+		    <div ng-if="pageNum == '9'" class="section"  ng-include="ctx + '/static/pages/warn/assyWarn.html'"></div>
+		    <div ng-if="pageNum == '10'" class="section"  ng-include="ctx + '/static/pages/warn/laterWarn.html'"></div>
+		</div> -->
+	</div>
+</div>

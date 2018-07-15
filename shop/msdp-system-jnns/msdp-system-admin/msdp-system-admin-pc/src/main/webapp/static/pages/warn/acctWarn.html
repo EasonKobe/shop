@@ -1,0 +1,116 @@
+<div ng-controller="warnCtrl">
+<div  ><!-- 单笔溢拨 预警（应收账款） -->
+	<div class="allcontent">
+	<form class="layui-form layui-form-pane" name="form1">
+			<div class="search_mian">
+				<div class="layui-form-item">
+				<div class="layui-inline">
+						<label class="layui-form-label">合同编号</label>
+						<div class="layui-input-inline">
+							<input class="layui-input" type="text" ng-model="queryParam.ctrId">
+						</div>
+					</div>
+					<div class="layui-inline">
+						<label class="layui-form-label">应收账款编号</label>
+						<div class="layui-input-inline">
+							<input class="layui-input" type="text" ng-model="queryParam.rcvbId">
+						</div>
+					</div>
+				</div>
+				<div class="search_button">
+					<button class="layui-btn" ng-click="search()">
+						<i class="layui-icon">&#xe615;</i> 查询
+					</button>
+						<button class="layui-btn" ng-click="queryParam={}">
+						<i class="layui-icon">&#x1002;</i> 重置
+					</button>
+					<button class="layui-btn search-senior" type="button">
+						<i class="layui-icon">&#xe654;</i> 更多查询条件
+					</button>
+					<button class="layui-btn cancel-btn" type="button"
+						style="display: none">
+						<i class="layui-icon">&#x1006;</i> 关闭
+					</button>
+				</div>
+				</div>
+			</div>
+			<!--search_mian_end-->
+			<div class="search_sub contract-search-wrap" class="moresearch" style="display: none">
+				<div class="layui-inline">
+						<label class="layui-form-label">客户名称</label>
+						<div class="layui-input-inline">
+							<input class="layui-input" type="text" ng-model="queryParam.cstNm">
+						</div>
+					</div>				
+					<div class="layui-inline">
+						<label class="layui-form-label">交易对手名称名称</label>
+						<div class="layui-input-inline" style="width: 91px;">
+							<input ng-model="queryParam.cntprNm" class="layui-input"
+								date="loanStDate" type="text">
+						</div>						
+					</div>
+					<div class="layui-inline">
+						<label class="layui-form-label">账款起始日</label>
+						<div class="layui-input-inline" style="width: 91px;">
+							<input ng-model="queryParam.rcvbStdt" class="layui-input"
+								date="loanStDate" type="text">
+						</div>					
+					</div>
+					<div class="layui-inline">
+					<div class="layui-form-mid">账款到期日</div>
+						<div class="layui-input-inline" style="width: 91px;">
+							<input ng-model="queryParam.rcvbExdat" class="layui-input "
+								date="loanEdDate" type="text">
+						</div>
+						</div>
+			</div>
+			<!--search_sub_end-->
+		</form>
+		<div class="button_contain">
+		<button class="layui-btn layui-btn-danger" ng-click="$del($event, '/user/cst/delete?cstId')">
+				<i class="layui-icon">&#xe640;</i> 解除预警
+			</button>
+		</div>		
+	<div jf-grid="用款申请列表" paging="true" search="search" resource="warnOneRcvbList.list" params="queryParam">
+			<div class="layui-form">
+			<table>
+				<thead>
+					<tr>
+						<th>选择</th>
+						<th>合同编号</th>
+						<th>应收账款编号</th>
+						<th>客户名称</th>
+						<th>交易对手名称</th>
+						<th>单据类型</th>
+						<th>应收账款金额</th>
+						<th>应收账款余额</th>
+						<th>账款起始日</th>
+						<th>账款到期日</th>
+						<th>登记人</th>
+						<th>登记机构</th>
+					</tr>
+				</thead>
+				<tbody class="tbody">
+					<tr>
+						<td align="center" width="40"><a ng-click="selectItem(item.cstId)" ><input type="radio" name="cstId" title=" " lay-skin="primary"></a></td>
+						<td align="center" ng-bind="item.ctrId"></td>
+						<td align="center" ng-bind="item.rcvbId"></td>
+						<td align="center" ng-bind="item.cstNm"></td>
+						<td align="center" ng-bind="item.cntprNm"></td>
+						<td align="center" ng-bind="item.docTpCd"></td>
+						<td align="center" ng-bind="item.rcvbAmt"></td>
+						<td align="center" ng-bind="item.rcvbBal"></td>
+						<td align="center" ng-bind="item.rcvbStdt"></td>
+						<td align="center" ng-bind="item.rcvbExdat"></td>
+						<td align="center" ng-bind="item.rspbPsnId"></td>
+						<td align="center" ng-bind="item.hdlInstId"></td>
+					</tr>
+				</tbody>
+			</table>
+			</div>
+		</div>
+		
+	</div>
+	 
+</div>
+</div>

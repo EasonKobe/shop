@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.jeedev.msdp.system</groupId>
+        <artifactId>msdp-system-admin</artifactId>
+        <version>2.0.0-jnns-SNAPSHOT</version>
+    </parent>
+
+    <name>msdp-system-admin-controller</name>
+    <artifactId>msdp-system-admin-controller</artifactId>
+    <packaging>jar</packaging>
+
+    <dependencies>
+ 		<dependency>
+            <groupId>com.jeedev.msdp.system</groupId>
+            <artifactId>msdp-sys-service</artifactId>
+        </dependency>
+        <!-- dubbo远程api调用 -->
+   	   	<!-- <dependency>
+            <groupId>com.jeedev.msdp.system</groupId>
+            <artifactId>msdp-sys-api-dubbo-client</artifactId>
+            <version>${msdp.jnns.version}</version>
+        </dependency>  -->
+
+        <!-- 验证码生成调用 -->
+        <!-- <dependency>
+            <groupId>com.jeedev.msdp</groupId>
+            <artifactId>msdp-validatecode-api-dubbo</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency> -->
+         <!-- 邮箱手机号码验证调用 -->
+        <!-- <dependency>
+            <groupId>com.jeedev.msdp</groupId>
+            <artifactId>msdp-msg-api-dubbo</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency> -->
+        <!-- 验证码生成调用 -->
+        <dependency>
+            <groupId>com.jeedev.msdp</groupId>
+            <artifactId>msdp-validatecode-service</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.jeedev.msdp</groupId>
+            <artifactId>msdp-validatecode-api</artifactId>
+        </dependency>
+        <!-- 邮箱手机号码验证调用 -->
+        <dependency>
+            <groupId>com.jeedev.msdp</groupId>
+            <artifactId>msdp-msg-service</artifactId>
+        </dependency>
+        <dependency>
+			<groupId>com.jeedev.msdp</groupId>
+			<artifactId>msdp-msg-api</artifactId>
+		</dependency>
+        <dependency>
+            <groupId>com.jeedev.msdp</groupId>
+            <artifactId>msdp-auth-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.jeedev.msdp.system</groupId>
+            <artifactId>msdp-auth-client-impl</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.jeedev.msdp.system</groupId>
+                    <artifactId>msdp-sys-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- 文件服务引入，目前没用先注释 -->
+        
+        <!-- <dependency>
+            <groupId>com.jeedev.msdp</groupId>
+            <artifactId>msdp-file-api-dubbo</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency> -->
+       
+        <dependency>
+            <groupId>com.jeedev.msdp</groupId>
+            <artifactId>msdp-select-user-service</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.jeedev.msdp</groupId>
+            <artifactId>msdp-select-user-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.jeedev.msdp.system</groupId>
+            <artifactId>msdp-user-select-impl</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.jeedev.msdp.system</groupId>
+                    <artifactId>msdp-sys-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.jeedev.msdp</groupId>
+            <artifactId>msdp-translatehelper</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.jeedev.msdp</groupId>
+            <artifactId>msdp-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.jeedev.msdp</groupId>
+            <artifactId>msdp-constantjs</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.jeedev.msdp.system</groupId>
+                    <artifactId>msdp-sys-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.jeedev.msdp</groupId>
+            <artifactId>msdp-utils</artifactId>
+        </dependency>
+        <!-- SERVLET -->
+        <dependency>
+            <groupId>javax.servlet</groupId><!-- servlet容器 -->
+            <artifactId>javax.servlet-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId><!-- jsp容器 -->
+            <artifactId>javax.servlet.jsp-api</artifactId>
+        </dependency>
+        <!-- jstl标签 -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>taglibs</groupId>
+            <artifactId>standard</artifactId>
+        </dependency>
+
+        <!-- dubbo -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>dubbo</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.zookeeper</groupId>
+            <artifactId>zookeeper</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.sgroschupf</groupId>
+            <artifactId>zkclient</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.ruedigermoeller</groupId>
+            <artifactId>fst</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+        </dependency>
+
+        <!-- 其他 -->
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+        </dependency>
+
+        <!-- httpclient -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+        </dependency>
+        
+        <!-- spring mvc -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+		<!-- spring 依赖包 -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+		</dependency>
+		
+		<!-- apache -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+		</dependency>
+		
+		<!-- fastjson -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+		</dependency>
+		
+		<!-- httpclient -->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId>
+			<scope>provided</scope>
+			<optional>true</optional><!-- 只用于UEditorAction -->
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<scope>provided</scope>
+			<optional>true</optional><!-- 只用于UEditorAction -->
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpmime</artifactId>
+			<scope>provided</scope>
+			<optional>true</optional><!-- 只用于UEditorAction -->
+		</dependency>
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
+
+		<!-- dubbo -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>dubbo</artifactId>
+			<scope>provided</scope>
+			<optional>true</optional>
+		</dependency>
+		
+		 <!--SECURITY begin  -->
+            <!-- shiro -->
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-core</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-spring</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-web</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-ehcache</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-quartz</artifactId>
+            </dependency>
+            <!-- oauth2 -->
+            <dependency>
+                <groupId>org.apache.oltu.oauth2</groupId>
+                <artifactId>org.apache.oltu.oauth2.client</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.oltu.oauth2</groupId>
+                <artifactId>org.apache.oltu.oauth2.authzserver</artifactId>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.oltu.oauth2</groupId>
+                <artifactId>org.apache.oltu.oauth2.resourceserver</artifactId>
+            </dependency>
+            <!--SECURITY end  -->
+		
+
+    </dependencies>
+</project>

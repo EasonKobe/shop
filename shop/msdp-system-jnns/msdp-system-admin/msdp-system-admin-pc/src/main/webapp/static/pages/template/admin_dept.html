@@ -1,0 +1,25 @@
+<div ng-controller="adminChangeCtrl">
+<div class="layui-form addborder">
+	<table border="0" cellspacing="0" cellpadding="0" class="layui-table dataTable no-footer" lay-even lay-skin="nob">
+		<thead>
+			<tr>
+		      
+			  <th align="left">部门代码</th>
+			  <th align="left">部门</th>
+			  <th align="left">机构代码</th>
+			  <th align="left">机构</th>
+			</tr>
+		</thead>
+		<tbody >
+			<tr ng-repeat="dept in deptList" ng-click="changer(dept,1)">
+			  
+			    <td align="left" class="intercept" ng-bind="dept.deptCode"></td>
+			      <td align="left" class="intercept"ng-bind="dept.deptName"></td>
+			       <td align="left" class="intercept" ng-bind="dept.orgCode"></td>
+			      <td align="left" class="intercept" ng-bind="dept.orgName"></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+</div>

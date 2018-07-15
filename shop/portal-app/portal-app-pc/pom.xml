@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.tansun.tb</groupId>
+        <artifactId>portal-app</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <name>portal-app-pc</name>
+    <artifactId>portal-app-pc</artifactId>
+    <packaging>war</packaging>
+
+    <build>
+        <finalName>portal-app-pc</finalName>
+        <filters>
+            <filter>${project.parent.relativePath}/../config/${env}.properties</filter>
+        </filters>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <overlays>
+                        <overlay>
+                            <groupId>com.jeedev.tui</groupId>
+                            <artifactId>tui-bg-v1</artifactId>
+                        </overlay>
+                        <overlay>
+							<groupId>com.jeedev.msdp.system</groupId>
+							<artifactId>msdp-system-admin-pc</artifactId>
+			        	</overlay>
+                    </overlays>
+                     <dependentWarExcludes>
+                       	WEB-INF/lib/msdp-sys-service*,WEB-INF/lib/msdp-sys-api-dubbo-client*,WEB-INF/lib/msdp-file*,WEB-INF/lib/msdp-validatecode*,
+                       	WEB-INF/lib/msdp-msg*
+                   	</dependentWarExcludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.jeedev.msdp.system</groupId>
+            <artifactId>msdp-system-admin-pc</artifactId>
+            <version>2.0.0-resources-SNAPSHOT</version>
+            <type>war</type>
+        </dependency>
+        <dependency>
+            <groupId>com.tansun.tb</groupId>
+            <artifactId>portal-app-controller</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jeedev.tui</groupId>
+            <artifactId>tui-bg-v1</artifactId>
+            <type>war</type>
+        </dependency>
+
+        <!-- SERVLET -->
+        <dependency>
+            <groupId>javax.servlet</groupId><!-- servlet容器 -->
+            <artifactId>javax.servlet-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId><!-- jsp容器 -->
+            <artifactId>javax.servlet.jsp-api</artifactId>
+        </dependency>
+        <!-- jstl标签 -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>taglibs</groupId>
+            <artifactId>standard</artifactId>
+        </dependency>
+    </dependencies>
+
+    <profiles>
+        <!--=======================环境配置开始=======================-->
+        <!-- 生产环境 -->
+        <profile>
+            <id>produce</id>
+            <properties>
+                <env>produce</env>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>mysql</groupId>
+                    <artifactId>mysql-connector-java</artifactId>
+                    <version>5.1.40</version>
+                    <scope>runtime</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+        <!-- 本地mysql环境 -->
+        <profile>
+            <id>local_mysql</id>
+            <properties>
+                <env>local_mysql</env>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>mysql</groupId>
+                    <artifactId>mysql-connector-java</artifactId>
+                    <version>5.1.40</version>
+                    <scope>runtime</scope>
+                </dependency>
+            </dependencies>
+        </profile>
+        <!--=======================环境配置结束=======================-->
+    </profiles>
+</project>

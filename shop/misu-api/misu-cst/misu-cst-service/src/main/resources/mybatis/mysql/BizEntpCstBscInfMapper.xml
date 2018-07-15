@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tansun.tb.entp.dao.IBizEntpCstBscInfDao" >
+	<resultMap id="BizCstBscInf" type="java.util.Map">
+		<result column="ID" property="id" />
+		<result column="CST_ID" property="cstId" />
+		<result column="CST_NM" property="cstNm" />
+		<result column="CST_ENG_NM" property="cstEngNm" />
+		<result column="CST_TP_CD" property="cstTpCd" />
+		<result column="CST_CHAR_CD" property="cstCharCd" />
+		<result column="CORE_CST_ID" property="coreCstId" />
+		<result column="CMIS_CST_ID" property="cmisCstId" />
+		<result column="CST_RLTV_SN" property="cstRltvSn" />
+		<result column="ORG_CODE" property="orgCode" />
+		<result column="CRG_RTG" property="crgRtg" />
+		<result column="ENTP_SZ" property="entpSz" />
+		<result column="ENTP_FD_DT" property="entpFdDt" />
+		<result column="BSN_LCNS_ID" property="bsnLcnsId" />
+		<result column="TAX_RGS_CTF_NO" property="taxRgsCtfNo" />
+		<result column="AR_CPTL_CCY" property="arCptlCcy" />
+		<result column="NET_AST_AMT" property="netAstAmt" />
+		<result column="RGST_CTY" property="rgstCty" />
+		<result column="RGST_PRVC" property="rgstPrvc" />
+		<result column="RGST_CITY" property="rgstCity" />
+		<result column="RGST_AREA" property="rgstArea" />
+		<result column="RGST_ADR" property="rgstAdr" />
+		<result column="ENG_ADR" property="engAdr" />
+		<result column="EMAIL" property="email" />
+		<result column="CO_WEBST" property="coWebst" />
+		<result column="ZIP_CODE" property="zipCode" />
+		<result column="FAX" property="fax" />
+		<result column="TEL" property="tel" />
+		<result column="CTC_PSN" property="ctcPsn" />
+		<result column="CTC_PSN_TEL" property="ctcPsnTel" />
+		<result column="INF_SRC" property="infSrc" />
+		<result column="FCI_MBSH_IND" property="fciMbshInd" />
+		<result column="BLNG_CTY" property="blngCty" />
+		<result column="SWIFT_ID" property="swiftId" />
+		<result column="RMRK" property="rmrk" />
+		<result column="RSPB_PSN_ID" property="rspbPsnId" />
+		<result column="HDL_INST_ID" property="hdlInstId" />
+		<result column="HDL_DT" property="hdlDt" />
+		<result column="CST_ST_CD" property="cstStCd" />
+		<result column="PCS_ST_CD" property="pcsStCd" />
+		<result column="WORK_ITEM_ID" property="workItemId" />
+		<result column="MDF_ST_CD" property="mdfStCd" />
+		<result column="CREATE_TIME" property="createTime" />
+		<result column="UPDATE_TIME" property="updateTime" />
+		<result column="CREATE_USER" property="createUser" />
+		<result column="UPDATEUSER" property="updateUser" />
+		<result column="DEL_IND" property="delInd" />
+		<result column="VERSION" property="version" />
+		<result column="OPIN" property="opin" />
+		<result column="RMNDR_MOD_CD" property="rmndrModCd" />
+		<result column="RMNDR_IND" property="rmndrInd" />
+		<result column="CST_STY_CD" property="cstStyCd" />
+		<result column="IDY_TP_CD" property="idyTpCd" />
+		<result column="TENANT_ID" property="tenantId" />
+		<result column="BELONGING_ROLE" property="belongingRole" />
+		<result column="CRDT_TP_CD" property="crdtTpCd" />
+		<result column="GND" property="gnd" />
+		<result column="BRTH_DT" property="brthDt" />
+		<result column="CRDT_EX_DT" property="crdtExDt" />
+		<result column="REG_LO" property="regLo" />
+		<result column="REG_ADR" property="regAdr" />
+		<result column="WRK_UNIT" property="wrkUnit" />
+		<result column="WRK_UNIT_ADR" property="wrkUnitAdr" />
+		<result column="WRK_UNIT_TP_CD" property="wrkUnitTpCd" />
+	</resultMap>
+	<!--列信息-->
+	<sql id="column_list">
+		BCS.ID AS ID,BCS.CST_ID AS CST_ID,BCS.CST_NM AS CST_NM,BCS.CST_ENG_NM AS CST_ENG_NM,
+		BCS.CST_TP_CD AS CST_TP_CD,BCS.CST_CHAR_CD AS CST_CHAR_CD,BCS.CORE_CST_ID AS CORE_CST_ID,
+		BCS.CMIS_CST_ID AS CMIS_CST_ID,BCS.CST_RLTV_SN AS CST_RLTV_SN,BCS.ORG_CODE AS ORG_CODE,
+		BCS.CRG_RTG AS CRG_RTG,BCS.ENTP_SZ AS ENTP_SZ,BCS.ENTP_FD_DT AS ENTP_FD_DT,BCS.BSN_LCNS_ID AS BSN_LCNS_ID,
+		BCS.TAX_RGS_CTF_NO AS TAX_RGS_CTF_NO,BCS.AR_CPTL_CCY AS AR_CPTL_CCY,BCS.NET_AST_AMT AS NET_AST_AMT,
+		BCS.RGST_CTY AS RGST_CTY,BCS.RGST_PRVC AS RGST_PRVC,BCS.RGST_CITY AS RGST_CITY,BCS.RGST_AREA AS RGST_AREA,
+		BCS.RGST_ADR AS RGST_ADR,BCS.ENG_ADR AS ENG_ADR,BCS.EMAIL AS EMAIL,BCS.CO_WEBST AS CO_WEBST,
+		BCS.ZIP_CODE AS ZIP_CODE,BCS.FAX AS FAX,BCS.TEL AS TEL,BCS.CTC_PSN AS CTC_PSN,
+		BCS.CTC_PSN_TEL AS CTC_PSN_TEL,BCS.INF_SRC AS INF_SRC,BCS.FCI_MBSH_IND AS FCI_MBSH_IND,
+		BCS.BLNG_CTY AS BLNG_CTY,BCS.SWIFT_ID AS SWIFT_ID,BCS.RMRK AS RMRK,BCS.RSPB_PSN_ID AS RSPB_PSN_ID,
+		BCS.HDL_INST_ID AS HDL_INST_ID,BCS.HDL_DT AS HDL_DT,BCS.CREATE_TIME AS CREATE_TIME,BCS.CREATE_USER AS CREATE_USER,
+		BCS.UPDATE_TIME AS UPDATE_TIME,BCS.UPDATE_USER AS UPDATE_USER,BCS.CST_ST_CD AS CST_ST_CD,BCS.PCS_ST_CD AS PCS_ST_CD,
+		BCS.DEL_IND AS DEL_IND,BCS.VERSION AS VERSION,BCS.RMNDR_MOD_CD AS RMNDR_MOD_CD,BCS.RMNDR_IND AS RMNDR_IND,BCS.TENANT_ID AS TENANT_ID,
+		BCS.WORK_ITEM_ID AS WORK_ITEM_ID,BCS.MDF_ST_CD AS MDF_ST_CD,BCS.OPIN AS OPIN,BCS.CST_STY_CD AS CST_STY_CD,BCS.IDY_TP_CD AS IDY_TP_CD,
+		BCS.BELONGING_ROLE AS BELONGING_ROLE,BCS.CRDT_TP_CD AS CRDT_TP_CD,BCS.GND AS GND,BCS.BRTH_DT AS BRTH_DT,
+		BCS.CRDT_EX_DT AS CRDT_EX_DT, BCS.REG_LO AS REG_LO,BCS.REG_ADR AS REG_ADR,BCS.WRK_UNIT AS WRK_UNIT,
+		BCS.WRK_UNIT_ADR AS WRK_UNIT_ADR,BCS.WRK_UNIT_TP_CD AS WRK_UNIT_TP_CD
+	</sql>
+
+	<!--动态条件-->
+	<sql id="where_filters">
+		<if test="id != null and id != ''">
+		 	AND BCS.ID = #{id}
+		 </if>		
+		<if test="cst_Nm != null and cst_Nm != ''">
+		 	AND BCS.CST_NM = #{cst_Nm}
+		 </if>
+		<if test="cstNm != null and cstNm != ''">
+		 	AND BCS.CST_NM LIKE  CONCAT(CONCAT('%',#{cstNm}),'%')
+		 </if>
+		<if test="cstId != null and cstId != ''">
+		 	AND BCS.CST_ID = #{cstId}
+		 </if>
+		<if test="noCstId != null and noCstId != ''">
+		 	<![CDATA[ AND BCS.CST_ID <> #{noCstId} ]]>
+		 </if>		 
+		<if test="cstRltvSn != null and cstRltvSn != ''">
+		 	AND BCS.CST_RLTV_SN = #{cstRltvSn}
+		 </if>		 
+		<if test="coreCstId != null and coreCstId != ''">
+		 	AND BCS.CORE_CST_ID LIKE CONCAT(CONCAT('%',#{coreCstId}),'%')
+		 </if>
+		<if test="cmisCstId != null and cmisCstId != ''">
+		 	AND BCS.CMIS_CST_ID LIKE CONCAT(CONCAT('%',#{cmisCstId}),'%')
+		 </if>			 
+		<if test="orgCode != null and orgCode != ''">
+		 	AND BCS.ORG_CODE LIKE CONCAT(CONCAT('%',#{orgCode}),'%')
+		 </if>
+		<if test="cstTpCd != null and cstTpCd != ''">
+		 	AND BCS.CST_TP_CD  LIKE CONCAT(CONCAT('%',#{cstTpCd}),'%')
+		 </if>
+		<if test="cstStCd != null and cstStCd != ''">
+		 	AND BCS.CST_ST_CD = #{cstStCd}
+		</if>
+		<if test="infSrc != null and infSrc != ''">
+		 	AND BCS.INF_SRC = #{infSrc}
+		</if>
+		<if test="crdtTpCd != null and crdtTpCd != ''">
+		 	AND BCS.CRDT_TP_CD = #{crdtTpCd}
+		</if>
+		<if test="cstStCds != null and cstStCds.size() > 0">
+			AND BCS.CST_ST_CD IN
+			<foreach collection="cstStCds" open="(" separator="," close=")" item="cstStCd">
+				#{cstStCd}
+			</foreach>
+		</if>
+		<if test="cstTpCds != null and cstTpCds.size() > 0">
+			AND
+			<foreach collection="cstTpCds" open="(" separator="or" close=")" item="cstTpCd">
+				BCS.CST_TP_CD  LIKE CONCAT(CONCAT('%',#{cstTpCd}),'%')
+			</foreach>
+		</if>
+		<if test="mdfStCd != null and mdfStCd != ''">
+		 	AND BCS.MDF_ST_CD = #{mdfStCd}
+		 </if>
+		<if test="cstRltvSns != null and cstRltvSns.size() > 0">
+			AND 
+				 <foreach collection="cstRltvSns" item="item" index="index" open="(" close=")" separator="or">
+					BCS.CST_RLTV_SN = #{item}
+				</foreach>
+		 </if>
+		<if test="cstIds != null and cstIds.size() > 0">
+		 	AND 
+		 		<foreach collection="cstIds" item="item" index="index" open="(" close=")" separator="or">
+					BCS.CST_ID = #{item}
+				</foreach>
+		 </if>
+		 <if test="orgCodes != null and orgCodes.size() > 0">
+		 	AND 
+		 		<foreach collection="orgCodes" item="item" index="index" open="(" close=")" separator="or">
+					BCS.ORG_CODE = #{item}
+				</foreach>
+		 </if>
+		 <if test="cstStCdGroups != null and cstStCdGroups.size() > 0">
+		 	AND 
+		 		<foreach collection="cstStCdGroups" item="item" index="index" open="(" close=")" separator="or">
+					(BCS.CST_ST_CD = #{item.cstStCd} AND BCS.MDF_ST_CD = #{item.mdfStCd})
+				</foreach>
+		 </if>
+		 <if test="updateTimeStarDt != null and updateTimeStarDt != ''">
+			<![CDATA[ AND BCS.UPDATE_TIME >= #{updateTimeStarDt} ]]>
+		 </if>
+		 <if test="updateTimeEndDt != null and updateTimeEndDt != ''">
+			<![CDATA[ AND BCS.UPDATE_TIME <= #{updateTimeEndDt}  ]]>
+		 </if>
+		 <if test="tenantId != null and tenantId != ''">
+			AND BCS.TENANT_ID = #{tenantId}
+		 </if>
+		 <!-- 9：预存状态，只有在ecif引入时赋值，当引入后在界面点击保存时被更改。 -->
+		 <!-- ecif引入时，预存到供应链，只有在点击保存后，才更改为待生效，因此，预存状态不能在客户查询列表展示 -->
+		 <if test="defParamFlag != null and defParamFlag != ''">
+			AND BCS.CST_ST_CD != '9'
+		 </if>
+	</sql>	
+	<select id="findBizCstBscInfPage" parameterType="java.util.Map" resultMap="BizCstBscInf">
+	    SELECT 
+	    <include refid="column_list"/>
+		FROM BIZ_CST_BSC_INF BCS
+		WHERE 1=1 AND BCS.DEL_IND='0'
+	 	<include refid="where_filters"/>
+	 	ORDER BY BCS.ID DESC 
+	</select>
+	
+	
+	<resultMap id="BizCstMgtTeam" type="java.util.Map">
+		<result column="loginName" property="loginName" />
+		<result column="realName" property="realName" />
+		<result column="userNum" property="userNum" />
+		<result column="orgCode" property="orgCode" />
+		<result column="orgName" property="orgName" />
+		<result column="mapWght" property="mapWght" />
+		<result column="hdlWght" property="hdlWght" />
+		<result column="mntWght" property="mntWght" />
+		<result column="exmWght" property="exmWght" />
+	</resultMap>
+	<!--列信息-->
+	<sql id="term_column_list">
+		su.login_name as loginName,
+       su.realname   as realName,
+       su.user_num   as userNum,
+       suor.org_code as orgCode,
+       sot.org_name  as orgName,
+       term.MAP_WGHT as mapWght,
+       term.HDL_WGHT as hdlWght,
+       term.MNT_WGHT as mntWght,
+       term.EXM_WGHT as exmWght
+	</sql>	
+	
+	<!--动态条件-->
+	<sql id="where_term_tefilters">
+		<if test="cstId != null and cstId != ''">
+		 	AND term.cst_id = #{cstId}
+		 </if>	
+	</sql>
+	
+	<select id="findBizCstMgtTeamPage" parameterType="java.util.Map" resultMap="BizCstMgtTeam">
+		SELECT 
+		<include refid="term_column_list"/>
+		FROM BIZ_CST_MGT_TEAM term
+			 INNER JOIN SYS_USER su ON term.cst_mgr = su.login_name
+			 INNER JOIN SYS_USER_ORG_REL suor ON su.user_num = suor.user_num
+			 INNER JOIN SYS_ORGANIZATION sot ON suor.org_code = sot.org_code
+		WHERE 1=1 AND term.del_ind = '0' 
+		<include refid="where_term_tefilters"/>
+		
+	</select>
+</mapper>

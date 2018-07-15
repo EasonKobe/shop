@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tansun.tb.entp.dao.IEnterpriseDao">
+
+    <resultMap id="enterpriseMap" type="java.util.Map">
+        <result column="ID" property="id" javaType="java.lang.Integer"/>
+
+        <result column="ENTP_CODE" property="entpCode" javaType="java.lang.String"/>
+        <result column="ENTP_NM" property="entpNm" javaType="java.lang.String"/>
+        <result column="ENTP_ORG_CODE" property="entpOrgCode" javaType="java.lang.String"/>
+        <result column="ENTP_ORG_LVL_CD" property="entpOrgLvlCd" javaType="java.lang.String"/>
+        <result column="ENTP_CRDT_TP_CD" property="entpCrdtTpCd" javaType="java.lang.String"/>
+        <result column="ENTP_CRDT_NO" property="entpCrdtNo" javaType="java.lang.String"/>
+        <result column="ENTP_EMAIL_ADR" property="entpEmailAdr" javaType="java.lang.String"/>
+        <result column="ENTP_FAX_NO" property="entpFaxNo" javaType="java.lang.String"/>
+        <result column="ENTP_CTCPSN" property="entpCtcpsn" javaType="java.lang.String"/>
+        <result column="ENTP_CTCPSN_TEL" property="entpCtcpsnTel" javaType="java.lang.String"/>
+        <result column="ENTP_RGST_ADR" property="entpRgstAdr" javaType="java.lang.String"/>
+        <result column="WTHR_CPTPL_HOST_ENTP" property="wthrCptplHostEntp" javaType="java.lang.String"/>
+        <result column="WTHR_SIGN" property="wthrSign" javaType="java.lang.String"/>
+        <result column="PARENT_ENTP_CODE" property="parentEntpCode" javaType="java.lang.String"/>
+
+        <result column="CREATE_TIME" property="createTime" javaType="java.lang.String"/>
+        <result column="CREATE_USER" property="createUser" javaType="java.lang.String"/>
+        <result column="UPDATE_TIME" property="updateTime" javaType="java.lang.String"/>
+        <result column="UPDATE_USER" property="updateUser" javaType="java.lang.String"/>
+        <result column="EXPD_ID" property="expdId" javaType="java.lang.String"/>
+        <result column="DEL_IND" property="delInd" javaType="java.lang.String"/>
+        <result column="VERSION" property="version" javaType="java.lang.Integer"/>
+        <result column="TENANT_ID" property="tenantId" javaType="java.lang.String"/>
+    </resultMap>
+
+    <sql id="column_list">
+        ID,
+        ENTP_CODE,
+        ENTP_NM,
+        ENTP_ORG_CODE,
+        ENTP_ORG_LVL_CD,
+        ENTP_CRDT_TP_CD,
+        ENTP_CRDT_NO,
+        ENTP_EMAIL_ADR,
+        ENTP_FAX_NO,
+        ENTP_CTCPSN,
+        ENTP_CTCPSN_TEL,
+        ENTP_RGST_ADR,
+        WTHR_CPTPL_HOST_ENTP,
+        WTHR_SIGN,
+        PARENT_ENTP_CODE,
+        CREATE_TIME, CREATE_USER, UPDATE_TIME, UPDATE_USER, EXPD_ID, DEL_IND, VERSION, TENANT_ID
+    </sql>
+
+    <sql id="where_filters">
+        <where>
+            <if test="id!=null and id!=''">AND ID = #{id}</if>
+
+            <if test="entpCode!=null and entpCode!=''">AND ENTP_CODE = #{entpCode}</if>
+            <if test="entpNm!=null and entpNm!=''">AND ENTP_NM like concat('%', concat(#{entpNm},'%'))</if>
+            <if test="entpOrgCode!=null and entpOrgCode!=''">AND ENTP_ORG_CODE = #{entpOrgCode}</if>
+            <if test="entpOrgLvlCd!=null and entpOrgLvlCd!=''">AND ENTP_ORG_LVL_CD = #{entpOrgLvlCd}</if>
+            <if test="entpCrdtTpCd!=null and entpCrdtTpCd!=''">AND ENTP_CRDT_TP_CD = #{entpCrdtTpCd}</if>
+            <if test="entpCrdtNo!=null and entpCrdtNo!=''">AND ENTP_CRDT_NO = #{entpCrdtNo}</if>
+            <if test="entpEmailAdr!=null and entpEmailAdr!=''">AND ENTP_EMAIL_ADR = #{entpEmailAdr}</if>
+            <if test="entpFaxNo!=null and entpFaxNo!=''">AND ENTP_FAX_NO = #{entpFaxNo}</if>
+            <if test="entpCtcpsn!=null and entpCtcpsn!=''">AND ENTP_CTCPSN = #{entpCtcpsn}</if>
+            <if test="entpCtcpsnTel!=null and entpCtcpsnTel!=''">AND ENTP_CTCPSN_TEL = #{entpCtcpsnTel}</if>
+            <if test="entpRgstAdr!=null and entpRgstAdr!=''">AND ENTP_RGST_ADR = #{entpRgstAdr}</if>
+            <if test="wthrCptplHostEntp!=null and wthrCptplHostEntp!=''">AND WTHR_CPTPL_HOST_ENTP = #{wthrCptplHostEntp}</if>
+            <if test="wthrSign!=null and wthrSign!=''">AND WTHR_SIGN = #{wthrSign}</if>
+            <if test="parentEntpCode!=null and parentEntpCode!=''">AND PARENT_ENTP_CODE = #{parentEntpCode}</if>
+
+            <if test="childTenantId!=null and childTenantId!=''">
+                AND TENANT_ID like concat(#{childTenantId},'%')
+            </if>
+
+            <if test="tenantIds != null and tenantIds.size() > 0">
+                AND TENANT_ID IN
+                <foreach collection="tenantIds" item="tenantIdItem" index="index" open="(" close=")" separator=",">
+                    #{tenantIdItem}
+                </foreach>
+            </if>
+
+            <if test="expdId!=null and expdId!=''">AND EXPD_ID = #{expdId}</if>
+            <if test="delInd!=null and delInd!=''">AND DEL_IND = #{delInd}</if>
+            <if test="version!=null and version!=''">AND VERSION = #{version}</if>
+            <if test="tenantId!=null and tenantId!=''">AND TENANT_ID = #{tenantId}</if>
+        </where>
+    </sql>
+
+    <!--根据条件查询列表-->
+    <select id="findEnterpriseList" parameterType="map" resultMap="enterpriseMap">SELECT
+        <include refid="column_list"/>
+        FROM BIZ_ENTP_INF
+        <include refid="where_filters"/>
+        ORDER BY ID ASC
+    </select>
+
+</mapper>

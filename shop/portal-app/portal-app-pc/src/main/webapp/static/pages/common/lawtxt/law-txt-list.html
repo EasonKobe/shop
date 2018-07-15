@@ -1,0 +1,68 @@
+<div class="main" ng-controller="lawTxtCtrl">
+    <div class="title-items">
+        <h2>法律文本</h2>
+        <b class="line"></b>
+    </div>
+    <div class="tabreplace_content">
+        <div class="search-condition easy">
+            <div class="cond-items">
+                <div class="cond-items-line">
+                    <label class="cond-items-label">签署时间</label>
+                    <div class="cond-input-line" style="width: 90px">
+                        <input type="text" class="inputdatepicker short" ng-model="queryParam.signBgdt"
+                               date="{'max': 'queryParam.signExdt', 'format': 'YYYY-MM-DD'}">
+                    </div>
+                    <div class="cond-items-mid">-</div>
+                    <div class="cond-input-line" style="width: 90px">
+                        <input type="text" class="inputdatepicker short" ng-model="queryParam.signExdt"
+                               date="{'min': 'queryParam.signBgdt', 'format': 'YYYY-MM-DD'}">
+                    </div>
+                </div>
+                <div class="cond-items-line">
+                    <label class="cond-items-label">法律文本类型</label>
+                    <div class="cond-input-line">
+                        <div jf-select="ArtcTpcd" ng-model="queryParam.lawTxtType" placeholder="请选择"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="cond-search-button">
+                <button class="btn btn-common btn-small" ng-click="search()">
+                    <i class="icon-20 icon-search"></i>查询
+                </button>
+                <button class="btn btn-border btn-small" ng-click="queryParam={}">重置</button>
+            </div>
+        </div>
+        <div jf-grid="法律文本列表" paging="true" search="search" resource="lawTxt.query" params="queryParam">
+            <table>
+                <thead>
+                <tr>
+                    <th align="center">签署日期</th>
+                    <th align="center">签署状态</th>
+                    <th align="center">文本类型</th>
+                    <th align="center">操作</th>
+                </tr>
+                </thead>
+                <tbody class="tbody">
+                <tr>
+                    <td align="center" ng-bind="item.fileId"></td>
+                    <td align="center" ng-bind="item.signTime | jfDate"></td>
+                    <td align="center" ng-bind="item.signStCd | jfConvert : 'dict' : 'SignStCd'"></td>
+                    <td align="center" ng-bind="item.lawTxtType | jfConvert : 'dict' : 'ArtcTpcd'"></td>
+                    <td align="center">
+                        <div ng-show="item.signStCd == '0'">
+                            <a href="javascript:void(0)" ng-click="noteDialog.open(item)">签订</a>
+                        </div>
+                        <div ng-show="item.signStCd == '1' ">
+                            <a href="javascript:void(0)" target="_blank" ng-click="download(item)">下载</a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- 协议详情 -->
+    <div class="overlay-box" style="display: none;" id="law">
+        <div ng-if="noteDialog.showDialog" ng-include="noteDialog.pageUri" class="overlay-box-content"></div>
+    </div>
+</div>

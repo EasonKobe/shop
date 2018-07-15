@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tansun.tb.entp.dao.ICmEntpUserUkeyRelDao">
+	<resultMap type="java.util.Map" id="cmEntpUserUkeyRelMap">
+		<result column="CST_NO" property="cstNo"/>
+		<result column="CST_NM" property="cstNm"/>
+		<result column="UKEY_NUM" property="ukeyNum"/>
+		<result column="UKEY_SEQ" property="ukeySeq"/>
+		<result column="REL_ST" property="relSt"/>
+		<result column="REMARK1" property="remark1"/>
+		<result column="REMARK2" property="remark2"/>
+		<result column="REMARK3" property="remark3"/>
+		<result column="RSPB_PSN_ID" property="rspbPsnId"/>
+		<result column="HDL_INST_ID" property="hdlInstId"/>
+        <result column="ID" property="id" />
+        <result column="CREATE_TIME" property="createTime" />
+        <result column="UPDATE_TIME" property="updateTime" />
+        <result column="CREATE_USER" property="createUser" />
+        <result column="UPDATE_USER" property="updateUser" />
+        <result column="EXPD_ID" property="expdId" />
+        <result column="DEL_IND" property="delInd" />
+        <result column="VERSION" property="version" />
+	</resultMap>
+
+    <sql id="column_list">
+        ID,  CST_NO, CST_NM, UKEY_NUM, UKEY_SEQ, REL_ST, REMARK1, REMARK2, REMARK3, RSPB_PSN_ID, HDL_INST_ID, TENANT_ID,CREATE_TIME, UPDATE_TIME, CREATE_USER, UPDATE_USER, EXPD_ID, DEL_IND, VERSION
+	</sql>
+	
+    <sql id="where_filters">
+        <where>
+        	<if test="delInd!=null and delInd!=''">
+        		AND DEL_IND = #{delInd}
+			</if>
+        	<if test="id!=null and id!=''">
+				AND ID = #{id}
+			</if>
+			<if test="cstNo!=null and cstNo!=''">
+				AND CST_NO like concat('%', concat(#{cstNo},'%'))
+			</if>
+			<if test="cstNm!=null and cstNm!=''">
+				AND CST_NM like concat('%', concat(#{cstNm},'%'))
+			</if>
+			<if test="ukeyNum!=null and ukeyNum!=''">
+				AND UKEY_NUM = #{ukeyNum}
+			</if>
+			<if test="ukeySeq!=null and ukeySeq!=''">
+				AND UKEY_SEQ = #{ukeySeq}
+			</if>
+			<if test="relSt!=null and relSt!=''">
+				AND REL_ST = #{relSt}
+			</if>
+			<if test="remark1!=null and remark1!=''">
+				AND REMARK1 = #{remark1}
+			</if>
+			<if test="remark2!=null and remark2!=''">
+				AND REMARK2 = #{remark2}
+			</if>
+			<if test="remark3!=null and remark3!=''">
+				AND REMARK3 = #{remark3}
+			</if>
+			<!-- <if test="rspbPsnId!=null and rspbPsnId!=''">
+				AND RSPB_PSN_ID = #{rspbPsnId}
+			</if>
+			<if test="hdlInstId!=null and hdlInstId!=''">
+				AND HDL_INST_ID = #{hdlInstId}
+			</if> -->
+        </where>
+    </sql>
+
+    <!--根据条件查询列表-->
+    <select id="findCmEntpUserUkeyRelList" parameterType="map" resultMap="cmEntpUserUkeyRelMap">
+        SELECT <include refid="column_list"/> FROM cm_entp_user_ukey_rel <include refid="where_filters"/>
+    </select>
+
+</mapper>

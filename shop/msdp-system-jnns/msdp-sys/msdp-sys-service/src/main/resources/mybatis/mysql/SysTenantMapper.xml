@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jeedev.msdp.sys.tenant.dao.ISysTenantDao">
+	<resultMap id="sysTenantMap" type="java.util.Map" >
+		<result column="ID" property="id" javaType="java.lang.Integer" />
+		<result column="TENANT_ID" property="tenantId" javaType="java.lang.String" />
+		<result column="TENANT_NAME" property="tenantName" javaType="java.lang.String" />
+		<result column="ORG_CODE" property="orgCode" javaType="java.lang.String" />
+		<result column="STATUS_CD" property="statusCd" javaType="java.lang.String" />
+		<result column="CREATE_TIME" property="createTime" javaType="java.util.Date" />
+		<result column="CREATE_USER" property="createUser" javaType="java.lang.String" />
+		<result column="UPDATE_TIME" property="updateTime" javaType="java.util.Date" />
+		<result column="UPDATE_USER" property="updateUser" javaType="java.lang.String" />
+		<result column="EXPD_ID" property="expdId" javaType="java.lang.String" />
+		<result column="DEL_IND" property="delInd" javaType="java.lang.String" />
+		<result column="VERSION" property="version" javaType="java.lang.Integer" />
+		<result column="USER_NUM" property="userNum" javaType="java.lang.String" />
+	</resultMap>
+
+	<sql id="column_list">
+		ST.ID,
+		ST.TENANT_ID, 
+		ST.TENANT_NAME, 
+		ST.STATUS_CD,
+		ST.ORG_CODE,
+		ST.CREATE_TIME, 
+		ST.CREATE_USER, 
+		ST.UPDATE_TIME,
+		ST.UPDATE_USER, 
+		ST.EXPD_ID, 
+		ST.DEL_IND, 
+		ST.VERSION,
+		ST.USER_NUM
+	</sql>
+
+	<sql id="where_filters">
+		<where>
+			<if test="id!=null and id!=''">
+				AND ST.ID = #{id}
+			</if>
+			<if test="tenantId!=null and tenantId!=''">
+				AND ST.TENANT_ID = #{tenantId}
+			</if>
+			<if test="userNum!=null and userNum!=''">
+				AND ST.USER_NUM = #{userNum}
+			</if>
+			<if test="statusCd!=null and statusCd!=''">
+				AND ST.STATUS_CD = #{statusCd}
+			</if>
+			<if test="tenantIds!=null and tenantIds.size()>0">
+				AND ST.TENANT_ID IN
+				<foreach collection="tenantIds" item="tenantId" index="index" open="(" close=")" separator=",">
+					#{tenantId}
+				</foreach>
+			</if>
+
+			<if test="tenantName!=null and tenantName!=''">
+				AND ST.TENANT_NAME = #{tenantName}
+			</if>
+			<if test="tenantNameLike!=null and tenantNameLike!=''">
+				AND ST.TENANT_NAME LIKE concat('%',#{tenantNameLike},'%')
+			</if>
+
+			<if test="orgCode !=null and orgCode!=''">
+				AND ST.ORG_CODE LIKE concat('%',#{orgCode},'%')
+			</if>
+			<if test="delInd!=null and delInd!=''">
+				AND ST.DEL_IND = #{delInd}
+			</if>
+			<if test="version!=null and version!=''">
+				AND ST.VERSION = #{version}
+			</if>
+		</where>
+	</sql>
+
+	<!--根据条件查询列表 -->
+	<select id="findTenantList" parameterType="map" resultMap="sysTenantMap">
+		SELECT
+		<include refid="column_list" />
+		FROM SYS_TENANT ST
+		<include refid="where_filters" />
+		ORDER BY ST.ID DESC
+	</select>
+
+	<!-- 根据条件查询单条数据 -->
+	<select id="getTenantMap" parameterType="map" resultMap="sysTenantMap">
+		SELECT
+		<include refid="column_list" />
+		FROM SYS_TENANT ST
+		<include refid="where_filters" />
+	</select>
+</mapper>

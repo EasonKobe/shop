@@ -1,0 +1,74 @@
+<div class="layout_body" ng-controller="paramCtrl">
+		<div class="subposition" ng-bind-html="getCurrentLoaction('')">
+        </div>
+		<form class="layui-form layui-form-pane" name="form1">
+			<div class="search_mian">
+				<div class="layui-form-item">
+					<div class="layui-inline" >
+						<label class="layui-form-label">参数编码：</label>
+						<div class="layui-input-inline">
+							<input class="layui-input" type="text" ng-model="paramList.params.parmId">
+						</div>
+					</div>
+					<div class="layui-inline">
+						<label class="layui-form-label">类型名称：</label>
+						<div class="layui-input-inline">
+							<input class="layui-input" type="text" ng-model="paramList.params.parmTpNm">
+						</div>
+					</div>
+				</div>
+				<div class="search_button">
+					<button class="layui-btn" ng-click="paramList.search()">
+						<i class="layui-icon">&#xe615;</i> 查询
+					</button>
+
+					<button class="layui-btn" type="button"
+						ng-click="paramList.params={}">
+						<i class="layui-icon">&#x1006;</i> 重置
+					</button>
+				</div>
+			</div>
+
+		</form>
+		<div class="button_contain">  
+		<!-- <div id="paramDia" url="/sysmanage/param/addParam.html"style="display: none;" title="" size="700px,300px"
+			  callback="addParamSub"></div> -->
+			<button class="layui-btn layui-btn-primary" ng-click="addParam()" jf-permission="param.add">
+				<i class="layui-icon">&#xe61f;</i> 新 增
+			</button>
+			<button class="layui-btn layui-btn-primary"
+				ng-click="getParam()" jf-permission="param.edit">
+				<i class="layui-icon">&#xe642;</i> 修 改
+			</button>
+			<button class="layui-btn layui-btn-primary"
+					ng-click="paramList.request('param.delete?id')" jf-permission="param.del">
+				<i class="layui-icon">&#xe640;</i> 删 除
+			</button>
+
+		</div>
+		<!-- <div jf-grid="paramList" paging="true" search="search" resource="param.query" params="queryParam" style="width:80%"> -->
+		<div jf-grid="paramList">
+			<table>
+				<thead>
+					<tr>
+						<th align="left">参数类型</th>
+						<th align="left">类型名称</th>
+						<th align="left">参数编码</th>
+						<th align="left">参数值</th>
+						<th align="left">参数描述</th> 
+						<th align="left">是否缓存</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td align="left" ng-bind="item.parmTpCd"></td>
+						<td align="left" ng-bind="item.parmTpNm"></td> 
+						<td align="left" ng-bind="item.parmId"></td> 
+						<td align="left" ng-bind="item.parval"></td> 
+						<td align="left" ng-bind="item.parmDsc"></td> 
+						<td align="left" ng-bind="item.wthrCchCd |jfConvert:'dict':'Indicator'"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+</div>

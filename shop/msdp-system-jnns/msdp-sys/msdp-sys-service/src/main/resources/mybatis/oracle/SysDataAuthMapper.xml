@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jeedev.msdp.sys.dataauth.dao.ISysDataAuthDao">
+	<resultMap id="sysDataAuthMap" type="java.util.Map" >
+		<result column="ID" property="id" javaType="java.lang.Integer" />
+		<result column="DATA_AUTH_CODE" property="dataAuthCode" javaType="java.lang.String" />
+		<result column="MODEL_CODE" property="modelCode" javaType="java.lang.String" />
+		<result column="AUTH_CONDITIONS" property="authConditions" javaType="java.lang.String" />
+		<result column="EVENT_CODE" property="eventCode" javaType="java.lang.String" />
+		<result column="DEPT_CODE" property="deptCode" javaType="java.lang.String" />
+		<result column="ORG_CODE" property="orgCode" javaType="java.lang.String" />
+		<result column="ROLE_CODE" property="roleCode" javaType="java.lang.String" />
+		<result column="USER_NUM" property="userNum" javaType="java.lang.String" />
+		<result column="BIZ_SCENE" property="bizScene" javaType="java.lang.String" />
+		<result column="CLNTEND_ID" property="clntendId" javaType="java.lang.String" />
+		<result column="CONDITIONS_REMARK" property="conditionsRemark" javaType="java.lang.String" />
+		<result column="MODEL_NAME" property="modelName" javaType="java.lang.String" />
+		<result column="REMARK" property="remark" javaType="java.lang.String" />
+		<result column="CREATE_TIME" property="createTime" javaType="java.util.Date" />
+		<result column="CREATE_USER" property="createUser" javaType="java.lang.String" />
+		<result column="UPDATE_TIME" property="updateTime" javaType="java.util.Date" />
+		<result column="UPDATE_USER" property="updateUser" javaType="java.lang.String" />
+		<result column="EXPD_ID" property="expdId" javaType="java.lang.String" />
+		<result column="DEL_IND" property="delInd" javaType="java.lang.String" />
+		<result column="VERSION" property="version" javaType="java.lang.Integer" />
+		<result column="TENANT_ID" property="tenantId" javaType="java.lang.String" />
+	</resultMap>
+
+	<sql id="column_list">
+		DA.ID, DA.MODEL_CODE, DA.DATA_AUTH_CODE,DA.AUTH_CONDITIONS,DAM.MODEL_NAME, DA.REMARK,DA.CONDITIONS_REMARK, DA.CREATE_TIME,
+		DA.CREATE_USER, DA.UPDATE_TIME, DA.UPDATE_USER, DA.EXPD_ID, DA.DEL_IND, DA.VERSION,DA.TENANT_ID,
+		DA.DEPT_CODE,DA.ORG_CODE,DA.ROLE_CODE,DA.USER_NUM,DA.BIZ_SCENE,DA.CLNTEND_ID,DA.EVENT_CODE
+	</sql>
+
+	<sql id="where_filters">
+		<where>
+			DA.MODEL_CODE=DAM.MODEL_CODE
+			<if test="id!=null and id!=''">
+				AND DA.ID = #{id}
+			</if>
+			<if test="modelCode!=null and modelCode!=''">
+				AND DA.MODEL_CODE = #{modelCode}
+			</if>
+			<if test="dataAuthCode!=null and dataAuthCode!=''">
+				AND DA.DATA_AUTH_CODE = #{dataAuthCode}
+			</if>
+			<if test="deptCode!=null and deptCode!=''">
+				AND (DA.DEPT_CODE =#{deptCode} or DA.DEPT_CODE='*')
+			</if>
+			<if test="eventCode!=null and eventCode!=''">
+				AND (DA.EVENT_CODE =#{eventCode} or DA.EVENT_CODE='*')
+			</if>
+			<if test="orgCode!=null and orgCode!=''">
+				AND (DA.ORG_CODE =#{orgCode} or DA.ORG_CODE='*')
+			</if>
+			<if test="roleCode!=null and roleCode!=''">
+				AND (DA.ROLE_CODE =#{roleCode} or DA.ROLE_CODE='*')
+			</if>
+			<if test="userNum!=null and userNum!=''">
+				AND (DA.USER_NUM =#{userNum} or DA.USER_NUM='*')
+			</if>
+			<if test="bizScene!=null and bizScene!=''">
+				AND (DA.BIZ_SCENE =#{bizScene} or DA.BIZ_SCENE='*')
+			</if>
+			<if test="clntendId!=null and clntendId!=''">
+				AND (DA.CLNTEND_ID =#{clntendId} or DA.CLNTEND_ID='*')
+			</if>
+			<if test="delInd!=null and delInd!=''">
+				AND DA.DEL_IND = #{delInd}
+			</if>
+			<if test="version!=null and version!=''">
+				AND DA.VERSION = #{version}
+			</if>
+			<if test="tenantId!=null and tenantId!=''">
+				AND DA.TENANT_ID = #{tenantId}
+			</if>
+		</where>
+	</sql>
+
+	<!--根据条件查询匹配列表 -->
+	<select id="findDataAuthList" parameterType="map" resultMap="sysDataAuthMap">
+		SELECT
+		<include refid="column_list" />
+		FROM SYS_DATA_AUTH DA,SYS_RES_DATA_AUTH_MODEL DAM
+		<include refid="where_filters" />
+	</select>
+   <!--根据条件查询列表 -->
+	<select id="findDataAuthListByExact" parameterType="map" resultMap="sysDataAuthMap">
+		SELECT
+		<include refid="column_list" />
+		FROM SYS_DATA_AUTH DA,SYS_RES_DATA_AUTH_MODEL DAM
+		<where>
+			DA.MODEL_CODE=DAM.MODEL_CODE
+			<if test="id!=null and id!=''">
+				AND DA.ID = #{id}
+			</if>
+			<if test="modelCode!=null and modelCode!=''">
+				AND DA.MODEL_CODE = #{modelCode}
+			</if>
+			<if test="dataAuthCode!=null and dataAuthCode!=''">
+				AND DA.DATA_AUTH_CODE = #{dataAuthCode}
+			</if>
+			
+			<if test="deptCode!=null and deptCode!=''">
+				AND DA.DEPT_CODE =#{deptCode}
+			</if>
+			<if test="orgCode!=null and orgCode!=''">
+				AND DA.ORG_CODE =#{orgCode}
+			</if>
+			<if test="roleCode!=null and roleCode!=''">
+				AND DA.ROLE_CODE =#{roleCode}
+			</if>
+			<if test="userNum!=null and userNum!=''">
+				AND DA.USER_NUM =#{userNum}
+			</if>
+			<if test="bizScene!=null and bizScene!=''">
+				AND DA.BIZ_SCENE =#{bizScene}
+			</if>
+			<if test="eventCode!=null and eventCode!=''">
+				AND DA.EVENT_CODE =#{eventCode}
+			</if>
+			<if test="eventCodes != null and eventCodes.size() > 0">
+				AND DA.EVENT_CODE IN
+				<foreach collection="eventCodes" item="eventCode" index="index" open="(" close=")" separator=",">
+					#{eventCode}
+				</foreach>
+			</if>
+			<if test="clntendId!=null and clntendId!=''">
+				AND DA.CLNTEND_ID =#{clntendId}
+			</if>
+			<if test="delInd!=null and delInd!=''">
+				AND DA.DEL_IND = #{delInd}
+			</if>
+			<if test="version!=null and version!=''">
+				AND DA.VERSION = #{version}
+			</if>
+			<if test="tenantId!=null and tenantId!=''">
+				AND DA.TENANT_ID = #{tenantId}
+			</if>
+		</where>
+	</select>
+</mapper>

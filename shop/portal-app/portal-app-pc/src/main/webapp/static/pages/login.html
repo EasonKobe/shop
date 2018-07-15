@@ -1,0 +1,342 @@
+<div ng-controller="indexCtrl">
+
+    <!--banner start-->
+    <ul class="banner" id="scroll-page">
+        <li class="section section01">
+            <div class="banner-slogan"><img ng-src="{{global.imgPath}}/blue/slogan-img01.png" width="616" height="56">
+            </div>
+        </li>
+        <li class="section section02">
+            <div class="banner-slogan"><img ng-src="{{global.imgPath}}/blue/slogan-img02.png" width="391" height="123">
+            </div>
+            <div class="banner-info">
+                <ul>
+                    <li><span class="slogan-icon"><i class="icon-32 icon-chain-easy01"></i></span>
+                        <div class="slogan-text">
+                            <h2>链易付</h2>
+                            <p>于核心企业承兑的前提将信用穿透到链上的2-N级供应商</p>
+                        </div>
+                    </li>
+                    <li><span class="slogan-icon"><i class="icon-32 icon-chain-easy02"></i></span>
+                        <div class="slogan-text">
+                            <h2>链钞</h2>
+                            <p>在供应链生态圈间流转，可解决应收应付需求，也可按需融资。</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        <li class="section section03">
+            <div class="banner-slogan text_left"><img ng-src="{{global.imgPath}}/blue/slogan-img03.png" width="589"
+                                                      height="142"></div>
+            <div class="banner-info">
+                <ul class="four">
+                    <li><span class="slogan-icon"><i class="icon-32 icon-chain-easy03"></i></span>
+                        <div class="slogan-text">
+                            <h2>极易付</h2>
+                            <p>任意结转应付账款，极速付款！</p>
+                        </div>
+                    </li>
+                    <li><span class="slogan-icon"><i class="icon-32 icon-chain-easy04"></i></span>
+                        <div class="slogan-text">
+                            <h2>极易融</h2>
+                            <p>随时提前变现，随借随还！</p>
+                        </div>
+                    </li>
+                    <li><span class="slogan-icon"><i class="icon-32 icon-chain-easy05"></i></span>
+                        <div class="slogan-text">
+                            <h2>极易拆</h2>
+                            <p>随意拆分，便捷简单！</p>
+                        </div>
+                    </li>
+                    <li><span class="slogan-icon"><i class="icon-32 icon-chain-easy06"></i></span>
+                        <div class="slogan-text">
+                            <h2>极易兑</h2>
+                            <p>依托核心企业信用，安心承兑！</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+    <!--banner end-->
+    <div class="lr-btn-group" ng-if="!user || !user.realname">
+        <button class="btn-lr" ng-click="funcShow('toreg')">企业注册</button>
+        <button class="btn-lr" ng-click="funcShow('tologin')">企业登录</button>
+    </div>
+
+
+    <!--login_box-->
+    <div class="login_box" ng-show="mshow=='tologin'" id="loginBox">
+        <!--web_login-->
+        <form id="loginForm" name="loginForm" method="post" action="{{loginAction}}">
+            <div class="login_content">
+                <span class=" layui-icon close" ng-click="funcShow('')">&#x1006;</span>
+                <p class="login_tips">链易付不会以任何理由要求您转账汇款，谨防诈骗。</p>
+                <div class="web_login">
+                    <ul class="webtitle">
+                        <li ng-class="{ 'hover' : current == 1 }" ng-click="showTab(1)">账户登录</li>
+                        <li ng-class="{ 'hover' : current == 2 }" ng-click="showTab(2)">扫码登录</li>
+                    </ul>
+                    <div ng-show="current == 1">
+                        <div class="warninger" ng-if="showError">{{errMsg}}</div>
+                        <div class="webcontent">
+                            <input onfocus="this.type='text'" autocomplete="off" class="inputuser"
+                                   name="username" ng-model="user.username" placeholder="请输入您的登录账号"
+                                   ng-keydown="enter($event)">
+                        </div>
+                        <div class="webcontent">
+                            <input onfocus="this.type='password'" autocomplete="off" class="inputpasswod" name="password"
+                                    ng-keydown="enter($event)" ng-model="user.password" placeholder="请输入您的登录密码">
+                        </div>
+                        <!--<div class="webcontent">-->
+                            <!--<input type="text" class="inputcode" placeholder="请输入右侧的验证码" name="captcha"-->
+                                   <!--ng-model="user.captcha"-->
+                                   <!--ng-keydown="enter($event)">-->
+                            <!--<div jf-captcha="login" class="verify-code"></div>-->
+                            <!--<a href="javascript:void(0)" ng-click="change()">看不清换一张</a>-->
+                        <!--</div>-->
+                        <div class="reuser text_right"><a href="javascript:void(0)" ng-click="funcShow('findpwd')">忘记密码</a></div>
+                        <div class="webcontent">
+                            <button class="btnlogin"  validation-submit="loginForm"
+                                    ng-click="login()">登 录</button>
+                        </div>
+                        <div class="reuser text_right"><a href="javascript:void(0)" class="blue"
+                                                          ng-click="funcShow('toreg')">立即注册</a>
+                        </div>
+                    </div>
+                    <div id="con_one_2" ng-show="current == 2">
+                        <div class="webcat_pic"></div>
+                        <div class="webcat_text">微信扫一扫</div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <!--注册-->
+    <!--form_box-->
+    <div class="form_box" id="formBox" ng-if="mshow=='toreg'">
+        <!--form_content-->
+
+        <div class="form_content" id="reg-box" ng-show="step=='1'">
+            <h2 class="regist-title">用户注册<span class=" layui-icon close" ng-click="funcShow('')">&#x1006;</span></h2>
+            <form name="regForm">
+
+
+                <div class="web_form_box">
+                    <div class="input-content">
+                        <label class="reg-name"><span class="red">*</span>用户名：</label>
+                        <input type="text" name="loginName"
+                               ng-model="reg.loginName" validator="required" required-error-message="请输入登录账号"
+                               class="reginput" placeholder="最长为20个字符，最短为4个字符.只能由字母跟数字组成">
+                    </div>
+                    <div class="input-content">
+                        <label class="reg-name"><span class="red">*</span>密码：</label>
+                        <input type="text" name="password"
+                               ng-model="reg.password" validator="required,password" required-error-message="请设置您的登录密码"
+                               password-error-message="密码必须由6-20个字母、数字或符号组成"
+                               class="reginput" placeholder="建议使用字母、数字和符号两种及以上的组合，6-20个字符">
+                    </div>
+                    <div class="agreehttp">
+                        <span>密码强度：</span>
+                        <ul class="pwd-strength">
+                            <li class="cur"></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                    <div class="input-content">
+                        <label class="reg-name"><span class="red">*</span>确认密码：</label>
+                        <input type="text" class="reginput" placeholder="请再次输入密码"
+                               name="confirmPswd"
+                               ng-model="reg.confirmPswd" validator="required,equals,password" equals="password"
+                               required-error-message="请确认您的登录密码" password-error-message="密码必须由6-20个字母、数字或符号组成"
+                               equals-error-message="确认密码必须与登录密码一致">
+                    </div>
+                    <div class="input-content">
+                        <label class="reg-name"><span class="red">*</span>手机号码：</label>
+                        <input type="text" class="reginput" placeholder="请输入手机号码" name="mobile" ng-model="reg.mobile"
+                               validator="required,phone" required-error-message="请输入您的手机号码"
+                               phone-error-message="请输入正确的手机号码">
+                    </div>
+                    <div class="input-content">
+                        <label class="reg-name"><span class="red">*</span>验证码：</label>
+                        <input type="text" class="reginput code" placeholder="请输入验证码" name="code"
+                               validator="required,minlength,maxlength" minlength="6" maxlength="6" ng-model="reg.code"
+                               minlength-error-message="手机验证码由6个字符组成" maxlength-error-message="手机验证码由6个字符组成"
+                               required-error-message="请输入您手机收到的验证码">
+                        <a class="reg-get-code" jf-code="reg" mode="SMS" target="reg.mobile" handle="preHandle()"
+                           captcha="reg.captcha">获取验证码</a>
+                    </div>
+                    <div class="agreehttp">
+                        <input name="check4" type="checkbox" ng-click="reg.ctrFlag = !reg.ctrFlag">我已阅读并同意<a
+                            href="javascript:void(0)" class="blue"
+                            ng-click="funcShow('http')">《链易付平台注册和使用协议》</a>
+                    </div>
+                    <div class="input-content">
+                        <button class="btnregister" validation-submit="regForm" ng-click="regSubmit()">注册</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!--form_content-->
+        <div class="form_content" id="reg-box-succeed" ng-show="step=='2'">
+            <div class="formsuccee-box">
+                <div class="succeed-img"><img ng-src="{{global.imgPath}}/login/succeed.png"></div>
+                <h2>注册成功！</h2>
+                <p>3s后跳转，
+                    <button class="btnlogin short" ng-click="funcShow('tologin')">立即登录</button>
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+    <!--找回密码-->
+    <!--form_box-->
+    <div class="form_box" ng-if="mshow=='findpwd'">
+        <!--form_content-->
+        <div class="form_content">
+            <div class="form-tabreplace">
+                <ul>
+                    <li ng-class="{ 'hover' : current == 1 }" ng-click="showTab(1)">手机找回</li>
+                    <li ng-class="{ 'hover' : current == 2 }" ng-click="showTab(2)">邮箱找回</li>
+                </ul>
+                <span class=" layui-icon close" ng-click="funcShow('')">&#x1006;</span>
+            </div>
+            <!--con_two_1-->
+            <div class="find-content" ng-show="current=='1'">
+                <div class="web_form_box" ng-if="step=='1'">
+                    <div class="input-content">
+                        <label class="reg-name"><span class="red">*</span>手机号码：</label>
+                        <input type="text" class="reginput" placeholder="请输入您注册的手机号">
+                    </div>
+                    <div class="input-content">
+                        <label class="reg-name"><span class="red">*</span>手机验证码：</label>
+                        <input type="text" class="reginput code" placeholder="请输入验证码">
+                        <a href="javascript:void(0)" class="getcode">获取验证码</a>
+                    </div>
+                    <div class="input-content">
+                        <label class="reg-name"><span class="red">*</span>新密码：</label>
+                        <input type="text" class="reginput" placeholder="建议使用字母、数字和符号两种及以上的组合，6-20个字符">
+                    </div>
+                    <div class="agreehttp">
+                        <span>密码强度：</span>
+                        <ul class="pwd-strength">
+                            <li class="cur"></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                    <div class="input-content">
+                        <label class="reg-name"><span class="red">*</span>确认密码：</label>
+                        <input type="password" class="reginput" placeholder="请再次输入密码">
+                    </div>
+                    <div class="input-content">
+                        <button class="btnregister" ng-click="funcStep(2)">确定</button>
+                    </div>
+                </div>
+                <!--formsuccee-box-->
+                <div class="formsuccee-box" ng-if="step=='2'">
+                    <div class="succeed-img"><img ng-src="{{global.imgPath}}/login/succeed.png"></div>
+                    <h2>手机重置密码,成功！</h2>
+                    <p>3s后跳转，
+                        <button class="btnlogin short" ng-click="funcShow('tologin')">立即登录</button>
+                    </p>
+                </div>
+            </div>
+            <!--con_two_1 end-->
+            <!--con_two_2-->
+            <div class="find-content" ng-show="current=='2'">
+                <!--web_form_box-->
+                <div class="web_form_box" ng-if="step=='1'">
+                    <div class="input-content">
+                        <label class="reg-name"><span class="red">*</span>注册邮箱：</label>
+                        <input type="text" class="reginput" placeholder="chenhong0592@qq.com">
+                    </div>
+                    <div class="input-content">
+                        <label class="reg-name"><span class="red">*</span>邮箱验证码：</label>
+                        <div class="verify-cont">
+                            <input type="text" class="reginput" placeholder="请输入验证码">
+                            <img ng-src="{{global.imgPath}}/login/code.jpg" class="verify-img">
+                        </div>
+                    </div>
+                    <div class="input-content">
+                        <button class="btnregister" ng-click="funcStep(2)">下一步</button>
+                    </div>
+                </div>
+                <!--formsuccee-box-->
+                <div class="formsuccee-box" ng-if="step=='3'">
+                    <div class="succeed-img"><img ng-src="{{global.imgPath}}/login/send-email.png"></div>
+                    <h3>通过邮箱找回密码chenhon*****@qq.com发送成功</h3>
+                    <h3>请您注意 &nbsp; &nbsp;<span class="ora">接收邮件!</span></h3>
+                    <p>并按照邮件中的提示操作,完成安全验证。</p>
+                </div>
+                <!--web_form_box-->
+                <div class="web_form_box" ng-if="step=='2'">
+                    <div class="input-content">
+                        <label class="reg-name"><span class="red">*</span>新密码：</label>
+                        <input type="text" class="reginput" placeholder="建议使用字母、数字和符号两种及以上的组合，6-20个字符">
+                    </div>
+                    <div class="agreehttp">
+                        <span>密码强度：</span>
+                        <ul class="pwd-strength">
+                            <li class="cur"></li>
+                            <li></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                    <div class="input-content">
+                        <label class="reg-name"><span class="red">*</span>确认密码：</label>
+                        <input type="password" class="reginput" placeholder="请再次输入密码">
+                    </div>
+                    <div class="input-content">
+                        <button class="btnregister" ng-click="funcStep(4)">完成</button>
+                    </div>
+                </div>
+                <!--formsuccee-box-->
+                <div class="formsuccee-box" ng-if="step=='4'">
+                    <div class="succeed-img"><img ng-src="{{global.imgPath}}/login/succeed.png"></div>
+                    <h2>邮箱重置密码,成功！</h2>
+                    <p>{{time}}s后跳转，
+                        <button class="btnlogin short" ng-click="funcShow('tologin')">立即登录</button>
+                    </p>
+                </div>
+            </div>
+            <!--con_two_2 end-->
+        </div>
+    </div>
+
+
+    <!--注册协议-->
+    <!--form_box-->
+    <div class="form_box" ng-if="mshow=='http'">
+        <!--form_content-->
+        <div class="form_content http">
+            <div class="httptitle">
+                <h2>用户注册协议和隐私政策</h2>
+                <span class=" layui-icon close" ng-click="funcShow('')">&#x1006;</span>
+            </div>
+            <div class="http-content">
+                <p>
+                    在您注册成为大树用户的过程中，您需要完成我们的注册流程并通过点击同意的形式以下协议，请您务必仔细阅读、充分理解协议中的条款内容后再点击同意（尤其是以粗体并下划线标识的条款，因为这些条款可能会明确您应履行的义务或对您的权利有所限制）：</p>
+                <p>
+                    《链易付金融平台协议》在您注册成为链易付用户的过程中，您需要完成我们的注册流程并通过点击同意的形式以下协议，请您务必仔细阅读、充分理解协议中的条款内容后再点击同意（尤其是以粗体并下划线标识的条款，因为这些条款可能会明确您应履行的义务或对您的权利有所限制）：</p>
+                <h2>链易付金融平台协议用户注册协议</h2>
+                <p>
+                    在您注册成为链易付用户的过程中，您需要完成我们的注册流程并通过点击同意的形式以下协议，请您务必仔细阅读、充分理解协议中的条款内容后再点击同意（尤其是以粗体并下划线标识的条款，因为这些条款可能会明确您应履行的义务或对您的权利有所限制）：</p>
+                <h3>链易金融平台协议用户注册协议</h3>
+                <p>
+                    在您注册成为大树用户的过程中，您需要完成我们的注册流程并通过点击同意的形式以下协议，请您务必仔细阅读、充分理解协议中的条款内容后再点击同意（尤其是以粗体并下划线标识的条款，因为这些条款可能会明确您应履行的义务或对您的权利有所限制）：</p>
+            </div>
+            <div class="http-button">
+                <button class="btn btn-back" ng-click="funcShow('')">取消</button>
+                <button class="btn btn-sure" ng-click="funcShow('')">同意并继续</button>
+            </div>
+        </div>
+    </div>
+    <!--注册协议-->
+
+</div>

@@ -1,0 +1,37 @@
+<div ng-controller="userAndOrgRelEditCtrl">
+	<form name="userAndOrgRelForm">
+		<div class="col_tr" ng-if="false">
+			<div class="col4 text_right">
+				<i class="red_input">*</i>用户编号：
+			</div>
+			<div class="wd190 float_left">
+				<input class="layui-input" type="text" ng-model="userAndOrgRel.userNum">
+				<input class="layui-input" type="hidden" ng-model="userAndOrgRel.id">
+			</div>
+		</div>
+		<div class="col_tr">
+			<div class="col4 text_right">
+				<i class="red_input">*</i>机构名称：
+			</div>
+			<div class="wd190 float_left">
+				<input class="layui-input" type="text" ng-model="userAndOrgRel.orgName" selector="selectOrg" placeholder="请选择">
+				<input class="layui-input" type="hidden" ng-model="userAndOrgRel.orgCode" name="orgCode" validator="required">
+			</div>
+		</div>
+		<div class="col_tr">
+			<div class="col4 text_right">
+				<i class="red_input">*</i>机构用户关联状态：</div>
+			<div class="wd190 float_left">
+				<select  ng-model="userAndOrgRel.statusCd" jf-select="builder.option('StCd')" class="layui-input"  name="statusCd" validator="required"></select>
+			</div>
+		</div>
+		<div class="col_tr">
+			<div class="col4 text_right">
+				<i class="red_input">*</i>是否默认机构：
+			</div>
+			<div class="wd190 float_left">
+				<select  ng-model="userAndOrgRel.defaultInd" jf-select="builder.option('Indicator')" class="layui-input" name="defaultInd" validator="required"></select>
+			</div>
+		</div>
+	</form>
+</div>

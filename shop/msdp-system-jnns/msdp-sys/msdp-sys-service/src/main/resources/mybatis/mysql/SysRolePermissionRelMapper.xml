@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jeedev.msdp.sys.role.dao.ISysRolePermissionRelDao">
+	<resultMap id="sysRolePermissionRelMap" type="java.util.Map" >
+		<result column="ID" property="id" javaType="java.lang.Integer"/>
+		<result column="ROLE_CODE" property="roleCode" javaType="java.lang.String"/>
+		<result column="PERMISSION_CODE" property="permissionCode" javaType="java.lang.String"/>
+		<result column="CREATE_TIME" property="createTime" javaType="java.util.Date"/>
+		<result column="CREATE_USER" property="createUser" javaType="java.lang.String"/>
+		<result column="UPDATE_TIME" property="updateTime" javaType="java.util.Date"/>
+		<result column="UPDATE_USER" property="updateUser" javaType="java.lang.String"/>
+		<result column="EXPD_ID" property="expdId" javaType="java.lang.String"/>
+		<result column="DEL_IND" property="delInd" javaType="java.lang.String"/>
+		<result column="VERSION" property="version" javaType="java.lang.Integer"/>
+		<result column="STATUS_CD" property="statusCd" javaType="java.lang.String"/>
+		<result column="REMARK" property="remark" javaType="java.lang.String"/>
+		<result column="TENANT_ID" property="tenantId" javaType="java.lang.String"/>
+	</resultMap>
+
+	<sql id="column_list">
+        ID, ROLE_CODE, PERMISSION_CODE, CREATE_TIME, CREATE_USER, UPDATE_TIME, UPDATE_USER, EXPD_ID, 
+        DEL_IND, VERSION, STATUS_CD, REMARK, TENANT_ID
+	</sql>
+	
+	<sql id="where_filters">
+		<where>
+			<if test="id!=null and id!=''">
+				AND ID = #{id}
+			</if>
+			<if test="roleCode!=null and roleCode!=''">
+				AND ROLE_CODE = #{roleCode}
+			</if>
+			<if test="permissionCode!=null and permissionCode!=''">
+				AND PERMISSION_CODE = #{permissionCode}
+			</if>
+			<if test="delInd!=null and delInd!=''">
+				AND DEL_IND = #{delInd}
+			</if>
+			<if test="version!=null and version!=''">
+				AND VERSION = #{version}
+			</if>
+			<if test="statusCd!=null and statusCd!=''">
+				AND STATUS_CD = #{statusCd}
+			</if>
+			<if test="tenantId!=null and tenantId!=''">
+				AND TENANT_ID = #{tenantId}
+			</if>
+		</where>
+	</sql>
+
+	<!--根据条件查询列表-->
+	<select id="findRolePermList" parameterType="map" resultMap="sysRolePermissionRelMap">
+		SELECT <include refid="column_list"/> 
+		FROM SYS_ROLE_PERMISSION_REL
+		<include refid="where_filters"/>
+        ORDER BY ID DESC
+	</select>
+	<!--根据角色编号删除关联关系-->
+	<delete id="deleteByRoleCode" parameterType="java.lang.String">
+        DELETE FROM SYS_ROLE_PERMISSION_REL WHERE ROLE_CODE = #{roleCode} 
+        <if test="tenantId!=null and tenantId!=''">
+				AND TENANT_ID = #{tenantId}
+		</if>
+    </delete>
+</mapper>

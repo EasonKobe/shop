@@ -1,0 +1,569 @@
+<div class="layout_body" ng-controller="entpIndexCtrl">
+    <div class="subposition" ng-bind-html="getCurrentLoaction('')">
+    </div>
+    <div class="layui-form">
+        <div class="maintree_contain">
+            <div class="maintree_title">用户机构树</div>
+            <div jf-tree="entpTree" class="maintree_content"></div>
+            <div class="maintree_button" style="height:76px">
+                <button class="layui-btn layui-btn-mini" ng-click="addEnterprise()">新 增</button>
+                <button class="layui-btn layui-btn-mini" ng-click="addEnterpriseNode()">增加子企业机构</button>
+                <button class="layui-btn layui-btn-mini layui-btn-normal" ng-click="delEnterprise()">删除</button>
+                <button class="layui-btn layui-btn-mini" ng-click="batchImport()">批量导入</button>
+                <button class="layui-btn layui-btn-mini" ng-click="downloadTemplate()">模板下载</button>
+            </div>
+        </div>
+        <div class="maintree_right">
+            <div id="container">
+                <div class="layui-tab layui-tab-card">
+                    <ul class="layui-tab-title">
+                        <li class="layui-this">企业机构信息</li>
+                        <li>角色管理</li>
+                        <li>用户管理</li>
+                    </ul>
+                    <div class="layui-tab-content">
+
+                        <!-----------------村镇信息 begin--------------- -->
+                        <div class="layui-tab-item layui-show">
+                            <div class="layui-form">
+                                <form name="entpForm">
+                                    <div class="allcontent " style="border:0px">
+                                        <div class="col_td" >
+                                            <div class="col4 text_right">
+                                                	客户编号：
+                                            </div>
+                                            <div class="wd190 float_left">
+                                                <input class="layui-input" type="text" ng-model="enterprise.entpCode"
+                                                       validator="required" readonly>
+                                            </div>
+                                            <button class="layui-btn"  ng-if="!enterprise.id"
+												ng-click="selectCst();">
+												引入
+											</button>
+                                        </div>
+                                        
+                                        <div class="col_td">
+                                            <div class="col4 text_right">
+                                                <i class="red_input">*</i>客户名称 ：
+                                            </div>
+                                            <div class="wd190 float_left">
+                                                <input class="layui-input" type="text" ng-model="enterprise.entpNm"
+                                                       validator="required">
+                                            </div>
+                                        </div>
+
+                                        <!--<div class="col_td" ng-if="!!enterprise.entpOrgCode">-->
+                                            <!--<div class="col4 text_right">-->
+                                                <!--机构号 ：-->
+                                            <!--</div>-->
+                                            <!--<div class="wd190 float_left">-->
+                                                <!--<input class="layui-input" type="text" ng-model="enterprise.entpOrgCode"-->
+                                                       <!--validator="required" readonly>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                        <div class="col_td" ng-if="!!enterprise.entpOrgLvlCd">
+                                            <div class="col4 text_right">
+                                                机构管理级别 ：
+                                            </div>
+                                            <div class="wd190 float_left">
+                                                <input class="layui-input" type="text"
+                                                       ng-model="enterprise.entpOrgLvlCd"
+                                                       validator="required" readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="col_td">
+                                            <div class="col4 text_right">
+                                                <i class="red_input">*</i>证件类型 ：
+                                            </div>
+                                            <div class="wd190 float_left">
+                                                <select class="layui-input" ng-model="enterprise.entpCrdtTpCd"
+                                                        jf-select="builder.option('CrdtTpCd')">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col_td">
+                                            <div class="col4 text_right">
+                                                <i class="red_input">*</i>证件号码 ：
+                                            </div>
+                                            <div class="wd190 float_left">
+                                                <input class="layui-input" type="text" ng-model="enterprise.entpCrdtNo">
+                                            </div>
+                                        </div>
+
+                                        <div class="col_td">
+                                            <div class="col4 text_right">
+                                                Email地址 ：
+                                            </div>
+                                            <div class="wd190 float_left">
+                                                <input class="layui-input" type="text"
+                                                       ng-model="enterprise.entpEmailAdr"
+                                                       validator="email">
+                                            </div>
+                                        </div>
+                                        <div class="col_td">
+                                            <div class="col4 text_right">
+                                                <i class="red_input">*</i>传真 ：
+                                            </div>
+                                            <div class="wd190 float_left">
+                                                <input class="layui-input" type="text" ng-model="enterprise.entpFaxNo">
+                                            </div>
+                                        </div>
+
+                                        <div class="col_td">
+                                            <div class="col4 text_right">
+                                                <i class="red_input">*</i>联系人 ：
+                                            </div>
+                                            <div class="wd190 float_left">
+                                                <input class="layui-input" type="text" ng-model="enterprise.entpCtcpsn"
+                                                       validator="name">
+                                            </div>
+                                        </div>
+                                        <div class="col_td">
+                                            <div class="col4 text_right">
+                                                <i class="red_input">*</i>联系电话 ：
+                                            </div>
+                                            <div class="wd190 float_left">
+                                                <input class="layui-input" type="text"
+                                                       ng-model="enterprise.entpCtcpsnTel"
+                                                       validator="required,telephone">
+                                            </div>
+                                        </div>
+
+                                        <div class="col_td">
+                                            <div class="col4 text_right">
+                                                <i class="red_input">*</i>注册地址 ：
+                                            </div>
+                                            <div class="wd190 float_left">
+                                                <input class="layui-input" type="text" ng-model="enterprise.entpRgstAdr"
+                                                       validator="required">
+                                            </div>
+                                        </div>
+                                        <div class="col_td">
+                                            <div class="col4 text_right">
+                                                <i class="red_input">*</i>是否资金池主办单位 ：
+                                            </div>
+                                            <div class="wd190 float_left">
+                                                <select class="layui-input" name="wthrCptplHostEntp"
+                                                        ng-model="enterprise.wthrCptplHostEntp"
+                                                        validator="required"
+                                                        jf-select="builder.option('WthrCptplHostEntp')" >
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col_td" ng-if="enterprise.wthrCptplHostEntp == '1'">
+                                            <div class="col4 text_right">
+                                                <i class="red_input">*</i>资金池模式 ：
+                                            </div>
+                                            <div class="wd190 float_left">
+                                                <select class="layui-input" name="cptplModel"
+                                                        ng-model="enterprise.cptplModel" jf-select="builder.option('CptplModel')"
+                                                        validator="required">
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col_td">
+                                            <div class="col4 text_right">
+                                                <i class="red_input">*</i>是否已签约 ：
+                                            </div>
+                                            <div class="wd190 float_left">
+                                                <select class="layui-input" name="wthrSign"
+                                                        ng-model="enterprise.wthrSign"
+                                                        validator="required"
+                                                        jf-select="builder.option('WthrSign')" >
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col_td" ng-if="!!enterprise.parentEntpCode">
+                                            <div class="col4 text_right">
+                                                上级编号 ：
+                                            </div>
+                                            <div class="wd190 float_left">
+                                                <input class="layui-input" type="text"
+                                                       ng-model="enterprise.parentEntpCode"
+                                                       readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="button_contain" style="width:100%;text-align:center">
+                                            <button class="layui-btn" ng-click="save()">
+                                                <i class="layui-icon">စ</i> 确认
+                                            </button>
+                                            <button class="layui-btn" ng-click="back()">
+                                                <i class="layui-icon"></i> 返回
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <!-----------------村镇信息 end  --------------- -->
+
+                        <!-----------------角色管理begin --------------- -->
+                        <div class="layui-tab-item">
+                            <div class="layui-row " style="border:0px">
+                                <div class="layui-col-md12" ng-show="role2.showDiv==1">
+                                    <div class="button_contain">
+                                        <button class="layui-btn layui-btn-primary" ng-click="bindEntpRole()"><i
+                                                class="layui-icon">&#xe61f;</i> 绑定角色
+                                        </button>
+                                        <button class="layui-btn layui-btn-primary" ng-click="delRole()"><i
+                                                class="layui-icon">&#xe640;</i> 解除绑定
+                                        </button>
+                                    </div>
+
+                                    <div jf-grid="roleGrid">
+                                        <table>
+                                            <thead>
+                                            <tr>
+                                                <th align="left">角色编号</th>
+                                                <th align="left">角色名称</th>
+                                                <th align="left">角色状态</th>
+                                                <th align="left">排序</th>
+                                                <th align="left">描述</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td align="left" ng-bind="item.roleCode"></td>
+                                                <td align="left" ng-bind="item.roleName"></td>
+                                                <td align="left" ng-bind="item.statusCd"></td>
+                                                <td align="left" ng-bind="item.sort"></td>
+                                                <td align="left" ng-bind="item.remark"></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="layui-col-md12" ng-show="role && role.roleCode">
+                                    <div class="layui-form" style="margin-top: 20px">
+                                        <div class="search_mian">
+                                            <div class="layui-form-item">
+                                                <div class="layui-inline">
+                                                    <label class="layui-form-label">登录名:</label>
+                                                    <div class="layui-input-inline">
+                                                        <input class="layui-input" type="text"
+                                                               ng-model="roleUserList.params.userLoginName">
+                                                    </div>
+                                                </div>
+                                                <div class="layui-inline">
+                                                    <label class="layui-form-label">姓名:</label>
+                                                    <div class="layui-input-inline">
+                                                        <input class="layui-input" type="text"
+                                                               ng-model="roleUserList.params.userRealname">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="search_button">
+                                                <button class="layui-btn" ng-click="roleUserList.search()">
+                                                    <i class="layui-icon">&#xe615;</i> 查询
+                                                </button>
+                                                <button class="layui-btn" ng-click="resetRoleUserQueryParam()">
+                                                    <i class="layui-icon">&#x1002;</i> 重置
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div jf-grid="roleUserList">
+                                        <table>
+                                            <thead>
+                                            <tr>
+                                                <th>用户编号</th>
+                                                <th>登陆名称</th>
+                                                <th>姓名</th>
+                                                <th>性别</th>
+                                                <th>电话</th>
+                                                <th>状态</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td align="left" ng-bind="item.userNum"></td>
+                                                <td align="left" ng-bind="item.userLoginName"></td>
+                                                <td align="left" ng-bind="item.userRealname"></td>
+                                                <td align="left"
+                                                    ng-bind="item.userSexCd | jfConvert : 'dict' : 'Gnd'"></td>
+                                                <td align="left" ng-bind="item.userMobile"></td>
+                                                <td align="left"
+                                                    ng-bind="item.userStatusCd |jfConvert:'dict':'StCd'"></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-----------------角色管理end --------------- -->
+
+                        <!-----------------用户管理begin --------------- -->
+                        <div class="layui-tab-item">
+                            <div id="ctsUserListCtrl">
+                                <form class="layui-form layui-form-pane">
+                                    <div class="search_mian">
+                                        <div class="layui-form-item">
+                                            <input class="layui-input" type="hidden"
+                                                   ng-model="entpUserList.params.tenantId">
+                                            <div class="layui-inline">
+                                                <label class="layui-form-label">登录名：</label>
+                                                <div class="layui-input-inline">
+                                                    <input class="layui-input" type="text"
+                                                           ng-model="entpUserList.params.loginName">
+                                                </div>
+                                            </div>
+                                            <div class="layui-inline">
+                                                <label class="layui-form-label">姓名：</label>
+                                                <div class="layui-input-inline">
+                                                    <input class="layui-input" type="text"
+                                                           ng-model="entpUserList.params.realname">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="search_button">
+                                            <button class="layui-btn" ng-click="entpUserList.search()">
+                                                <i class="layui-icon">&#xe615;</i> 查询
+                                            </button>
+
+                                            <button class="layui-btn" type="button" ng-click="entpUserList.params={}">
+                                                <i class="layui-icon">&#x1002;</i> 重置
+                                            </button>
+
+                                        </div>
+                                    </div>
+
+                                </form>
+                                <div class="button_contain">
+                                    <button class="layui-btn layui-btn-primary"
+                                            ng-click="addOrUpdateUser('add')">
+                                        <i class="layui-icon">&#xe61f;</i> 新 增
+                                    </button>
+                                    <button class="layui-btn layui-btn-primary"
+                                            ng-click="addOrUpdateUser('update')">
+                                        <i class="layui-icon">&#xe642;</i> 修 改
+                                    </button>
+                                    <button class="layui-btn layui-btn-primary"
+                                            ng-click="deleteUser()">
+                                        <i class="layui-icon">&#xe640;</i> 删 除
+                                    </button>
+                                    <button class="layui-btn layui-btn-primary" ng-click="resetPassword()">
+                                        <i class="layui-icon">&#xe642;</i> 重置密码
+                                    </button>
+                                </div>
+                                <div jf-grid="entpUserList">
+                                    <table>
+                                        <thead>
+                                        <tr>
+                                            <th align="left">用户编号</th>
+                                            <th align="left">登陆名称</th>
+                                            <th align="left">姓名</th>
+                                            <th align="left">性别</th>
+                                            <th align="left">电话</th>
+                                            <!--<th align="left">地区</th>-->
+                                            <th align="left">状态</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td align="left" ng-bind="item.userNum"></td>
+                                            <td align="left" ng-bind="item.loginName"></td>
+                                            <td align="left" ng-bind="item.realname"></td>
+                                            <td align="left" ng-bind="item.sexCd | jfConvert : 'dict' : 'Gnd'"></td>
+                                            <td align="left" ng-bind="item.mobile"></td>
+                                            <!--<td align="left" ng-bind="item.city |jfConvert:'address'"></td>-->
+                                            <td align="left" ng-bind="item.statusCd |jfConvert:'dict':'StCd'"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div id="ctsUserAddCtrl" style="display:none">
+                                <div class="section">
+                                    <div class="leftmenu_navtitle">
+                                        用户信息 <i class="follow_icon" title="关注该业务"></i>
+                                    </div>
+                                    <form name="userForm">
+                                        <div class="allcontent">
+                                            <div class="col_td">
+                                                <div class="col4 text_right">
+                                                    <i class="red_input">*</i>登录名：
+                                                </div>
+                                                <div class="wd190 float_left">
+                                                    <input class="layui-input" type="text" name="loginName"
+                                                           ng-model="user.loginName" validator="required">
+                                                </div>
+                                            </div>
+                                            <div class="col_td">
+                                                <div class="col4 text_right">
+                                                    <i class="red_input">*</i>姓名：
+                                                </div>
+                                                <div class="wd190 float_left">
+                                                    <input class="layui-input" type="text" name="realname"
+                                                           ng-model="user.realname" validator="required">
+                                                </div>
+                                            </div>
+                                            <div class="col_td" ng-if="!user.userNum">
+                                                <div class="col4 text_right">
+                                                    <i class="red_input">*</i>密码：
+                                                </div>
+                                                <div class="wd190 float_left">
+                                                    <input class="layui-input" type="password" name="password"
+                                                           ng-model="user.password" validator="required">
+                                                </div>
+                                            </div>
+                                            <div class="col_td" ng-if="!user.userNum">
+                                                <div class="col4 text_right">
+                                                    <i class="red_input">*</i>密码确认：
+                                                </div>
+                                                <div class="wd190 float_left">
+                                                    <input class="layui-input" type="password" name="repassword"
+                                                           ng-model="user.repassword" validator="required">
+                                                </div>
+                                            </div>
+
+                                            <div class="col_td">
+                                                <div class="col4 text_right">
+                                                    <i class="red_input">*</i>证件类型：
+                                                </div>
+                                                <div class="wd190 float_left">
+                                                    <select class="layui-input" name="certificateTypeCd" ng-model="user.certificateTypeCd"
+                                                            validator="required">
+                                                        <option value="0">身份证</option>
+                                                        <option value="1">学生证</option>
+                                                        <option value="2">士兵证</option>
+                                                        <option value="3">工作证</option>
+                                                        <option value="4">军官证</option>
+                                                        <option value="5">护照</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col_td">
+                                                <div class="col4 text_right">
+                                                    <i class="red_input">*</i>证件号码：
+                                                </div>
+                                                <div class="wd190 float_left">
+                                                    <input class="layui-input" type="text" name="certificateNum"
+                                                           ng-model="user.certificateNum" validator="required">
+                                                </div>
+                                            </div>
+                                            <!--<div class="col_td">-->
+                                                <!--<div class="col4 text_right">-->
+                                                    <!--<i class="red_input">*</i>U盾编号：-->
+                                                <!--</div>-->
+                                                <!--<div class="wd190 float_left">-->
+                                                    <!--<input class="layui-input" type="text" name="ukey"-->
+                                                           <!--ng-model="user.ukey" validator="required">-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                            <div class="col_td">
+                                                <div class="col4 text_right">
+                                                    <i class="red_input">*</i>性别：
+                                                </div>
+                                                <div class="wd190 float_left">
+                                                    <select ng-model="user.sexCd" jf-select="builder.option('Gnd')"
+                                                            class="layui-input" placeholder="请选择" name="statusCd"
+                                                            validator="required"></select>
+                                                </div>
+                                            </div>
+                                            <div class="col_td">
+                                                <div class="col4 text_right">移动电话：</div>
+                                                <div class="wd190 float_left">
+                                                    <input class="layui-input" type="text" ng-model="user.mobile"
+                                                           validator="telephone" tel-error-message="移动电话号码输入格式错误">
+                                                </div>
+                                            </div>
+                                            <div class="col_td">
+                                                <div class="col4 text_right">固定电话：</div>
+                                                <div class="wd190 float_left">
+                                                    <input class="layui-input" type="text" ng-model="user.telephone"
+                                                           validator="tel" tel-error-message="固定电话号码输入格式错误">
+                                                </div>
+                                            </div>
+                                            <div class="col_td">
+                                                <div class="col4 text_right">邮箱地址：</div>
+                                                <div class="wd190 float_left">
+                                                    <input class="layui-input" type="text" ng-model="user.email"
+                                                           validator="email" tel-error-message="邮箱输入格式错误">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                    <div class="scrbtn">
+                                        <button class="layui-btn"
+                                                ng-click="userSave('saveBizInf')"><i class="layui-icon">&#x1005;</i> 保存
+                                        </button>
+                                        <button class="layui-btn" ng-click="userBack()"><i
+                                                class="layui-icon">&#x1006;</i> 返回
+                                        </button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="button_contain">
+                                        <button class="layui-btn layui-btn-primary"
+                                                ng-click="bindUserRole()">
+                                            <i class="layui-icon">&#xe61f;</i>管理所属角色
+                                        </button>
+                                        <button class="layui-btn layui-btn-primary"
+                                                ng-click="deleteUserRole()">
+                                            <i class="layui-icon">&#xe640;</i>移除所属角色
+                                        </button>
+                                        <button class="layui-btn layui-btn-primary"
+                                                ng-click="userRoleList.modal('/entp/user/userRoleAddDialog.html?id',{title :'所属角色信息',buttons : ['提交','取消'],size : ['700px','400px'],callbacks : [saveRole]})">
+                                            <i class="layui-icon">&#xe642;</i>修改关联状态
+                                        </button>
+                                    </div>
+                                    <div jf-grid="userRoleList">
+                                        <div>
+                                            <table>
+                                                <thead>
+                                                <tr>
+                                                    <th>角色名称</th>
+                                                    <th>角色用户关联状态</th>
+                                                    <th>是否默认角色</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td align="center" ng-bind="item.roleName"></td>
+                                                    <td align="center"
+                                                        ng-bind="item.statusCd | jfConvert : 'dict' : 'StCd'"></td>
+                                                    <td align="center"
+                                                        ng-bind="item.defaultInd | jfConvert : 'dict' : 'Indicator'"></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="scrbtn">
+                                        <button class="layui-btn" ng-click="userBack()"><i
+                                                class="layui-icon">&#x1006;</i> 返回
+                                        </button>
+                                    </div>
+                                    <div class="scrbtn">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-----------------用户管理end --------------- -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    layui.use('element', function () {
+        var $ = layui.jquery, element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+
+        //Hash地址的定位
+        var layid = location.hash.replace(/^#test=/, '');
+        element.tabChange('test', layid);
+
+        element.on('tab(test)', function (elem) {
+            location.hash = 'test=' + $(this).attr('lay-id');
+        });
+
+    });
+</script>

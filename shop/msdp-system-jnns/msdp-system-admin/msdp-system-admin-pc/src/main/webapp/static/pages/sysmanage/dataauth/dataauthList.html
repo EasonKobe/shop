@@ -1,0 +1,127 @@
+<div class="layout_body" ng-controller="dataauthCtrl">
+	<div class="">
+		<div class="subposition" ng-bind-html="getCurrentLoaction()">
+        </div>
+		<form class="layui-form layui-form-pane" name="form1">
+			<div class="search_mian">
+				<div class="layui-form-item">
+					<div class="layui-inline">
+						<label class="layui-form-label">数据权限模式：</label>
+						<div class="layui-input-inline">
+							<input class="layui-input" type="text"
+								ng-model="dataAuthGridOpts.params.modelName" name="modelName"
+								selector="queryModel" placeholder="请选择"></input> <input
+								class="layui-input" type="hidden"
+								ng-model="dataAuthGridOpts.params.modelCode" name="modelCode"
+								validator="required">
+						</div>
+					</div>
+				    <div class="layui-inline">
+						<label class="layui-form-label">用户：</label>
+						<div class="layui-input-inline">
+							<input class="layui-input" type="text"
+								ng-model="dataAuthGridOpts.params.loginName" name="loginName"
+								selector="queryUser" placeholder="请选择用户"></input> <input
+								class="layui-input" type="hidden"
+								ng-model="dataAuthGridOpts.params.userNum" name="userNum">
+						</div>
+					</div>
+					<div class="layui-inline">
+					<button class="layui-btn" ng-click="dataAuthGridOpts.search()">
+						<i class="layui-icon">&#xe615;</i> 查询
+					</button>
+					<!-- <button class="layui-btn" type="button" ng-click="queryDataauth={}">
+						<i class="layui-icon">&#x1006;</i> 重置
+					</button> -->
+					<button class="layui-btn" type="button" ng-click="dataAuthGridOpts.params={}">
+						<i class="layui-icon">&#x1002;</i> 重置
+					</button>
+					<button class="layui-btn" type="button" moreClick>
+						<i class="layui-icon">&#xe61a;</i> 
+					</button>
+				</div>
+					<div class="search_width" style="display: none">
+					<div class="layui-inline">
+						<label class="layui-form-label">角色：</label>
+						<div class="layui-input-inline">
+							<input class="layui-input" type="text"
+								ng-model="dataAuthGridOpts.params.roleName" selector="queryRole"
+								placeholder="请选择角色"> <input class="layui-input"
+								type="hidden" ng-model="dataAuthGridOpts.params.roleCode" name="roleCode">
+						</div>
+					</div>
+						<div class="layui-inline">
+							<label class="layui-form-label">场景：</label>
+							<div class="layui-input-inline">
+								<select ng-model="dataAuthGridOpts.params.bizScene" jf-select="builder.option('BizSceneType')" class="layui-input" placeholder="请选择" name="bizScene"></select>
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label">部门：</label>
+							<div class="layui-input-inline">
+								<input class="layui-input" type="text"
+									ng-model="dataAuthGridOpts.params.deptName" selector="queryDept"
+									placeholder="请选择机构"> <input class="layui-input"
+									type="hidden" ng-model="dataAuthGridOpts.params.deptCode" name="deptCode">
+							</div>
+						</div>
+						<div class="layui-inline">
+							<label class="layui-form-label">机构：</label>
+							<div class="layui-input-inline">
+								<input class="layui-input" type="text"
+									ng-model="dataAuthGridOpts.params.orgName" selector="queryOrg"
+									placeholder="请选择机构"> <input class="layui-input"
+									type="hidden" ng-model="dataAuthGridOpts.params.orgCode" name="orgCode">
+							</div>
+						</div> 
+					</div>
+				</div>
+			</div>
+
+		</form>
+		<div class="button_contain">
+			<button class="layui-btn layui-btn-primary" ng-click="addDataauth($event)">
+				<i class="layui-icon">&#xe61f;</i> 新 增
+			</button>
+			<button class="layui-btn layui-btn-primary"
+				ng-click="getDataauth($event)">
+				<i class="layui-icon">&#xe642;</i> 修 改
+			</button>
+			<button class="layui-btn layui-btn-primary"
+				ng-click="dataAuthGridOpts.request('dataauth.delete?id')">
+				<i class="layui-icon">&#xe640;</i> 删 除
+			</button>
+
+		</div>
+		<div jf-grid="dataAuthGridOpts" >
+			<div class="layui-form">
+				<table>
+					<thead>
+						<tr>
+							<th>客户端</th>
+							<th>用户</th>
+							<th>场景</th>
+							<th>事件</th>
+							<th>角色</th>
+							<th>机构</th>
+							<th>部门</th>
+							<th>数据权限模式</th>
+						</tr>
+					</thead>
+					<tbody class="tbody">
+						<tr>
+							<td align="center" ng-bind="item.clntendNm==null?'*':item.clntendNm"></td>	
+							<td align="center" ng-bind="item.loginName==null?'*':item.loginName"></td>
+							<td align="center" ng-bind="item.bizScene | jfConvert : 'dict' : 'BizSceneType'"></td>
+							<td align="center" ng-bind="item.eventName==null?'*':item.eventName"></td>
+							<td align="center" ng-bind="item.roleName==null?'*':item.roleName"></td>
+							<td align="center" ng-bind="item.orgName==null?'*':item.orgName"></td>
+							<td align="center" ng-bind="item.deptName==null?'*':item.deptName"></td>
+							<td align="center" ng-bind="item.modelName"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

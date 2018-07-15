@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeedev.msdp.sys.role.dao.ISysRoleDao"> 
+	<resultMap id="sysRoleMap" type="java.util.Map" > 
+		<result column="ID" property="id" javaType="java.lang.Integer"/>  
+		<result column="ROLE_CODE" property="roleCode" javaType="java.lang.String"/>  
+		<result column="ROLE_NAME" property="roleName" javaType="java.lang.String"/>  
+		<result column="PARENT_ROLE_CODE" property="parentRoleCode" javaType="java.lang.String"/>  
+		<result column="STATUS_CD" property="statusCd" javaType="java.lang.String"/>  
+		<result column="REMARK" property="remark" javaType="java.lang.String"/>  
+		<result column="CREATE_TIME" property="createTime" javaType="java.lang.String"/>  
+		<result column="CREATE_USER" property="createUser" javaType="java.lang.String"/>  
+		<result column="UPDATE_TIME" property="updateTime" javaType="java.lang.String"/>  
+		<result column="UPDATE_USER" property="updateUser" javaType="java.lang.String"/>  
+		<result column="EXPD_ID" property="expdId" javaType="java.lang.String"/>  
+		<result column="DEL_IND" property="delInd" javaType="java.lang.String"/>  
+		<result column="VERSION" property="version" javaType="java.lang.Integer"/>  
+		<result column="TENANT_ID" property="tenantId" javaType="java.lang.String"/> 
+		<result column="SORT" property="sort" javaType="java.lang.Integer"/> 
+		<result column="CLNTEND_ID" property="clntendId" javaType="java.lang.String"/> 
+	</resultMap>  
+ 
+	<sql id="column_list">
+  	ID, ROLE_CODE, ROLE_NAME,PARENT_ROLE_CODE, STATUS_CD, REMARK, CREATE_TIME, CREATE_USER,
+  	 UPDATE_TIME, UPDATE_USER, EXPD_ID, DEL_IND, VERSION,SORT,CLNTEND_ID,TENANT_ID
+	</sql>  
+  
+	<sql id="where_filters"> 
+		<where> 
+			<if test="id!=null and id!=''">AND ID = #{id}</if>  
+			<if test="roleCode!=null and roleCode!=''">AND ROLE_CODE = #{roleCode}</if>  
+			<if test="roleCodes != null and roleCodes.size() > 0">
+				AND ROLE_CODE IN
+				<foreach collection="roleCodes" item="roleCode" index="index" open="(" close=")" separator=",">
+					#{roleCode}
+				</foreach>
+			</if>
+			
+			<if test="roleName!=null and roleName!=''">AND ROLE_NAME LIKE concat(concat('%',#{roleName}),'%')</if>  
+			<if test="parentRoleCode!=null and parentRoleCode!=''">AND PARENT_ROLE_CODE = #{parentRoleCode}</if>  
+			<if test="statusCd!=null and statusCd!=''">AND STATUS_CD = #{statusCd}</if>  
+			<if test="expdId!=null and expdId!=''">AND EXPD_ID = #{expdId}</if>  
+			<if test="delInd!=null and delInd!=''">AND DEL_IND = #{delInd}</if>  
+			<if test="version!=null and version!=''">AND VERSION = #{version}</if>  
+			<if test="tenantId!=null and tenantId!=''">AND TENANT_ID = #{tenantId}</if> 
+			<if test="clntendId!=null and clntendId!=''">AND CLNTEND_ID = #{clntendId}</if>
+		</where> 
+	</sql>  
+	<!--根据条件查询列表-->  
+	<select id="findRoleList" parameterType="map" resultMap="sysRoleMap">SELECT 
+		<include refid="column_list"/> FROM SYS_ROLE 
+		<include refid="where_filters"/> ORDER BY SORT,ID DESC
+	</select> 
+</mapper>

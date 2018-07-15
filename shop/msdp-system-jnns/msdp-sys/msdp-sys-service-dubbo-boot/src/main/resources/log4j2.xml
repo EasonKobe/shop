@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="WARN">
+   <Properties>
+   	  <property name="APP_NAME">msdp-sys-service</property>
+      <Property name="LOG_HOME">${logger.path}/${APP_NAME}</Property>
+      <Property name="FILE_SIZE">300M</Property>
+      <Property name="log_pattern">%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Property>
+      <Property name="rolling_file_name">-%d{yyyy-MM-dd}.%i.zip</Property>
+      <Property name="rollover_strategy_max">30</Property>
+
+      <Property name="LOG_HOME_PROJECT">${LOG_HOME}/${APP_NAME}-project</Property>
+      <Property name="LOG_HOME_PROJECT_ERROR">${LOG_HOME}/${APP_NAME}-project-error</Property>
+      <Property name="LOG_HOME_MSDP">${LOG_HOME}/${APP_NAME}-msdp</Property>
+      <Property name="LOG_HOME_SQL">${LOG_HOME}/${APP_NAME}-sql</Property>
+      <Property name="LOG_HOME_ACCESS">${LOG_HOME}/${APP_NAME}-access</Property>
+      <Property name="LOG_HOME_ACCESS_ERROR">${LOG_HOME}/${APP_NAME}-access-error</Property>
+        </Properties>
+   <appenders>
+      <Console name="Console" target="SYSTEM_OUT">
+         <PatternLayout pattern="${log_pattern}" />
+      </Console>
+      <RollingRandomAccessFile  name="projectRolling"
+         fileName="${LOG_HOME_PROJECT}.log"
+         filePattern="${LOG_HOME_PROJECT}${rolling_file_name}"
+         immediateFlush="false" append="true">
+         <PatternLayout>
+            <Pattern>${log_pattern}</Pattern>
+            <Charset>UTF-8</Charset>
+         </PatternLayout>
+         <Policies>
+            <SizeBasedTriggeringPolicy size="${FILE_SIZE}"/>
+         </Policies>
+         <DefaultRolloverStrategy max="${rollover_strategy_max}" />
+      </RollingRandomAccessFile>
+
+
+	   <RollingRandomAccessFile  name="projectErrorRolling"
+         fileName="${LOG_HOME_PROJECT_ERROR}.log"
+         filePattern="${LOG_HOME_PROJECT_ERROR}${rolling_file_name}"
+         immediateFlush="false" append="true">
+         <Filters>
+            <ThresholdFilter level="${logger.level}" onMatch="DENY" onMismatch="ACCEPT" />
+         </Filters>
+         <PatternLayout>
+            <Pattern>${log_pattern}</Pattern>
+            <Charset>UTF-8</Charset>
+         </PatternLayout>
+         <Policies>
+            <SizeBasedTriggeringPolicy size="${FILE_SIZE}"/>
+         </Policies>
+         <DefaultRolloverStrategy max="${rollover_strategy_max}" />
+      </RollingRandomAccessFile>
+
+	   <RollingRandomAccessFile  name="msdpRolling"
+         fileName="${LOG_HOME_MSDP}.log"
+         filePattern="${LOG_HOME_MSDP}${rolling_file_name}"
+         immediateFlush="false" append="true">
+         <PatternLayout>
+            <Pattern>${log_pattern}</Pattern>
+            <Charset>UTF-8</Charset>
+         </PatternLayout>
+         <Policies>
+            <SizeBasedTriggeringPolicy size="${FILE_SIZE}"/>
+         </Policies>
+         <DefaultRolloverStrategy max="${rollover_strategy_max}" />
+      </RollingRandomAccessFile>
+      
+      
+      <RollingRandomAccessFile  name="sqlRolling"
+         fileName="${LOG_HOME_SQL}.log"
+         filePattern="${LOG_HOME_SQL}${rolling_file_name}"
+         immediateFlush="false" append="true">
+         <PatternLayout>
+            <Pattern>${log_pattern}</Pattern>
+            <Charset>UTF-8</Charset>
+         </PatternLayout>
+         <Policies>
+            <SizeBasedTriggeringPolicy size="${FILE_SIZE}"/>
+         </Policies>
+         <DefaultRolloverStrategy max="${rollover_strategy_max}" />
+      </RollingRandomAccessFile>
+   </appenders>
+
+   <loggers>
+      <AsyncLogger name="druid.sql" level="${logger.level}"  additivity="false">
+	  		<appender-ref ref="Console"/>
+	  		<appender-ref ref="sqlRolling"/>
+	  </AsyncLogger>
+      <AsyncLogger name="org.mybatis" level="${logger.level}"  additivity="false">
+      		<appender-ref ref="Console"/>
+	  		<appender-ref ref="sqlRolling"/>
+      </AsyncLogger>
+      <AsyncLogger name="com.jeedev.msdp" level="${logger.level}"  additivity="false">
+      		<appender-ref ref="Console"/>
+	  		<appender-ref ref="msdpRolling"/>
+      </AsyncLogger>
+      <AsyncLogger name="com.tansun" level="${logger.level}"  additivity="false">
+      		<appender-ref ref="Console"/>
+	  		<appender-ref ref="projectRolling"/>
+	  		<appender-ref ref="projectErrorRolling"/>
+      </AsyncLogger>
+
+	  <AsyncRoot  level="${logger.level}">
+         <appender-ref ref="Console"/>
+         <appender-ref ref="projectRolling" />
+         <appender-ref ref="projectErrorRolling" />
+      </AsyncRoot>
+   </loggers>
+</configuration>

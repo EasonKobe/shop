@@ -1,0 +1,17 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    <!-- 提供方应用信息，用于计算依赖关系 -->
+    <dubbo:application name="shop-app-pc" />
+
+    <!-- 使用multicast广播注册中心 -->
+    <!-- <dubbo:registry address="multicast://127.0.0.1:1234" /> -->
+    <!-- 使用zookeeper注册中心 -->
+    <dubbo:consumer check="false" timeout="30000" retries="0" />	
+     <!-- 延迟加载超时不重试 --> 
+    <dubbo:provider delay="-1" timeout="30000"  retries="0"/>
+    <dubbo:registry address="${dubbo.registry.address}" file="${dubbo.registry.file}/shop-app.properties" />
+ 	<import resource="classpath*:/dubbo/consumer-*.xml"/>
+ </beans>

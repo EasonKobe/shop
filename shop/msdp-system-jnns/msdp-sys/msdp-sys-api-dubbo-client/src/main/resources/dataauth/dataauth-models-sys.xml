@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns="http://msdp.tansun.com/schema/dataauth-model"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:schemaLocation="http://msdp.tansun.com/schema/dataauth-model http://msdp.tansun.com/schema/dataauth-model.xsd">
+<models id="sys">
+	<!--  可使用的变量 fkcolumn,和插件中 fillArgs配置的变量,
+		fkcolumn 可被dao中的注解fkcolumn 替换
+		可在params上自定义参数
+			定义 orgCode变量值为 '123'
+			<param name="orgCode" value="123"/>  
+			定义 orgCode变量值为  引用变量 currOrgCode值
+			<param name="orgCode" value-ref="currOrgCode"/>  
+			定义 orgCode变量值为  调用com.jeedev.msdp.sys.org.api.OrgApi.getOrgNameByOrgCode 的结果，api只支持第一个参数为map的
+			<value-factory beanClass="com.jeedev.msdp.sys.org.api.OrgApi" methodName="getOrgNameByOrgCode">
+				api第一个参数（map）中的key-value
+				<param name="orgCode" value-ref="currOrgCode"/>
+			</value-factory>
+	-->
+		<!-- 经办机构是本机构及其下属机构 -->
+		<model id="orgCodeIsCurrOrAllSubModel">
+			<type>remote</type>
+			<fkcolumns>
+				<fkcolumn name="fkcolumn">HDL_INST_ID</fkcolumn>
+			</fkcolumns>
+			<params>
+				<!-- 自定义参数 -->
+				<param name="orgCodes">
+					<value-factory beanClass="com.jeedev.msdp.sys.org.api.OrgApi" methodName="findChildrenOrgs">
+						<param name="orgCode" value-ref="currInstCd"/>
+					</value-factory>
+				</param>
+			</params>
+			<sqls>
+				<sql type="remote" depends="orgCodes">
+					<where> 
+						and ( 1!=1
+						<if test="orgCodes!=null and orgCodes.size()>0" >
+							<foreach collection="orgCodes" item="cond">
+							 	OR #{fkcolumn}=#{cond.orgCode}
+							</foreach>
+						</if>
+						)
+					</where>
+				</sql>
+			</sqls>
+			<exclusion>
+			<!-- 待扩展 -->
+				<!-- 把参数涉及到的 -->
+			</exclusion>
+		</model>
+		
+	</models>
+</config>

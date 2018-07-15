@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jeedev.msdp.sys.client.dao.SysClntendDao">
+	<resultMap id="ClntendInfMap" type="java.util.Map">
+		<result column="ID" property="id" />
+		<result column="CLNTEND_ID" property="clntendId" />
+		<result column="CLNTEND_NM" property="clntendNm" />
+		<result column="CLNTEND_SECRET" property="clntendSecret" />
+		<result column="CLNTEND_DOMAIN" property="clntendDomain" />
+		<result column="CLNTEND_ST" property="clntendSt" />
+		<result column="CREATE_TIME" property="createTime" />
+		<result column="UPDATE_TIME" property="updateTime" />
+		<result column="CREATE_USER" property="createUser" />
+		<result column="UPDATE_USER" property="updateUser" />
+		<result column="EXPD_ID" property="expdId" />
+		<result column="DEL_IND" property="delInd" />
+		<result column="VERSION" property="version" />
+	</resultMap>
+
+	<!--列信息-->
+	<sql id="column_list">
+		ID ,CLNTEND_ID ,CLNTEND_NM ,CLNTEND_SECRET ,CLNTEND_DOMAIN ,CLNTEND_ST ,CREATE_TIME ,CREATE_USER ,UPDATE_TIME ,UPDATE_USER ,DEL_IND ,VERSION 
+	</sql>
+
+	<!--动态条件-->
+	<sql id="where_filters">
+		<where>
+			<if test="clntendId !=null and clntendId !=''" >
+				AND CLNTEND_ID = #{clntendId}
+			</if>
+			<if test="clntendIds != null and clntendIds.size() > 0">
+				AND CLNTEND_ID IN
+				<foreach collection="clntendIds" item="clntendId" index="index" open="(" close=")" separator=",">
+					#{clntendId}
+				</foreach>
+			</if>
+			<if test="clntendNm !=null and clntendNm !=''" >
+				AND CLNTEND_NM = #{clntendNm}
+			</if>
+			<if test="clntendDomain !=null and clntendDomain !=''" >
+				AND CLNTEND_DOMAIN = #{clntendDomain}
+			</if>
+			<if test="clntendSt !=null and clntendSt !=''" >
+				AND CLNTEND_ST = #{clntendSt}
+			</if>
+		</where>
+	</sql>
+
+	<!--根据主键查询对象数据-->
+	<select id="selectById" parameterType="Integer" resultMap="ClntendInfMap">
+		SELECT <include refid="column_list"/> FROM SYS_CLNTEND where ID = #{id}
+	</select>
+
+	<!--根据条件查询列表-->
+	<select id="queryList" parameterType="map" resultMap="ClntendInfMap">
+		SELECT <include refid="column_list"/> FROM SYS_CLNTEND <include refid="where_filters"/> 
+	</select>
+
+	<!--根据条件查询数量-->
+	<select id="countList" parameterType="map" resultType="long">
+		SELECT COUNT(*) FROM SYS_CLNTEND <include refid="where_filters"/>
+	</select>
+
+	<select id="findByClntendId" resultType="java.util.HashMap" parameterType="java.lang.String">
+		SELECT
+			ID AS id,CLNTEND_ID AS clntendId,CLNTEND_NM AS clntendNm,CLNTEND_SECRET AS clntendSecret,CLNTEND_DOMAIN AS clntendDomain,CLNTEND_ST AS clntendSt
+		FROM
+			SYS_CLNTEND
+		WHERE 
+			CLNTEND_ID = #{clntendId} 
+		AND
+			CLNTEND_ST = 1
+	</select>
+	
+	<select id="findEnabledList" resultType="java.util.HashMap">
+		SELECT
+			CLNTEND_ID as clntendId,CLNTEND_NM as clntendNm
+		FROM
+			SYS_CLNTEND
+		WHERE 
+			CLNTEND_ST = 1
+	</select>
+	
+</mapper>

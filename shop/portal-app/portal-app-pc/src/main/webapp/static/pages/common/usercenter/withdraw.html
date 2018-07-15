@@ -1,0 +1,99 @@
+<div class="main" ng-controller="withdrawCtrl">
+  <form name="withdrawForm">
+    <div class="title-items">
+      <h2>提现</h2>
+      <b class="line"></b>
+    </div>
+    <div class="step-box">
+      <div class="step-menu">
+        <div class="top-step step-01">
+          <div class="step-num cur">1</div>
+          <div class="step-title cur">提现申请</div>
+        </div>
+        <div class="top-step step-02">
+          <div ng-class="{'step-num cur': tab == 2 || tab == 3, 'step-num': tab == 1}">2</div>
+          <div ng-class="{'step-title cur': tab == 2 || tab == 3, 'step-title': tab == 1}">确认提现</div>
+        </div>
+        <div class="top-step step-03">
+          <div ng-class="{'step-num cur': tab == 3, 'step-num': tab == 1 || tab == 2}">3</div>
+          <div ng-class="{'step-title cur': tab == 3, 'step-title': tab == 1 || tab == 2}">成功</div>
+        </div>
+      </div>
+      <div class="step-form" ng-if="tab==1">
+        <div class="col10">
+          <div class="col4 text_right">
+            <span class="red">*</span>开户银行：
+          </div>
+          <div class="col6">
+            <input type="text" class="inputclass" name="depBnk" ng-model="withdraw.depBnk" validator="required"
+              required-error-message="请输入开户银行">
+          </div>
+        </div>
+        <div class="col10">
+          <div class="col4 text_right">
+            <span class="red">*</span>银行账户：
+          </div>
+          <div class=" col6">
+            <input type="text" class="inputclass" name="bnkAccNo" ng-model="withdraw.bnkAccNo" validator="required"
+              required-error-message="请输入银行账户">
+          </div>
+        </div>
+        <div class="col10">
+          <div class="col4 text_right">
+            <span class="red">*</span>提现金额：
+          </div>
+          <div class="col6">
+            <input type="text" class="inputclass" name="amount" ng-model="withdraw.amount" jf-format-input="money" validator="required"
+              required-error-message="请输入提现金额"> 元
+          </div>
+        </div>
+        <div class="input-button">
+          <button class="btn btn-sure" validation-submit="withdrawForm" ng-click="toTwoStep()">下一步</button>
+        </div>
+      </div>
+      <div class="step-form" ng-if="tab==2">
+        <div class="col10">
+          <div class="col4 text_right">
+            <span class="red">*</span>银行账户信息 ：
+          </div>
+          <div class="col6" ng-bind="withdraw.cstNm"></div>
+        </div>
+        <div class="col10">
+          <div class="col6" style="margin-left: 340px;">
+            <img src="{{ctx}}/static/images/logo_ue2.png">(<span ng-bind="withdraw.bnkAccNo"></span>)
+          </div>
+        </div>
+        <div class="col10">
+          <div class=" col4 text_right">
+            <span class="red">*</span>提现金额：
+          </div>
+          <div class="col6">
+            <span class="red font-18 prl6" ng-bind="withdraw.amount | jfMoney : '2'"></span>元
+          </div>
+        </div>
+        <div class="col10">
+          <div class="col4 text_right">
+            <span class="red">*</span>输入交易密码：
+          </div>
+          <div class="col6">
+            <input type="password" class="inputclass" ng-model="withdraw.txnPwd" name="txnPwd"
+              validator="required,password" required-error-message="请输入交易密码"
+              password-error-message="密码必须由6-20个字母、数字或符号组成">
+          </div>
+        </div>
+        <div class="col10 text_center">
+          <a class="blue btn-line" ng-click="findTxnPwd()">忘记密码？</a>
+        </div>
+        <div class="input-button">
+          <button class="btn btn-sure" validation-submit="withdrawForm" ng-click="toThreeStep()">确认提现</button>
+        </div>
+      </div>
+      <div class="step-form" ng-if="tab==3">
+        <div class="step-result">
+          <img src="{{ctx}}/static/images/step-succeed.png">
+          <div class="step-r-txt">恭喜您，提现申请成功!</div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

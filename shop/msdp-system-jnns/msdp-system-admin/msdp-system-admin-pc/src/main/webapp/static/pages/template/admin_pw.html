@@ -1,0 +1,28 @@
+<div>
+	<form name="updatePWFrom">
+	<div class="col_tr">
+		<div class="col3 text_right">
+			<i class="red_input">*</i>原密码 ：
+		</div>
+		<div class="wd190 float_left">
+			<input class="layui-input" type="password" ng-model="user.password" name="password" validator="required">
+		</div>
+	</div>
+	<div class="col_tr">
+		<div class="col3 text_right">
+			<i class="red_input">*</i>新密码：
+		</div>
+		<div class="wd190 float_left">
+			<input class="layui-input" type="password" ng-model="user.newPswd"  name="newPswd" validator="required,password">
+		</div>
+	</div>
+	<div class="col_tr">
+		<div class="col3 text_right">
+			<i class="red_input">*</i>确认新密码 ：
+		</div>
+		<div class="wd190 float_left">
+			<input class="layui-input" type="password" ng-model="user.renewPswd"  name="renewPswd" validator="required,password,equals" equals="newPswd">
+		</div>
+	</div>
+	</form>
+</div>

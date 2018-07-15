@@ -1,0 +1,29 @@
+<!--header-->
+<div class="header" ng-controller="centHeaderCtrl">
+    <div class="topinfo">
+        <div class="topbar">
+            <div class="topbar-l">
+                <div class="hotline"><i class="icon-20 icon-phone"></i><b>客服热线</b><em> 400 890 3980</em></div>
+            </div>
+            <div class="topbar-r">
+                <ul class="account-infos">
+                    <li><a href="javascript:void(0)">消息</a></li>
+                    <li>|</li>
+                    <li ng-if="user.realname">欢迎您，<a href="javascript:void(0)" ng-click="turn('/user/center')" class="user">{{user.realname}}</a></li>
+                    <li>|</li>
+                    <li ng-if="user.realname"><a href="javascript:void(0)" ng-click="turn('/security/center')">安全中心</a></li>
+                    <li ng-if="user.realname"><a href="javascript:void(0)" ng-click="logout()">[退出]</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="main-nav">
+        <div class="main-nav-l"><a href="javascript:void(0)" ng-click="goHome()"><img src="{{global.imgPath}}/blue/logo.png" width="154" height="45"></a></div>
+        <div class="main-nav-r">
+            <ul class="nav" ng-controller="firMenuCtrl">
+                <li ng-repeat="menu in menuList"> <a href="javascript:void(0)"   ng-click="firMunuClick(menu)"><i class="icon-menu {{menu.img}}"></i>{{menu.text}}</a> </li>
+            </ul>
+        </div>
+    </div>
+</div>
+

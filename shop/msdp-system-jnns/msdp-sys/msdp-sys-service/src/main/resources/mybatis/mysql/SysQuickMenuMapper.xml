@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jeedev.msdp.sys.quickmenu.dao.ISysQuickMenuDao"> 
+	<resultMap id="quickMenuMap" type="java.util.Map" > 
+		<result column="ID" property="id" javaType="java.lang.Integer"/>  
+		<result column="MENU_CODE" property="menuCode" javaType="java.lang.String" />
+		<result column="MENU_NAME" property="menuName" javaType="java.lang.String" />
+		<result column="URL" property="url" javaType="java.lang.String" />
+		<result column="SORT" property="sort" javaType="java.lang.Integer" />
+		<result column="ICON" property="icon" javaType="java.lang.String" />
+		<result column="CREATE_TIME" property="createTime" javaType="java.lang.String"/>  
+		<result column="CREATE_USER" property="createUser" javaType="java.lang.String"/>  
+		<result column="UPDATE_TIME" property="updateTime" javaType="java.lang.String"/>  
+		<result column="UPDATE_USER" property="updateUser" javaType="java.lang.String"/>  
+		<result column="EXPD_ID" property="expdId" javaType="java.lang.String"/>  
+		<result column="DEL_IND" property="delInd" javaType="java.lang.String"/>  
+		<result column="VERSION" property="version" javaType="java.lang.Integer"/>  
+		<result column="TENANT_ID" property="tenantId" javaType="java.lang.String"/> 
+		<result column="CLNTEND_ID" property="clntendId" javaType="java.lang.String"/> 
+	</resultMap>  
+ 
+	<sql id="column_list">
+  	SQM.ID, SQM.MENU_CODE, SRM.MENU_NAME, SRM.URL, SRM.SORT,SRM.ICON, SQM.CREATE_TIME, SQM.CREATE_USER,
+  	 SQM.UPDATE_TIME, SQM.UPDATE_USER, SQM.EXPD_ID, SQM.DEL_IND, SQM.VERSION,SQM.CLNTEND_ID,SQM.TENANT_ID
+	</sql>  
+  
+	<sql id="where_filters"> 
+		<where> 
+			<if test="id!=null and id!=''">AND SQM.ID = #{id}</if>  
+			
+			<if test="menuCode!=null and menuCode!=''">
+				AND SQM.MENU_CODE = #{menuCode}
+			</if>
+			<if test="menuCodes != null and menuCodes.size() > 0">
+				AND SQM.MENU_CODE IN
+				<foreach collection="menuCodes" item="menuCode" index="index" open="(" close=")" separator=",">
+					#{menuCode}
+				</foreach>
+			</if>
+			<if test="menuName!=null and menuName!=''">
+				AND SQM.MENU_NAME = #{menuName}
+			</if>
+			<if test="expdId!=null and expdId!=''">AND SQM.EXPD_ID = #{expdId}</if>  
+			<if test="delInd!=null and delInd!=''">AND SQM.DEL_IND = #{delInd}</if>  
+			<if test="version!=null and version!=''">AND SQM.VERSION = #{version}</if>  
+			<if test="tenantId!=null and tenantId!=''">AND SQM.TENANT_ID = #{tenantId}</if> 
+			<if test="clntendId!=null and clntendId!=''">AND SQM.CLNTEND_ID = #{clntendId}</if>
+		</where> 
+	</sql>  
+	<!--根据条件查询列表-->  
+	<select id="findQuickMenuList" parameterType="map" resultMap="quickMenuMap">
+		SELECT 
+		<include refid="column_list"/> 
+		FROM SYS_QUICK_MENU SQM 
+		LEFT JOIN SYS_RES_MENU SRM 
+		ON SQM.MENU_CODE=SRM.MENU_CODE
+		<include refid="where_filters"/> 
+		ORDER BY SRM.SORT,SRM.ID DESC
+	</select> 
+</mapper>

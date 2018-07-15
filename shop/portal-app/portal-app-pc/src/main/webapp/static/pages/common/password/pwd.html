@@ -1,0 +1,123 @@
+<div ng-controller="pwdCtrl">
+    <form name="pwdForm">
+        <div class="reg-body">
+            <div class="reg-form">
+                <div class="reg-menu">
+                    <div class="reg-step stepl cur">1、身份验证</div>
+                    <div ng-class="{'reg-step stepc cur': tab == 2 || tab == 3, 'reg-step stepc': tab == 1}">2、设置新密码
+                    </div>
+                    <div ng-class="{'reg-step stepr cur': tab == 3, 'reg-step stepr': tab == 1 || tab == 2}">3、提交成功
+                    </div>
+                </div>
+                <div class="reg-form-box">
+                    <div class="table-form" ng-if="tab==1">
+                        <div class="col10">
+                            <div class="col4 text_right  height52">
+                                <span class="red">*</span>用户名：
+                            </div>
+                            <div class="col6">
+                                <input type="text" class="inputclass" name="loginName" ng-model="pwd.loginName"
+                                       validator="required" required-error-message="请输入用户名">
+                            </div>
+                        </div>
+                        <div class="col10">
+                            <div class="col4 text_right height52">
+                                <span class="red">*</span>手机号码/电子邮箱：
+                            </div>
+                            <div class="col6">
+                                <input type="text" class="inputclass" ng-model="pwd.mobileOrEmail" name="mobileOrEmail"
+                                       validator="required,mobileOrEmail" required-error-message="请输入手机号码或电子邮箱">
+                            </div>
+                        </div>
+                        <div class="col10">
+                            <div class="col4 text_right height52">
+                                <span class="red">*</span>验证码：
+                            </div>
+                            <div class="col6">
+                                <input type="text" class="inputclass short" validator="required,minlength,maxlength"
+                                       minlength='6' maxlength='6' ng-model="pwd.code" name="code"
+                                       minlength-error-message="手机验证码由6个字符组成"
+                                       maxlength-error-message="手机验证码由6个字符组成"
+                                       required-error-message="请输入短信验证码">
+                                <button class="btn btn-getcode" jf-code="pwd" mode="SMS" target="pwd.mobileOrEmail"
+                                        handle="preHandle()" captcha="pwd.captcha">免费获取验证码
+                                </button>
+                            </div>
+                        </div>
+                        <div style="display: none;">
+                            <input type="text" name="flag" ng-model="flag" validator="required">
+                        </div>
+                        <div class="col10">
+                            <div class="col4 text_right">&nbsp;</div>
+                            <div class="col6">
+                                <button class="btn btn-public long" validation-submit="pwdForm" ng-click="toTwoStep()">
+                                    下一步
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-form" ng-if="tab==2">
+                        <div class="col10">
+                            <div class="col4 text_right height52">
+                                <span class="red">*</span>新密码：
+                            </div>
+                            <div class="col6">
+                                <input type="password" class="inputclass" name="newPswd" ng-model="pwd.newPswd"
+                                       validator="required,password" required-error-message="请输入新密码"
+                                       password-error-message="密码必须由6-20个字母、数字或符号组成"
+                                       password-success-message="{{passwordDegree(pwd.password)}}">
+                            </div>
+                        </div>
+                        <div class="col10">
+                            <div class="col4 text_right height52">
+                                <span class="red">*</span>确认密码：
+                            </div>
+                            <div class="col6">
+                                <input type="password" class="inputclass" name="confirmNewPswd" equals="newPswd"
+                                       ng-model="pwd.confirmNewPswd" validator="required,equals,password"
+                                       password-error-message="密码必须由6-20个字母、数字或符号组成"
+                                       required-error-message="请输入确认密码"
+                                       equals-error-message="确认密码必须与新密码一致">
+                            </div>
+                        </div>
+                        <div class="col10" ng-if="type==1">
+                            <div class="col4 text_right height52">
+                                <span class="red">*</span>授权委托书：
+                            </div>
+                            <div class="col6">
+                                <a href="javascript:void(0);" class="inputfile">选择文件
+                                    <input type="file" filters="fileTypeFilter,fileSizeFilter"
+                                           nv-file-select uploader="authDocFile.plugin">
+                                    <input type="hidden" ng-model="">
+                                </a>
+                                <a href="javascript:void(0);" class="btn-line" ng-click="downLoad()">模板下载</a>
+                            </div>
+                        </div>
+                        <div class="col10 height52">
+                            <div class="col4 text_right">&nbsp;</div>
+                            <div class="col6 height40">
+                                <button class="btn btn-public long" validation-submit="pwdForm"
+                                        ng-click="toThreeStep()">完成
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="reg-form-box" ng-if="tab==3">
+                        <div class="col10">
+                            <div class="step-result">
+                                <img ng-src="{{ctx}}/static/images/step-succeed.png">
+                            </div>
+                        </div>
+                        <div class="col10 text_center">
+                            <h2 class="reg-result">登录密码修改成功,交易密码已经提交审核！</h2>
+                            <p>
+                                <span>{{time}}</span>s后跳转
+                                <!--<button class="btn btn-border height32" ng-click="toLogin()">进入登录</button>-->
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

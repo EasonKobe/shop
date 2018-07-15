@@ -1,0 +1,118 @@
+package com.jeedev.msdp.sys.org.entity;
+
+import java.io.Serializable;
+import java.util.Map;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+import org.apache.commons.collections.MapUtils;
+import org.springframework.util.StringUtils;
+
+import com.jeedev.msdp.core.data.BaseEntity;
+import com.jeedev.msdp.standard.exception.ExceptionFactory;
+
+@Entity
+@Table(name = "SYS_ORG_DEPT_REL")
+@SequenceGenerator(name="seq",allocationSize=1,initialValue=1,sequenceName="SEQ_SYS_ORG_DEPT_REL")
+public class SysOrgDeptRelEntity extends BaseEntity<Integer> implements Serializable
+{
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * 机构代码
+	 */
+	@Column(name = "ORG_CODE")
+	private String orgCode;
+
+	/**
+	 * 部门代码
+	 */
+	@Column(name = "DEPT_CODE")
+	private String deptCode;
+
+	/**
+	 * 状态(STATUS:无效0\有效1)
+	 */
+	@Column(name = "STATUS_CD")
+	private String statusCd;
+
+	/**
+	 * 备注
+	 */
+	@Column(name = "REMARK")
+	private String remark;
+
+	public String getOrgCode() {
+		return orgCode;
+	}
+
+	public void setOrgCode(String orgCode) {
+		this.orgCode = orgCode;
+	}
+
+	public String getDeptCode() {
+		return deptCode;
+	}
+
+	public void setDeptCode(String deptCode) {
+		this.deptCode = deptCode;
+	}
+
+	public String getStatusCd() {
+		return statusCd;
+	}
+
+	public void setStatusCd(String statusCd) {
+		this.statusCd = statusCd;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public SysOrgDeptRelEntity coverToEntity(Map<String, Object> params, SysOrgDeptRelEntity entity) {
+		if (entity == null) {
+			entity = new SysOrgDeptRelEntity();
+		}
+		try {
+			String orgCode = MapUtils.getString(params, "orgCode");
+	    	if(!StringUtils.isEmpty(orgCode)){
+	    		entity.setOrgCode(orgCode);
+	    	}
+	    	String deptCode = MapUtils.getString(params, "deptCode");
+	    	if(!StringUtils.isEmpty(deptCode)){
+	    		entity.setDeptCode(deptCode);
+	    	}
+	    	String statusCd = MapUtils.getString(params, "statusCd");
+	    	if(!StringUtils.isEmpty(statusCd)){
+	    		entity.setStatusCd(statusCd);
+	    	}
+	    	String remark = MapUtils.getString(params, "remark");
+	    	if(!StringUtils.isEmpty(remark)){
+	    		entity.setRemark(remark);
+	    	}
+			
+			//BaseEntity
+	    	//BaseEntity
+			Integer id = MapUtils.getInteger(params, "id");
+			if (id != null) {
+				entity.setId(id);
+			}
+			String delInd = MapUtils.getString(params, "delInd");
+			if (!StringUtils.isEmpty(delInd)) {
+				entity.setDelInd(delInd);
+			}
+			return entity;
+		} catch (Exception e) {
+			throw ExceptionFactory.getBizException("sys-00001","1");
+		}
+	}
+	
+}

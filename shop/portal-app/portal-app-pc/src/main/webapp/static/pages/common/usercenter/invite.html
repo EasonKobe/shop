@@ -1,0 +1,35 @@
+<div ng-controller="inviteDialogCtrl">
+    <div class="block-list-dia">
+        <form name="inviteForm{{$index}}" ng-repeat="item in inviteList">
+            <ul class="ul-table data-table">
+                <li class="col7">
+                    <span class="black" ng-show="item.wthrFctr==='1' && item.tenantName!==item.inviterNm">{{item.tenantName}}向你发出了来自{{item.inviterNm}}的邀请</span>
+                    <span class="black" ng-show="item.wthrFctr==='0' || (item.wthrFctr==='1' && item.tenantName===item.inviterNm)">{{item.inviterNm}}向你发出了邀请</span>
+                </li>
+                <li class="col3">
+                    <a class="know-more" ng-click="showFun()">详情<i class="icon-20 icon-more"></i></a>
+                </li>
+            </ul>
+            <div class="data-table-see" ng-show="isShow">
+                <input type="hidden" name="inviteStatus" validator="required" ng-model="item.inviteStatus">
+                <div class="data-table-line">
+                    <input type="radio" ng-value="3" ng-model="item.inviteStatus" name="inviteStatus">接受并输入邀请码
+                </div>
+                <div class="data-table-line">
+                    <input type="radio" ng-value="2" ng-model="item.inviteStatus" name="inviteStatus">不接受
+                </div>
+                <div class="data-table-line" ng-if="item.inviteStatus=='3'">
+                    <!-- <input type="text" class="inputclass" validator="required"
+                           ng-model="item.inviteCode" placeholder="请输入邀请码"> -->
+                    <input type="text" class="inputclass" validator="required" name="confirmInviteCode"
+                           ng-model="item.confirmInviteCode" placeholder="请输入邀请码">
+                </div>
+                <div class="input-button">
+                    <button class="btn btn-cancle" ng-click="showFun()">取消</button>
+                    <button class="btn btn-sure" ng-click="confirm($index)">确定</button>
+                    <button class="btn btn-sure" ng-click="regain($index)">重新获取</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

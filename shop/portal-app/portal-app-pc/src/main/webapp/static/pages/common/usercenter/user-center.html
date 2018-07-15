@@ -1,0 +1,134 @@
+<!--welcome-->
+<div class="welcome" ng-controller="userCenterCtrl">
+    <div class="user-info">
+        <div class="mephoto">
+            <div class="picphoto"></div>
+            <div class="textphoto">Hi,保理商001<br/>
+                一日之计在于晨！美好的一天从这一刻开始！
+            </div>
+        </div>
+        <div class="flowork">
+            <div class="flowork_top">
+                <div class="flowork_l">
+                    <h1>厦门市天阳科技有限公司<br><i class="icon-20 icon-called"></i><i class="icon-20 icon-email"></i><i class="icon-20 icon-idcard"></i></h1>
+                    <div class="info-progress"><span style="width:30%"></span></div>
+                    <p>资料完成度 ：<span>低</span><a href="javascript:void(0)" class="info-improve">立即提升</a></p>
+                </div>
+                <div class="flowork_r">
+                    <p class="flowork_locate">上次登录时间: 2017-12-14 9:43:30</p>
+                    <p class="flowork_btn">
+                        <button class="btn-withdrawal">提现</button>
+                        <button class="layui-btn layui-btn-radius">充值</button>
+                    </p>
+                </div>
+            </div>
+            <div class="flowork_bottom">
+                <div class="left">
+                    <p>账户金额：<span class="ora">100,000.00</span></p>
+                </div>
+                <div class="right">
+                    <p>签发限额金额：<span class="ora">100,000.00</span></p>
+                    <p>签发限额可用额度：<span class="ora">30,000.00</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--model-box-->
+    <div class="model-box">
+        <ul class="data-list">
+            <li><h2 class="model-title-default">我的资产</h2></li>
+            <li>持有链钞余额: <span class="ora">70,000.00</span></li>
+            <li>应收账款余额: <span class="ora">30,000.00</span></li>
+        </ul>
+    </div>
+    <!--model-box end-->
+    <!--model-box-->
+    <div class="model-box">
+        <ul class="data-list">
+            <li><h2 class="model-title-default">我的负债</h2></li>
+            <li>应付帐款余额: <span class="ora">30,000.00</span></li>
+            <li>应付链钞余额: <span class="ora">70,000.00</span></li>
+            <li>借款余额: <span class="ora">6,000.00</span></li>
+        </ul>
+    </div>
+    <!--model-box end-->
+    <!--model-box-->
+    <div class="model-box">
+        <h2 class="model-title-default">快捷入口</h2>
+        <div class="model-account">
+            <ul>
+                <li>
+                    <i class="icon-data account-receiver"></i>
+                    <p class="data-balance-txt">我要签发</p>
+                </li><li>
+                <i class="icon-data account-payment"></i>
+                <p class="data-balance-txt">我要付款</p>
+            </li><li>
+                <i class="icon-data account-borrow"></i>
+                <p class="data-balance-txt">我要借款</p>
+            </li><li>
+                <i class="icon-data account-loan"></i>
+                <p class="data-balance-txt">我要支付</p>
+            </li>
+            </ul>
+        </div>
+    </div>
+    <!--model-box end-->
+
+</div>
+<!--welcome end-->
+<div class="declare">
+    <div class="declare-box">
+        <div class="model-declare-title"><i class="layui-icon blue">&#xe645;</i><span>待办</span></div>
+        <p class="black newtitle"><strong>·&nbsp;</strong>待确认的应收账款信息：<a class="ora">0</a>条</p>
+        <p class="black newtitle"><strong>·&nbsp;</strong>待处理的邀请信息：<a class="ora">0</a>条</p>
+        <p class="black newtitle"><strong>·&nbsp;</strong>待确认的应收账款信息：<a class="ora">0</a>条</p>
+        <p class="black newtitle"><strong>·&nbsp;</strong>待处理的邀请信息：<a class="ora">0</a>条</p>
+    </div>
+    <div class="declare-box" ng-init="tab=1">
+        <div class="model-declare-title">
+            <ul>
+                <li ng-class="{'hover':tab==1}" ng-click="tab=1"><i class="layui-icon blue">&#xe645;</i><span>付款通知</span></li>
+                <li ng-class="{'hover':tab==2}" ng-click="tab=2">还款通知</span></li>
+            </ul>
+        </div>
+        <div class="layui-tab layui-tab-card" ng-show="tab==1">
+            <ul class="layui-tab-title">
+                <li class="layui-this">近7天</li>
+                <li>已逾期</li>
+            </ul>
+            <div style="height: 100px;" class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <p class="black newtitle"><strong>·&nbsp;</strong>应付款金额及笔数：<a class="ora">10</a>笔</p>
+                    <p class="black newtitle"><strong>·&nbsp;</strong>已逾期金额及笔数：<a class="ora">30</a>笔</p>
+                </div>
+                <div class="layui-tab-item">
+                    <p class="black newtitle"><strong>·&nbsp;</strong>应付款金额及笔数：<a class="ora">10</a>笔</p>
+                    <p class="black newtitle"><strong>·&nbsp;</strong>已逾期金额及笔数：<a class="ora">30</a>笔</p>
+                </div>
+            </div>
+        </div>
+        <div class="layui-tab layui-tab-card" ng-show="tab==2">
+            <ul class="layui-tab-title">
+                <li class="layui-this">近7天</li>
+                <li>已逾期</li>
+            </ul>
+            <div style="height: 100px;" class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <p class="black newtitle"><strong>·&nbsp;</strong>应还款金额及笔数：<a class="ora">8</a>笔</p>
+                    <p class="black newtitle"><strong>·&nbsp;</strong>已逾期金额及笔数：<a class="ora">0</a>笔</p>
+                    <p class="black newtitle"><strong>·&nbsp;</strong>应还款金额及笔数：<a class="ora">12</a>笔</p>
+                    <p class="black newtitle"><strong>·&nbsp;</strong>已逾期金额及笔数：<a class="ora">4</a>笔</p>
+                </div>
+                <div class="layui-tab-item">
+                    <p class="black newtitle"><strong>·&nbsp;</strong>应还款金额及笔数：<a class="ora">8</a>笔</p>
+                    <p class="black newtitle"><strong>·&nbsp;</strong>已逾期金额及笔数：<a class="ora">0</a>笔</p>
+                    <p class="black newtitle"><strong>·&nbsp;</strong>应还款金额及笔数：<a class="ora">12</a>笔</p>
+                    <p class="black newtitle"><strong>·&nbsp;</strong>已逾期金额及笔数：<a class="ora">4</a>笔</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--layouter_r end-->

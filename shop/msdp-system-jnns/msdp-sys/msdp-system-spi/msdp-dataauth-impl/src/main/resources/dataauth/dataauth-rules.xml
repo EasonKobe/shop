@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<rules>
+		<rule>
+<!-- 		 dims 内可配置的变量为 插件中 filterDims配置的变量,多配的维度无效，少配的维度默认为* -->
+			<dims>
+				<dim name="clntendId">10002</dim>
+				<dim name="currUsrId">*</dim>
+				<dim name="currBizScene">*</dim>
+				<dim name="currRlId">*</dim>
+				<dim name="currInstCd">*</dim>
+				<dim name="currDeptCd">*</dim>
+			</dims>
+			<model>rspbPsnIdIsCurrUserModel</model>
+			<exclusion>
+<!-- 				排除在外的表，多个以逗号隔开，支持ant通配符模式 -->
+			</exclusion>
+		</rule>
+		<rule>
+<!-- 		 dims 内可配置的变量为 插件中 filterDims配置的变量,多配的维度无效，少配的维度默认为* -->
+			<dims>
+				<dim name="clntendId">10002</dim>
+				<dim name="currUsrId">*</dim>
+				<dim name="currBizScene">Approve</dim>
+				<dim name="currRlId">*</dim>
+				<dim name="currInstCd">*</dim>
+				<dim name="currDeptCd">*</dim>
+			</dims>
+			<model>none</model>
+			<exclusion>
+<!-- 				排除在外的表，多个以逗号隔开，支持ant通配符模式 -->
+			</exclusion>
+		</rule>
+		<rule>
+<!-- 		 dims 内可配置的变量为 插件中 filterDims配置的变量,多配的维度无效，少配的维度默认为* -->
+			<dims>
+				<dim name="clntendId">10002</dim>
+				<dim name="currUsrId">*</dim>
+				<dim name="currBizScene">CprsvEnqr</dim>
+				<dim name="currRlId">*</dim>
+				<dim name="currInstCd">*</dim>
+				<dim name="currDeptCd">*</dim>
+			</dims>
+			<model>orgCodeIsCurrOrAllSubModel</model>
+			<exclusion>
+<!-- 				排除在外的表，多个以逗号隔开，支持ant通配符模式 -->
+			</exclusion>
+		</rule>
+		<rule>
+<!-- 		 dims 内可配置的变量为 插件中 filterDims配置的变量,多配的维度无效，少配的维度默认为* -->
+			<dims>
+				<dim name="clntendId">10002</dim>
+				<dim name="currUsrId">*</dim>
+				<dim name="currBizScene">tenantManage</dim>
+				<dim name="currRlId">*</dim>
+				<dim name="currInstCd">*</dim>
+				<dim name="currDeptCd">*</dim>
+			</dims>
+			<model>none</model>
+			<exclusion>
+<!-- 				排除在外的表，多个以逗号隔开，支持ant通配符模式 -->
+			</exclusion>
+		</rule>
+		<rule>
+<!-- 		 dims 内可配置的变量为 插件中 filterDims配置的变量,多配的维度无效，少配的维度默认为* -->
+			<dims>
+				<dim name="clntendId">10001</dim>
+				<dim name="currUsrId">*</dim>
+				<dim name="currBizScene">*</dim>
+				<dim name="currRlId">*</dim>
+				<dim name="currInstCd">*</dim>
+				<dim name="currDeptCd">*</dim>
+			</dims>
+			<model>none</model>
+			<exclusion>
+<!-- 				排除在外的表，多个以逗号隔开，支持ant通配符模式 -->
+			</exclusion>
+		</rule>
+	</rules>
+</config>

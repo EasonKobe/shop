@@ -1,0 +1,86 @@
+<div ng-controller="orgAddCtrl">
+	<form name="orgAddForm" class="layui-form layui-form-pane" >
+		<div class="col_tr">
+			<div class="col4 text_right">
+				上级机构名称：
+			</div>
+			<div class="wd190 float_left">
+				<input class="layui-input" type="text"
+					ng-model="addOrg.parentOrgName" disabled>
+			</div>
+		</div>
+		<!-- <div class="layui-form-item">
+			<div class="layui-inline">
+				<label class="layui-form-label">上级机构名称：</label>
+				<div class="layui-input-inline">
+					<input class="layui-input" type="text"
+					ng-model="addOrg.parentOrgName" disabled>
+				</div>
+			</div>
+		</div> -->
+		<div class="col_tr">
+			<div class="col4 text_right">上级机构号：</div>
+			<div class="wd190 float_left">
+				<input class="layui-input" type="text"
+					ng-model="addOrg.parentOrgCode" disabled>
+			</div>
+		</div>
+		<!-- <div class="layui-form-item">
+			<div class="layui-inline">
+				<label class="layui-form-label">上级机构号：</label>
+				<div class="layui-input-inline">
+					<input class="layui-input" type="text"
+					ng-model="addOrg.parentOrgCode" disabled>
+				</div>
+			</div>
+		</div> -->
+		<div class="col_tr">
+			<div class="col4 text_right">
+				<i class="red_input">*</i>机构名称：
+			</div>
+			<div class="wd190 float_left">
+				<input class="layui-input" type="text" ng-model="addOrg.orgName" name="orgName" validator="required,maxlength" maxlength="10">
+			</div>
+		</div>
+		<!-- <div class="layui-form-item">
+			<div class="layui-inline">
+				<label class="layui-form-label"><i class="red_input">*</i>机构名称：</label>
+				<div class="layui-input-inline">
+					<input class="layui-input" type="text" ng-model="addOrg.orgName" name="orgName" validator="required,maxlength" maxlength="10">
+				</div>
+			</div>
+		</div> -->
+		<div class="col_tr">
+			<div class="col4 text_right">
+				<i class="red_input">*</i>机构号：
+			</div>
+			<div class="wd190 float_left">
+				<input class="layui-input" type="text" ng-model="addOrg.orgCode" name="orgCode"  validator="required,maxlength" maxlength="10">
+			</div>
+		</div>
+		<div class="col_tr">
+			<div class="col4 text_right">
+				<i class="red_input">*</i>机构等级：
+			</div>
+			<div class="wd190 float_left">
+				<!-- <input class="layui-input" type="text" validator="required" ng-model="addOrg.orgLevelCd"> -->
+				<!-- <select lay-ignore ng-model="addOrg.orgLevelCd" jf-select="OrgLevel" class="layui-input" placeholder="请选择" name="orgLevelCd"
+					validator="required"></select> -->
+					<select ng-model="addOrg.orgLevelCd" jf-select="builder.option('OrgLevel')" placeholder="请选择" name="orgLevelCd"
+					validator="required" disabled="disabled"></select>
+			</div>
+		</div>
+		<div class="col_tr">
+			<div class="col4 text_right">排序：</div>
+			<div class="wd190 float_left">
+				<input class="layui-input" type="text" ng-model="addOrg.sort"  onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
+			</div>
+		</div>
+
+		<!-- 		 <div class="float_btnfoot"> -->
+		<!-- 		      <button class="layui-btn layui-btn-radius" ng-click="save()" ng-if="isAdd"><i class="layui-icon">&#x1005;</i> 确认</button> -->
+		<!-- 		      <button class="layui-btn layui-btn-radius" ng-click="update()" ng-if="isUpdate"><i class="layui-icon">&#x1005;</i> 确认</button> -->
+		<!-- 		      <button class="layui-btn layui-btn-warm layui-btn-radius" ng-click="closePage()"><i class="layui-icon">&#xe60c;</i> 取消</button> -->
+		<!-- 		 </div> -->
+	</form>
+</div>

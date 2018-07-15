@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jeedev.msdp.sys.menu.dao.ISysResMenuEventRelDao">
+	<resultMap id="sysResMenuEventRelMap" type="java.util.Map" >
+		<result column="ID" property="id" javaType="java.lang.Integer" />
+		<result column="EVENT_CODE" property="eventCode" javaType="java.lang.String" />
+		<result column="MENU_CODE" property="menuCode" javaType="java.lang.String" />
+		<result column="STATUS_CD" property="statusCd" javaType="java.lang.String" />
+		<result column="REMARK" property="remark" javaType="java.lang.String" />
+		<result column="CREATE_TIME" property="createTime" javaType="java.util.Date" />
+		<result column="CREATE_USER" property="createUser" javaType="java.lang.String" />
+		<result column="UPDATE_TIME" property="updateTime" javaType="java.util.Date" />
+		<result column="UPDATE_USER" property="updateUser" javaType="java.lang.String" />
+		<result column="EXPD_ID" property="expdId" javaType="java.lang.String" />
+		<result column="DEL_IND" property="delInd" javaType="java.lang.String" />
+		<result column="VERSION" property="version" javaType="java.lang.Integer" />
+		
+		<result column="EVENT_NAME" property="eventName" javaType="java.lang.String" />
+		<result column="URL" property="url" javaType="java.lang.String" />
+		
+		<result column="MENU_NAME" property="menuName" javaType="java.lang.String" />
+	</resultMap>
+
+	<sql id="column_list">
+		SRMER.ID, SRMER.EVENT_CODE, SRMER.MENU_CODE, SRMER.STATUS_CD, SRMER.REMARK, SRMER.CREATE_TIME,
+		SRMER.CREATE_USER, SRMER.UPDATE_TIME, SRMER.UPDATE_USER, SRMER.EXPD_ID, SRMER.DEL_IND, SRMER.VERSION,
+		SRE.EVENT_NAME,SRE.URL,
+		SRM.MENU_NAME
+	</sql>
+
+	<sql id="where_filters">
+		<where>
+			SRMER.EVENT_CODE = SRE.EVENT_CODE 
+			AND SRMER.MENU_CODE = SRM.MENU_CODE
+			AND SRE.DEL_IND = 0
+			AND SRM.DEL_IND = 0
+			<if test="id!=null and id!=''">
+				AND SRMER.ID = #{id}
+			</if>
+			<if test="menuCode!=null and menuCode!=''">
+				AND SRMER.MENU_CODE = #{menuCode}
+			</if>
+			<if test="menuCodes != null and menuCodes.size() > 0">
+				AND SRMER.MENU_CODE IN
+				<foreach collection="menuCodes" item="menuCode" index="index" open="(" close=")" separator=",">
+					#{menuCode}
+				</foreach>
+			</if>
+			<if test="eventCode!=null and eventCode!=''">
+				AND SRMER.EVENT_CODE = #{eventCode}
+			</if>
+			<if test="eventCodes != null and eventCodes.size() > 0">
+				AND SRMER.EVENT_CODE IN
+				<foreach collection="eventCodes" item="eventCode" index="index" open="(" close=")" separator=",">
+					#{eventCode}
+				</foreach>
+			</if>
+			<if test="statusCd!=null and statusCd!=''">
+				AND SRMER.STATUS_CD = #{statusCd}
+			</if>
+			<if test="delInd!=null and delInd!=''">
+				AND SRMER.DEL_IND = #{delInd} 
+			</if>
+			<if test="version!=null and version!=''">
+				AND SRMER.VERSION = #{version}
+			</if>
+			
+			<if test="eventName!=null and eventName!=''">
+				AND SRE.EVENT_NAME = #{eventName}
+			</if>
+			<if test="url!=null and url!=''">
+				AND SRE.URL = #{url}
+			</if>
+		</where>
+	</sql>
+	
+	<!--根据条件查询列表 -->
+	<select id="findMenuEventRelList" parameterType="map" resultMap="sysResMenuEventRelMap">
+		SELECT
+		<include refid="column_list" />
+		FROM SYS_RES_MENU_EVENT_REL SRMER,SYS_RES_EVENT SRE,SYS_RES_MENU SRM
+		<include refid="where_filters" />
+		ORDER BY SRMER.ID ASC
+	</select>	
+</mapper>

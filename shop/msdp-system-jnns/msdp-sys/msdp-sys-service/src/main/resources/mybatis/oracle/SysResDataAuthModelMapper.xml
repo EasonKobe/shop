@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jeedev.msdp.sys.dataauth.dao.ISysResDataAuthModelDao">
+	<resultMap id="sysResDataAuthModelMap" type="java.util.Map" >
+		<result column="ID" property="id" javaType="java.lang.Integer" />
+		<result column="MODEL_CODE" property="modelCode" javaType="java.lang.String" />
+		<result column="MODEL_ID" property="modelId" javaType="java.lang.String" />
+		<result column="MODEL_NAME" property="modelName" javaType="java.lang.String" />
+		<result column="REMARK" property="remark" javaType="java.lang.String" />
+		<result column="CREATE_TIME" property="createTime" javaType="java.util.Date" />
+		<result column="CREATE_USER" property="createUser" javaType="java.lang.String" />
+		<result column="UPDATE_TIME" property="updateTime" javaType="java.util.Date" />
+		<result column="UPDATE_USER" property="updateUser" javaType="java.lang.String" />
+		<result column="EXPD_ID" property="expdId" javaType="java.lang.String" />
+		<result column="DEL_IND" property="delInd" javaType="java.lang.String" />
+		<result column="VERSION" property="version" javaType="java.lang.Integer" />
+	</resultMap>
+
+	<sql id="column_list">
+		ID, MODEL_CODE, MODEL_ID, REMARK, CREATE_TIME,MODEL_NAME,
+		CREATE_USER, UPDATE_TIME, UPDATE_USER, EXPD_ID, DEL_IND, VERSION
+	</sql>
+
+	<sql id="where_filters">
+		<where>
+			<if test="id!=null and id!=''">
+				AND ID = #{id}
+			</if>
+			<if test="modelCode!=null and modelCode!=''">
+				AND MODEL_CODE = #{modelCode}
+			</if>
+			<if test="modelId!=null and modelId!=''">
+				AND MODEL_ID = #{modelId}
+			</if>
+			<if test="modelName!=null and modelName!=''">
+				AND MODEL_NAME like concat(concat('%',#{modelName}),'%')
+			</if>
+			<if test="remark!=null and remark!=''">
+				AND REMARK like concat(concat('%',#{remark}),'%')
+			</if>
+			<if test="delInd!=null and delInd!=''">
+				AND DEL_IND = #{delInd}
+			</if>
+			<if test="version!=null and version!=''">
+				AND VERSION = #{version}
+			</if>
+		</where>
+	</sql>
+
+	<!--根据条件查询列表 -->
+	<select id="findDataAuthModelList" parameterType="map" resultMap="sysResDataAuthModelMap">
+		SELECT
+		<include refid="column_list" />
+		FROM SYS_RES_DATA_AUTH_MODEL
+		<include refid="where_filters" />
+	</select>
+
+</mapper>

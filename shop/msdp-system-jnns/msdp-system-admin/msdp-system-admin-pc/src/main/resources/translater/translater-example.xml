@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<translaters>
+	<!--  指定的类名(接口)在spring的实例只能有一个,指定的翻译方法的方法名在该类中必须唯一-->
+		<translater name="user" batch="true">
+				<beanClass>com.jeedev.msdp.sys.user.api.UserApi</beanClass>
+				<methodName>findUserPage</methodName>
+<!-- 				<keyParam>userNum</keyParam> -->
+<!-- 				<valueParam>loginName,realname</valueParam> -->
+				<keyParam type="list">userNums</keyParam>
+				<valueParam key="userNum">loginName,realname</valueParam>
+			</translater>
+		<translater name="org" batch="true">
+			<beanClass>com.jeedev.msdp.sys.org.api.OrgApi</beanClass>
+			<methodName>findOrgPage</methodName>
+<!-- 			<keyParam>orgCode</keyParam> -->
+<!-- 			<valueParam>orgName</valueParam> -->
+			<keyParam type="list">orgCodes</keyParam>
+			<valueParam key="orgCode">orgName</valueParam>
+		</translater>
+		<translater name="dept" batch="true">
+			<beanClass>com.jeedev.msdp.sys.dept.api.DeptApi</beanClass>
+			<methodName>findDeptPage</methodName>
+<!-- 			<keyParam>deptCode</keyParam> -->
+<!-- 			<valueParam>deptName</valueParam> -->
+			<keyParam type="list">deptCodes</keyParam>
+			<valueParam key="deptCode">deptName</valueParam>
+		</translater>
+		<translater name="role" batch="true">
+			<beanClass>com.jeedev.msdp.sys.role.api.RoleApi</beanClass>
+			<methodName>findRolePage</methodName>
+<!-- 			<keyParam>roleCode</keyParam> -->
+<!-- 			<valueParam>roleName</valueParam> -->
+			<keyParam type="list">roleCodes</keyParam>
+			<valueParam key="roleCode">roleName</valueParam>
+		</translater>
+		<translater name="client" batch="true">
+			<beanClass>com.jeedev.msdp.sys.client.api.IClientApi</beanClass>
+			<methodName>findClientPage</methodName>
+<!-- 			<keyParam>roleCode</keyParam> -->
+<!-- 			<valueParam>roleName</valueParam> -->
+			<keyParam type="list">clntendIds</keyParam>
+			<valueParam key="clntendId">clntendNm</valueParam>
+		</translater>
+		<translater name="event" batch="true">
+			<beanClass>com.jeedev.msdp.sys.event.api.EventApi</beanClass>
+			<methodName>findEventPage</methodName>
+<!-- 			<keyParam>roleCode</keyParam> -->
+<!-- 			<valueParam>roleName</valueParam> -->
+			<keyParam type="list">eventCodes</keyParam>
+			<valueParam key="eventCode">eventName</valueParam>
+		</translater>
+	</translaters>
+</config>

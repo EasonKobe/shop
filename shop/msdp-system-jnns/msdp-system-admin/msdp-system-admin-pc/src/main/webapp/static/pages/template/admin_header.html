@@ -1,0 +1,96 @@
+<!--header-->
+<div class="header" ng-controller="headerCtrl">
+	<div class="webinfo">
+		<div class="logo"></div>
+		<div class="useinfo">
+			<div class="usead">
+				<ul>
+					<li>
+						<a href="javascript:void(0);" ng-click="logout()"><i class="icon_top01"></i> 退出系统</a>
+					</li>
+					<li ng-controller="adminChangeCtrl">
+						<a href="javascript:void(0);" ng-click="updatePW()"><i class="icon_top05"></i> 修改密码</a>
+					</li>
+<!-- 					<li> -->
+<!-- 						<a href="javascript:void(0)"><i class="icon_top02"> -->
+<!-- 							<span class="numall">10</span></i> 消息提醒 -->
+<!-- 						</a> -->
+<!-- 						<ul style="width: 280px; left: -80px"> -->
+<!-- 							<li><a href="javascript:void(0)"><p>湖南长沙喜地食品有限融资余额到期提醒报告列表</p> <span>2017-11-23</span></a></li> -->
+<!-- 						</ul> -->
+<!-- 					</li> -->
+					<li ng-controller="adminChangeCtrl">
+						<a href="javascript:void(0)"><i class="icon_top04"></i>欢迎：{{loginUser.realname}}</a>
+						<ul>
+							<li><a href="javascript:void(0)" ng-click="changeOrg()">机构：{{loginUser.currInstNm}}</a></li>
+							<li><a href="javascript:void(0)" ng-click="changeDept()">部门：{{loginUser.currDeptNm}}</a></li>
+							<li><a href="javascript:void(0)" ng-click="changeRole()">角色：{{loginUser.currRlNm}}</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#/index"><i class="icon_top03"></i> 返回首页</a>
+					</li>
+				</ul>
+			</div>
+			<!--web_info-->
+		</div>
+	</div>
+
+	<div class="web_menu"  ng-controller="menuCtrl">
+		<div class="menuer">
+			<div class="menu_navbox">
+				<div class="menu_nav">
+					<ul>
+						<li class="drop-menu-effect" ng-repeat="menu in menuList"
+							ng-class="{'hover_menu':menu.checked}"><a href="javascript:void(0)"><span><i
+									class="{{menu.img}}"></i>{{menu.text}}</span></a>
+							<ul class="submenu" ng-style="left($index)">
+
+								<li ng-repeat="submenu in menu.menu"><span
+									ng-bind="submenu.text+' > '"></span>
+									<ul>
+										<li ng-repeat="thrmenu in submenu.menu"><a
+											ng-bind="thrmenu.text" ng-click="addTab(thrmenu)"></a></li>
+									</ul></li>
+							</ul></li>
+					</ul>
+				</div>
+				<!--menu_nav_end-->
+			</div>
+			<!--menu_navbox_end-->
+
+		</div>
+
+		<div class="menutab">
+			<div class="menutab_con">
+				<div ng-class="{true:'tabmenu_active',false:'tabmenu_link'}[tab.isActive]"
+					ng-repeat="tab in tabList">
+					<p class="menutext" title="双击全屏" ng-dblclick="dblclickEvent()" ng-if="tab.id == 'index'"
+						ng-click="changeTab(tab);">
+						<i class="icon_home"></i>系统首页
+					</p>
+					<p title="双击全屏" class="menutext" ng-dblclick="dblclickEvent()" ng-if="tab.id != 'index'"
+						ng-click="changeTab(tab);">
+						<i class="icon_home"></i><span ng-bind="tab.text"></span>
+					</p>
+					<ul class="tablemenu" ng-if="tab.id != 'index'">
+						<li class="select_listmenu"><a
+							href="javascript:void(0)" ng-click="removeTab($index)"></a>
+							<ul>
+								<li><a href="javascript:void(0)" ng-click="removeTab($index);">
+									<i class="closetab">&#x1007;</i>关闭当前窗口</a>
+								</li>
+								<li><a href="javascript:void(0)" ng-click="removeOtherTab(tab);">
+									<i class="closetab">&#x1007;</i>关闭其他窗口</a>
+								</li>
+								<li><a href="javascript:void(0)" ng-click="removeAllTab()">
+									<i class="closetab">&#x1007;</i> 关闭全部</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

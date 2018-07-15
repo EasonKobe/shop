@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns="http://msdp.tansun.com/schema/dataauth-model"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:schemaLocation="http://msdp.tansun.com/schema/dataauth-model http://msdp.tansun.com/schema/dataauth-model.xsd">
+<models id="base">
+	<!--  可使用的变量 fkcolumn,和插件中 fillArgs配置的变量,
+		fkcolumn 可被dao中的注解fkcolumn 替换
+		可在params上自定义参数
+			定义 orgCode变量值为 '123'
+			<param name="orgCode" value="123"/>  
+			定义 orgCode变量值为  引用变量 currOrgCode值
+			<param name="orgCode" value-ref="currOrgCode"/>  
+			定义 orgCode变量值为  调用com.jeedev.msdp.sys.org.api.OrgApi.getOrgNameByOrgCode 的结果，api只支持第一个参数为map的
+			<value-factory beanClass="com.jeedev.msdp.sys.org.api.OrgApi" methodName="getOrgNameByOrgCode">
+				api第一个参数（map）中的key-value
+				<param name="orgCode" value-ref="currOrgCode"/>
+			</value-factory>
+	-->
+	<!-- 根据创建人过滤 -->
+		<model id="createrIsCurrUserModel" >
+			<type>locate</type>
+			<fkcolumns>
+				<fkcolumn name="fkcolumn1">create_user</fkcolumn>
+			</fkcolumns>
+			<sqls>
+				<sql type="locate">
+					<where>
+						(#{fkcolumn1} = #{currUsrId})
+					</where>
+				</sql>
+			</sqls>
+			<exclusion>
+			<!-- 待扩展 -->
+				
+			</exclusion>
+		</model>
+		<!-- 根据经办人过滤 -->
+		<model id="rspbPsnIdIsCurrUserModel" >
+			<type>locate</type>
+			<fkcolumns>
+				<fkcolumn name="fkcolumn1">RSPB_PSN_ID</fkcolumn>
+			</fkcolumns>
+			<sqls>
+				<sql type="locate">
+					<where>
+						(#{fkcolumn1} = #{currUsrId})
+					</where>
+				</sql>
+			</sqls>
+			<exclusion>
+			<!-- 待扩展 -->
+				
+			</exclusion>
+		</model>
+		
+		<!-- 根据经办机构, 经办部门过滤权限-->
+		<model id="instDeptModel" >
+			<type>locate</type>
+			<fkcolumns>
+				<fkcolumn name="fkcolumn1">HDL_INST_ID</fkcolumn>
+				<fkcolumn name="fkcolumn2">HDL_DEPT_ID</fkcolumn>
+			</fkcolumns>
+			<sqls>
+				<sql type="locate">
+					<where>
+						(#{fkcolumn1} = #{currInstCd} and #{fkcolumn2} = #{currDeptCd}  )
+					</where>
+				</sql>
+			</sqls>
+			<exclusion>
+			<!-- 待扩展 -->
+				
+			</exclusion>
+		</model>
+		
+		
+		
+		<model id="none" >
+			<type>locate</type>
+			<fkcolumns>
+			</fkcolumns>
+			<sqls>
+				<sql type="locate">
+				</sql>
+			</sqls>
+			<exclusion>
+			<!-- 待扩展 -->
+			</exclusion>
+		</model>
+	</models>
+</config>

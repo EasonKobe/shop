@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.tansun.tb</groupId>
+        <artifactId>shop-app</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <name>shop-app-controller</name>
+    <artifactId>shop-app-controller</artifactId>
+    <packaging>jar</packaging>
+
+    <dependencies>
+    
+    
+     	<!-- 业务模块api start -->
+        <dependency>
+			<groupId>com.tansun.tb</groupId>
+			<artifactId>misu-base-service</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.tansun.tb</groupId>
+			<artifactId>misu-cst-service</artifactId>
+		</dependency>
+    
+		<!-- 业务模块api end -->
+        
+        <!-- 本地引用 -->
+		<dependency>
+			<groupId>com.jeedev.msdp.system</groupId>
+			<artifactId>msdp-sys-service</artifactId>
+		</dependency>
+		<dependency>
+        	<groupId>com.jeedev.msdp.system</groupId>
+			<artifactId>msdp-sys-api</artifactId>
+		</dependency>
+		
+		<!-- dubbo远程api调用 -->
+<!-- 		<dependency> -->
+<!-- 		    <groupId>com.jeedev.msdp.system</groupId> -->
+<!-- 		    <artifactId>msdp-sys-api-dubbo</artifactId> -->
+<!-- 			<version>2.0.0-SNAPSHOT</version> -->
+<!-- 		</dependency> -->
+
+        <!-- 验证码生成调用 -->
+        <dependency>
+            <groupId>com.jeedev.msdp</groupId>
+            <artifactId>msdp-validatecode-service</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.jeedev.msdp</groupId>
+            <artifactId>msdp-validatecode-api</artifactId>
+        </dependency>
+        <!-- 邮箱手机号码验证调用 -->
+        <dependency>
+            <groupId>com.jeedev.msdp</groupId>
+            <artifactId>msdp-msg-service</artifactId>
+        </dependency>
+        <dependency>
+			<groupId>com.jeedev.msdp</groupId>
+			<artifactId>msdp-msg-api</artifactId>
+		</dependency>
+        
+        <dependency>
+            <groupId>com.jeedev.msdp</groupId>
+            <artifactId>msdp-auth-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.jeedev.msdp.system</groupId>
+            <artifactId>msdp-auth-client-impl</artifactId>
+        </dependency>
+        <!-- 文件服务引入，目前没用先注释 -->
+        <!--
+        <dependency>
+            <groupId>com.jeedev.msdp</groupId>
+            <artifactId>msdp-file-service</artifactId>
+        </dependency>
+        -->
+        <dependency>
+            <groupId>com.jeedev.msdp</groupId>
+            <artifactId>msdp-select-user-service</artifactId>
+        </dependency>
+        <dependency>
+	    	<groupId>com.jeedev.msdp</groupId>
+	    	<artifactId>msdp-select-user-api</artifactId>
+	    </dependency>
+	    
+        <dependency>
+            <groupId>com.jeedev.msdp.system</groupId>
+            <artifactId>msdp-user-select-impl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.jeedev.msdp</groupId>
+            <artifactId>msdp-translatehelper</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.jeedev.msdp</groupId>
+            <artifactId>msdp-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.jeedev.msdp</groupId>
+            <artifactId>msdp-constantjs</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.jeedev.msdp</groupId>
+            <artifactId>msdp-utils</artifactId>
+        </dependency>
+        <!-- SERVLET -->
+        <dependency>
+            <groupId>javax.servlet</groupId><!-- servlet容器 -->
+            <artifactId>javax.servlet-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId><!-- jsp容器 -->
+            <artifactId>javax.servlet.jsp-api</artifactId>
+        </dependency>
+        <!-- jstl标签 -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>taglibs</groupId>
+            <artifactId>standard</artifactId>
+        </dependency>
+
+        <!-- dubbo -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>dubbo</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.zookeeper</groupId>
+            <artifactId>zookeeper</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.sgroschupf</groupId>
+            <artifactId>zkclient</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.ruedigermoeller</groupId>
+            <artifactId>fst</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+        </dependency>
+
+        <!-- 其他 -->
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+        </dependency>
+
+        <!-- httpclient -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+        </dependency>
+        
+		<!-- spring mvc -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+		</dependency>
+		
+		<!-- shiro -->
+		<dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-core</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-ehcache</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-web</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-quartz</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.shiro</groupId>
+		    <artifactId>shiro-spring</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+		</dependency>
+		
+		<!-- oauth2 -->
+		<dependency>
+		    <groupId>org.apache.oltu.oauth2</groupId>
+		    <artifactId>org.apache.oltu.oauth2.client</artifactId>
+		</dependency>
+		
+		<!-- jcaptcha 验证码 -->
+		<dependency>
+			<groupId>com.octo.captcha</groupId>
+			<artifactId>jcaptcha</artifactId>
+		</dependency>
+		<dependency>
+            <groupId>com.jhlabs</groupId>
+            <artifactId>imaging</artifactId>
+            <version>01012005</version>
+        </dependency>
+        
+        <!--sys模块 -->
+		<dependency>
+			<groupId>com.jeedev.msdp.system</groupId>
+			<artifactId>msdp-dataauth-impl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.jeedev.msdp</groupId>
+			<artifactId>msdp-dict-service</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.jeedev.msdp</groupId>
+			<artifactId>msdp-area-service</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.jeedev.msdp</groupId>
+			<artifactId>msdp-encode-service</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.jeedev.msdp</groupId>
+			<artifactId>msdp-param-service</artifactId>
+		</dependency>
+
+    </dependencies>
+</project>

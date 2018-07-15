@@ -1,0 +1,86 @@
+<div class="layout_body" ng-controller="dictCtrl">
+		<div class="subposition" ng-bind-html="getCurrentLoaction('')">
+        </div>
+		<form class="layui-form layui-form-pane" name="form1">
+			<div class="search_mian">
+				<div class="layui-form-item">
+					<div class="layui-inline">
+						<label class="layui-form-label">类型名称：</label>
+						<div class="layui-input-inline">
+							<input class="layui-input" type="text"  ng-model="dictGridOpts.params.dctTpNm">
+						</div>
+					</div>
+					<div class="layui-inline">
+						<label class="layui-form-label">字典类型：</label>
+						<div class="layui-input-inline">
+							<input class="layui-input" type="text"  ng-model="dictGridOpts.params.dctTpCd">
+						</div>
+					</div>
+				</div>
+				<div class="search_button">
+					<button class="layui-btn" ng-click="dictGridOpts.search()">
+						<i class="layui-icon">&#xe615;</i> 查询
+					</button>
+
+					<!-- <button class="layui-btn" type="button"
+						ng-click="queryParam={};dictGridOpts.search();"> -->
+						<button class="layui-btn" type="button"
+						ng-click="dictGridOpts.params={}">
+						<i class="layui-icon">&#x1002;</i> 重置
+					</button>
+				</div>
+			</div>
+
+		</form>
+		<div class="button_contain">  
+		<!-- <div id="dictDia" url="/sysmanage/dict/addDict.html"style="display: none;" title="" size="800px,400px"
+						callback="addDictSub"></div> -->
+			<button class="layui-btn layui-btn-primary" ng-click="addDict()">
+				<i class="layui-icon">&#xe61f;</i> 新 增
+			</button>
+			<!-- <button class="layui-btn layui-btn-normal"
+				ng-click="getDict($event)"> -->
+			<button class="layui-btn layui-btn-primary"
+				ng-click="getDict()">
+				<i class="layui-icon">&#xe642;</i> 修 改
+			</button>
+			<!-- <button class="layui-btn layui-btn-danger"
+				ng-click="$del($event, '/dict/delete?id')"> -->
+			<button class="layui-btn layui-btn-primary"
+				ng-click="dictGridOpts.request('dict.delete?id')">
+				<i class="layui-icon">&#xe640;</i> 删 除
+			</button>
+
+		</div>
+		<!-- <div jf-grid="数据字典列表" paging="true" search="search" resource="dict.query" params="queryParam"> -->
+		<div jf-grid="dictGridOpts" >
+			<!-- <div class="layui-form"> -->
+			<table>
+				<thead>
+					<tr>
+						<th>字典键</th>
+						<th>字典类型</th>
+						<th>字典类型名称</th>
+						<th>字典值</th>
+						<th>字典值名称</th> 
+						<th>排序</th>
+						<th>描述</th>
+						<th>状态</th>
+					</tr>
+				</thead>
+				<tbody class="tbody">
+					<tr>
+						<td align="center" ng-bind="item.dctKey"></td>
+						<td align="center" ng-bind="item.dctTpCd"></td> 
+						<td align="center" ng-bind="item.dctTpNm"></td> 
+						<td align="center" ng-bind="item.dctVal"></td> 
+						<td align="center" ng-bind="item.dctValNm"></td> 
+						<td align="center" ng-bind="item.dctSeq"></td> 
+						<td align="center" ng-bind="item.dctDsc"></td> 
+						<td align="center" ng-bind="item.stCd |jfConvert:'dict':'StCd'"></td>
+					</tr>
+				</tbody>
+			</table>
+			<!-- </div> -->
+		</div>
+</div>

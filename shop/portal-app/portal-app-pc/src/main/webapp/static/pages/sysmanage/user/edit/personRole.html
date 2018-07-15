@@ -1,0 +1,45 @@
+<div ng-controller="userAndRoleManageCtrl">
+	<div >
+		<div class="button_contain">
+			<button class="layui-btn layui-btn-primary"
+				ng-click="userRoleList.modal('/sysmanage/user/edit/personRoleAddDialog.html',{title :'所属角色信息',buttons : ['提交','取消'],size : ['700px','400px'],callbacks : [save]})">
+				<i class="layui-icon">&#xe61f;</i>分配所属角色
+			</button>
+			<button class="layui-btn layui-btn-primary"
+				ng-click="userRoleList.request('userAndRoleRel.delete?id')">
+				<i class="layui-icon">&#xe640;</i>移除所属角色
+			</button>
+			<button class="layui-btn layui-btn-primary"
+				ng-click="userRoleList.modal('/sysmanage/user/edit/personRoleAddDialog.html?id',{title :'所属角色信息',buttons : ['提交','取消'],size : ['700px','400px'],callbacks : [save]})"">
+				<i class="layui-icon">&#xe642;</i>修改关联状态
+			</button>
+		</div>
+		<div jf-grid="userRoleList" >
+		<div>
+			<table>
+				<thead>
+					<tr>
+						<th>角色名称</th>
+						<th>角色用户关联状态</th>
+						<th>是否默认角色</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td align="center" ng-bind="item.roleName"></td>
+						<td align="center"
+							ng-bind="item.statusCd | jfConvert : 'dict' : 'StCd'"></td>
+						<td align="center"
+							ng-bind="item.defaultInd | jfConvert : 'dict' : 'Indicator'"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+		<div class="scrbtn">
+	 		<button class="layui-btn" ng-click="turn('/user/usermg/personMgList')"> <i class="layui-icon">&#x1006;</i> 返回</button>
+		</div>
+		<div class="scrbtn">
+		</div>
+</div>
+</div>

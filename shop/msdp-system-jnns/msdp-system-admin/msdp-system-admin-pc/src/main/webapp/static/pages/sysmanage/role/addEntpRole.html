@@ -1,0 +1,65 @@
+<div ng-controller="roleAddCtrl">
+	<form name="roleForm">
+		<div class="col_tr">
+			<div class="col4 text_right">
+				<i class="red_input">*</i>上级角色：
+			</div>
+			<div class="wd190 float_left">
+				<input class="layui-input" type="text"
+					ng-model="role2.parentRoleName" disabled>
+			</div>
+		</div>
+		<div class="col_tr">
+			<div class="col4 text_right">
+				<i class="red_input">*</i>名称 ：
+			</div>
+			<div class="wd190 float_left">
+				<input  class="layui-input" type="text" ng-model="role2.roleName"
+					validator="required,maxlength" maxlength="10" name="roleName">
+			</div>
+		</div>
+		<div class="col_tr" style="display:none;">
+			<div class="col4 text_right">
+				<i class="red_input">*</i>权重：
+			</div>
+			<div class="wd190 float_left">
+				<input class="layui-input" type="text" ng-model="role2.weight">
+			</div>
+		</div>
+		<div class="col_tr">
+			<div class="col4 text_right">
+				<i class="red_input">*</i>状态 ：
+			</div>
+			<div class="wd190 float_left">
+				<select ng-model="role2.statusCd" jf-select="builder.option('StCd')"
+					class="layui-input" placeholder="请选择" name="statusCd"
+					validator="required"></select>
+				<!-- <div class="wd190 float_left">
+				<a href="javascript:void(0);" ng-click="role2.statusCd = '1'"><input title="有效"  ng-model="role2.statusCd" name="statusCd" value="0" type="radio"></a>
+	            <a href="javascript:void(0);" ng-click="role2.statusCd = '0'"><input title="无效" ng-model="role2.statusCd" name="statusCd"  value="1" type="radio"></a>
+			</div> -->
+			</div>
+		</div>
+		<div class="col_tr">
+					<div class="col4 text_right">排序：</div>
+					<div class="wd190 float_left">
+						<input class="layui-input" type="text" ng-model="role2.sort" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}">
+					</div>
+				</div>
+		<div class="col_tr">
+			<div class="col4 text_right">描述 ：</div>
+			<div class="wd190 float_left">
+				<input class="layui-input" type="text" ng-model="role2.remark">
+			</div>
+		</div>
+	</form>
+	<!-- <div class="float_btnfoot">
+		<button class="layui-btn " ng-click="save()">
+			<i class="layui-icon">&#x1005;</i> 确认
+		</button>
+		<button class="layui-btn "
+			ng-click="closePage()">
+			<i class="layui-icon">&#xe60c;</i> 取消
+		</button>
+	</div> -->
+</div>

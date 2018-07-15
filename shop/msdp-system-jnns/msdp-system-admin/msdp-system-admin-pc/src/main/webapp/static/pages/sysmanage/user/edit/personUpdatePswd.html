@@ -1,0 +1,57 @@
+<div class="layout_body" ng-controller="uptPswdCtrl">
+	<div class="body_mg20">
+		<div class="subposition">
+			<i class="position_icon"></i>用户信息> 修改密码
+		</div>
+		<div class="layui-form">
+			<form name="userForm">
+			<div class="allcontent">
+				<div class="col_tr">
+						<div class="col5 text_right">登录名：</div>
+						<div class="wd190 float_left">
+							<input class="layui-input" type="text" name="realname"
+								ng-model="user.realname" validator="required">
+							<input class="layui-input" type="hidden" name="loginName"
+								ng-model="user.loginName" validator="required">
+							<input class="layui-input" type="hidden" name="salt"
+								ng-model="user.salt" validator="required">
+						</div>
+				</div>
+				<div class="col_tr">
+					<div class="col5 text_right">
+						<i class="red_input">*</i>原密码：
+					</div>
+					<div class="wd190 float_left">
+						<input class="layui-input" type="password" name="password"
+							ng-model="user.password" validator="required">
+					</div>
+				</div>
+				<div class="col_tr">
+					<div class="col5 text_right">
+						<i class="red_input">*</i>新密码：
+					</div>
+					<div class="wd190 float_left">
+						<input class="layui-input" type="password" name="newPswd"
+							ng-model="user.newPswd" validator="required">
+					</div>
+				</div>
+				<div class="col_tr">
+					<div class="col5 text_right">
+						<i class="red_input">*</i>新密码确认：
+					</div>
+					<div class="wd190 float_left">
+						<input class="layui-input" type="password" name="renewPswd"
+							ng-model="user.renewPswd" validator="required">
+					</div>
+				</div>
+			</div>
+		</form>
+			<div class="scrbtn">
+				<button class="layui-btn"  validation-submit="userForm"
+						ng-click="updatePswd()" button-type="saveBizInf"> <i class="layui-icon">&#x1005;</i> 保存</button>
+			 	<button class="layui-btn" ng-click="history.back()"> <i class="layui-icon">&#x1006;</i> 返回</button>
+			</div>
+		</div>
+	</div>
+</div>
+

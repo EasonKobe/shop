@@ -1,0 +1,43 @@
+<div ng-controller="rcvbConfirmCtrl">
+    <form name="rcvbForm" class="dialog-form">
+        <div class="col10">
+            <div class="col2 height52 text_right"><span class="red">*</span>保理商：</div>
+            <div class="col3 height52">
+                <input class="inputclass" type="text" ng-model="queryParam.tenantName" name="tenantName"
+                       selector="selectFactor">
+                <input type="hidden" class="inputclass" ng-model="queryParam.tenantId"
+                           validator="required" name="tenantId" required-error-message="请选择保理商" >
+            </div>
+        </div>
+
+        <div jf-grid="应收账款列表" paging="true" resource="rcvbConfirm.query" search="search"
+             params="queryParam" callback="callback" check="checkbox">
+            <table>
+                <thead>
+                <tr>
+                    <th align="center">买方名称</th>
+                    <th align="center">应收余额（¥）</th>
+                    <th align="center">单据类型</th>
+                    <th align="center">单据编号</th>
+                    <th align="center">开始日期</th>
+                    <th align="center">到期日期</th>
+                </tr>
+                </thead>
+                <tbody class="tbody">
+                <tr>
+                    <td align="center" ng-bind="item.cntprNm"></td>
+                    <td align="center" ng-bind="item.rcvbAmt | jfMoney : '2'"></td>
+                    <td align="center" ng-bind="item.docTpCd | jfConvert : 'dict' : 'DocTpCd'"></td>
+                    <td align="center" ng-bind="item.docId"></td>
+                    <td align="center" ng-bind="item.rcvbStDt | jfDate"></td>
+                    <td align="center" ng-bind="item.rcvbExDat | jfDate"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+    <div class="win-btn-table">
+        <button class="btn btn-sure" validation-submit="rcvbForm" ng-click="toConfirm()">确认</button>
+        <button class="btn btn-cancle" ng-click="toRefuse()"> 拒绝</button>
+    </div>
+</div>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jeedev.msdp.sys.org.dao.ISysOrganizationDao">
+	<resultMap id="sysOrganizationMap" type="java.util.Map" >
+		<result column="ID" property="id" javaType="java.lang.String" />
+		<result column="ORG_CODE" property="orgCode" javaType="java.lang.String" />
+		<result column="ORG_NAME" property="orgName" javaType="java.lang.String" />
+		<result column="PARENT_ORG_CODE" property="parentOrgCode"
+			javaType="java.lang.String" />
+		<result column="ORG_LEVEL_CD" property="orgLevelCd" javaType="java.lang.String" />
+		<result column="SORT" property="sort" javaType="java.lang.Integer" />
+		<result column="EXT_JSON_DATA" property="extJsonData" javaType="java.lang.String" />
+		<result column="STATUS_CD" property="statusCd" javaType="java.lang.String" />
+		<result column="REMARK" property="remark" javaType="java.lang.String" />
+		<result column="DEL_IND" property="delInd" javaType="java.lang.String" />
+		<result column="CREATE_USER" property="createUser" javaType="java.lang.String" />
+		<result column="CREATE_TIME" property="createTime" javaType="java.util.Date" />
+		<result column="UPDATE_USER" property="updateUser" javaType="java.lang.String" />
+		<result column="UPDATE_TIME" property="updateTime" javaType="java.util.Date" />
+		<result column="EXPD_ID" property="expdId" javaType="java.lang.String" />
+		<result column="VERSION" property="version" javaType="java.lang.Integer" />
+		<result column="TENANT_ID" property="tenantId" javaType="java.lang.String" />
+		<result column="CLNTEND_ID" property="clntendId" javaType="java.lang.String" />
+	</resultMap>
+
+	<sql id="column_list">
+		 ID, ORG_CODE, ORG_NAME, PARENT_ORG_CODE, ORG_LEVEL_CD, SORT,
+		EXT_JSON_DATA, STATUS_CD, REMARK, DEL_IND, CREATE_USER, CREATE_TIME,
+		UPDATE_USER, UPDATE_TIME, EXPD_ID, VERSION, TENANT_ID,CLNTEND_ID
+	</sql>
+
+	<sql id="where_filters">
+		<where>
+			<if test="id!=null and id!=''">
+				AND ID = #{id}
+			</if>
+			<if test="orgCode!=null and orgCode!=''">
+				AND ORG_CODE = #{orgCode}
+			</if>
+			<if test="orgCodes != null and orgCodes.size() > 0">
+				AND ORG_CODE IN
+				<foreach collection="orgCodes" item="orgCode" index="index" open="(" close=")" separator=",">
+					#{orgCode}
+				</foreach>
+			</if>
+			
+			<if test="orgName!=null and orgName!=''">
+				AND ORG_NAME  LIKE concat('%',#{orgName},'%') 
+			</if>
+			<if test="parentOrgCode!=null and parentOrgCode!=''">
+				AND PARENT_ORG_CODE = #{parentOrgCode}
+			</if>
+			<if test="orgLevelCd!=null and orgLevelCd!=''">
+				AND ORG_LEVEL_CD = #{orgLevelCd}
+			</if>
+			<if test="statusCd!=null and statusCd!=''">
+				AND STATUS_CD = #{statusCd}
+			</if>
+			<if test="delInd!=null and delInd!=''">
+				AND DEL_IND = #{delInd}
+			</if>
+			<if test="version!=null and version!=''">
+				AND VERSION = #{version}
+			</if>
+			<if test="tenantId!=null and tenantId!=''">
+				AND TENANT_ID = #{tenantId}
+			</if>
+			<if test="clntendId!=null and clntendId!=''">
+				AND CLNTEND_ID = #{clntendId}
+			</if>
+		</where>
+	</sql>
+
+	<!--根据条件查询列表 -->
+	<select id="findOrgList" parameterType="map" resultMap="sysOrganizationMap">
+		SELECT
+		<include refid="column_list" />
+		FROM SYS_ORGANIZATION
+		<include refid="where_filters" />
+		ORDER BY SORT,ID DESC
+	</select>
+
+</mapper>

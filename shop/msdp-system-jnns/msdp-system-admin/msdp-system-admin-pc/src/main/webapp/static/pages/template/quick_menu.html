@@ -1,0 +1,65 @@
+	<div class="body_mg20" ng-controller="shortMenuCtrl">
+		<div class="layui-form">
+
+			<div class="maintree_contain"  style="width:300px" >
+				<div class="maintree_title" style="width:280px"></div>
+				<div jf-ztree="quickTree" ng-class="maintree_content" params="treeParam" 
+					node-click="nodeClick"  reload="reloadTree" resource="quickMenu.tree">
+				</div>
+			</div>
+			<div id="container" style="margin-left: 100px ">
+				<div class="layui-form">
+					<!--< div class="search_mian">
+						<div class="layui-form-item">
+							<div class="layui-inline">
+								<label class="layui-form-label">登录名:</label>
+								<div class="layui-input-inline">
+									<input class="layui-input" type="text"
+										ng-model="queryUser.loginName">
+								</div>
+							</div>
+							<div class="layui-inline">
+								<label class="layui-form-label">姓名:</label>
+								<div class="layui-input-inline">
+									<input class="layui-input" type="text"
+										ng-model="queryUser.realname">
+								</div>
+							</div>
+						</div>
+						<div class="search_button">
+							<button class="layui-btn" ng-click="search()">
+								<i class="layui-icon">&#xe615;</i> 查询
+							</button>
+							<button class="layui-btn" ng-click="resetQueryUserParam()">
+								<i class="layui-icon">&#x1002;</i> 重置
+							</button>
+						</div>
+					</div> -->
+				</div>
+				<div jf-grid="用户列表" paging="false" search="menuSearch" 
+					resource="quickMenu.query" params="menuParams"  name="userTbNm">
+					<table>
+						<thead>
+							<tr>
+								 
+								
+								<th>序号</th> 
+								<th>快捷菜单</th>
+								<th>操作</th>
+							</tr>
+						</thead>
+						<tbody class="tbody">
+							<tr>
+								<td align="center" ng-bind="item.sort"></td>
+								<td align="center" ng-bind="item.menuName"></td> 
+								<td align="center"><button class="layui-btn layui-btn-danger" 
+									ng-click="delMenu(item.id)">
+									删除</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>

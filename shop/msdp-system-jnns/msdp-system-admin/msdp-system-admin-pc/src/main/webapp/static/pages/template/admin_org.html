@@ -1,0 +1,21 @@
+<div class="layui-form addborder" ng-controller="adminChangeCtrl">
+	<table border="0" cellspacing="0" cellpadding="0" class="layui-table dataTable no-footer" lay-even lay-skin="nob">
+		<thead>
+			<tr> 
+			  <th align="left">机构代码</th>
+			  <th align="left">机构</th>
+			  <th align="left">部门代码</th>
+			  <th align="left">部门</th>
+			</tr>
+		</thead>
+		<tbody >
+			<tr ng-repeat="org in orgList" ng-click="changer(org,0)"> 
+			    <td align="left" class="intercept" ng-bind="org.orgCode"></td>
+			    <td align="left" class="intercept" ng-bind="org.orgName"></td>
+			    <td align="left" class="intercept" ng-bind="org.deptCode"></td>
+			    <td align="left" class="intercept" ng-bind="org.deptName"></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+

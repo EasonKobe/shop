@@ -1,0 +1,39 @@
+<!--菜单-->
+<!--layouter_l-->
+	<div class="layouter_l">
+	    <ul class="layui-nav layui-nav-tree layui-bg-cyan layui-inline" lay-filter="demo">
+	        <li class="layui-nav-item layui-nav-itemed" ng-repeat="secmenu in secMenuList">
+	            <a href="javascript:void(0);">
+	            <i class="icon-20 icon-account"></i>{{secmenu.text}}</a>
+	            <dl class="layui-nav-child">
+	                <dd ng-repeat="subMenu in secmenu.menu" ><a href="javascript:void(0)"  ui-sref="root.{{subMenu.url}}" ng-bind="subMenu.text"></a></dd>
+	            </dl>
+	        </li>
+	    </ul>
+	</div>
+<!--layouter_l end-->
+<script>
+          layui.use(['form', 'layedit', 'laydate','laypage', 'layer', 'element'], function(){
+			 var laydate = layui.laydate;
+             laydate.render({
+             elem: '#test1,#test2'
+			 ,theme: 'molv'
+           });
+		   
+		   
+		   var $ = layui.jquery
+           ,element = layui.element; 
+		   
+		   var laypage = layui.laypage
+           ,layer = layui.layer;		   
+           laypage.render({
+               elem: 'demo'
+               ,count: 10
+               ,layout: ['count', 'prev', 'page', 'next', 'limit', 'skip']
+               ,jump: function(obj){
+                 console.log(obj)
+               }
+             });
+
+          });
+        </script>

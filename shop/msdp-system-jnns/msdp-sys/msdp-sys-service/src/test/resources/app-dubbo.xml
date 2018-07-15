@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 当前应用名称 -->
+	<dubbo:application name="consumer-scf-sys" />
+    <dubbo:registry address="zookeeper://172.19.0.223:2181" file="dubbo-registry/scf-sys.properties" />
+	<import resource="classpath*:/spring/applicationContext-dubbo.xml"/>
+</beans>
+    

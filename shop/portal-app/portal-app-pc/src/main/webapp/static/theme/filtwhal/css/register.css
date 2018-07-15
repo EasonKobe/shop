@@ -1,0 +1,64 @@
+.re_body{
+	margin-top: 105px;
+	padding: 85px 0px;
+	position: relative;
+}
+.re_b_cnt{
+	width: 300px;
+	margin: 0 auto;
+	/* background: #ccc; */
+}
+.re_b_c_btn{
+	display: block;
+	width: 150px;
+	height: 50px;
+	line-height: 50px;
+	float: left;
+	text-align: center;
+	font-size: 18px;
+	color: #000;
+	text-decoration: none;
+}
+.re_a_sted{
+	border-bottom: 1px solid #000;
+}
+.re_b_c_ipt{
+	width: 254px;
+	height: 50px;
+	line-height: 50px;
+	padding: 0px 20px;
+	border: 3px solid #cccccc;
+	font-size: 15px;
+}
+.re_b_c_ipt:nth-child(3){
+	margin-top: 15px;
+}
+.re_b_c_si{
+	margin-top: 15px;
+	width: 296px;
+	height: 46px;
+	color: #fff;
+	background: #000;
+	text-align: center;
+	line-height: 46px;
+	border: 2px solid #000;
+	cursor: pointer;
+	transition: background 1s, color 1s;
+	-moz-transition: background 1s, color 1s;	/* Firefox 4 */
+	-webkit-transition: background 1s, color 1s;	/* Safari 和 Chrome */
+	-o-transition: background 1s, color 1s;	/* Opera */
+}
+.re_b_c_at{
+	color: #000;
+	font-size: 14px;
+	margin-bottom: 5px;
+	margin-top: 30px;
+}
+.re_b_tips{
+	position: absolute;
+	right: 00px;
+	top: 150px;
+	width: 240px;
+	padding: 10px 15px;
+	background: #f9f9f9;
+}

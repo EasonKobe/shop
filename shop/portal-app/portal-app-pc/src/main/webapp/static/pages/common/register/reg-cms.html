@@ -1,0 +1,11 @@
+<div ng-controller="regCtrl">
+    <div class="artc-content-area" ng-init="noteDialog.init()">
+        <div class="artc-content" ng-bind-html="artcDetail.artcCntnt | jfTrusted">
+        </div>
+    </div>
+    <div class="win-btn-table">
+        <button class="btn btn-sure" ng-click="noteDialog.confirm()">本公司同意</button>
+        <button class="btn btn-cancle" ng-click="$parent.noteDialog.close()">取消</button>
+
+    </div>
+</div>

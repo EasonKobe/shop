@@ -1,0 +1,16 @@
+<div ng-controller="tenantBatchImportCtrl" class="ng-scope">
+	<div class="table-form">
+    	<div class="col10">
+        	<div class="col2 height52 text_right">文档名称：</div>
+            <div class="col3 height52">
+            	<div class="showFileName ng-binding" ng-bind="file.name"></div>
+                <a href="javascript:javascript(0);" class="inputfile">选择文件
+                	<input type="file" class="import-input" onchange="angular.element(this).scope().fileChanged(this)" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+                </a>
+                <button class="btn btn-border btn-small" ng-click="importFile()">导入</button>
+                <button class="btn btn-border btn-small" ng-click="downLoad()">模板下载</button>
+            </div>
+		</div>
+    </div>
+
+</div>

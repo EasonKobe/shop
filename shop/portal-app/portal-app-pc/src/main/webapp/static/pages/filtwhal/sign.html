@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>日本滤鲸官网-登录</title>
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" type="text/css" href="./css/reset.css">
+	<link rel="stylesheet" type="text/css" href="./css/common.css">
+	<link rel="stylesheet" type="text/css" href="./css/sign.css">
+	<script type="text/javascript" src="./js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="./js/common.js"></script>
+</head>
+<body>
+	<div class="head">
+		<div class="h_cnt cnt">
+			<a href="index.html" class="logo">
+				<img src="./image/logo.png">
+			</a>
+			<div class="h_rcnt">
+				<a href="main.html">Works</a>
+				<a href="service.html">Services</a>
+				<a href="about.html">About</a>
+				<a href="contactus.html">Contact</a>
+				<a href="sign.html" style="margin-right: 0px;margin-left: 50px;">Sign in</a>
+				<img src="./image/icon0.png" style="width: 16px;height: 16px">
+			</div>
+		</div>
+	</div>
+	<div class="sg_body cnt">
+		<div class="sg_b_cnt">
+			<div style="width: 100%;border-bottom: 1px solid #000;overflow: hidden;">
+				<a class="sg_b_c_btn sg_a_sted" href="sign.html">Sign in</a>
+				<a class="sg_b_c_btn" href="register.html">Register</a>
+			</div>
+			<div style="margin-top: 35px;">
+				<p class="sg_b_c_at">Account password error</p>
+				<input class="sg_b_c_ipt" type="text" name="accnum" placeholder="Nickname/Email">
+				<input class="sg_b_c_ipt" type="password" name="password" placeholder="Password">
+			</div>
+			<div class="sg_b_c_si">Sign in</div>
+			<p style="text-align: center;font-size: 16px;color: #999999;margin-top: 50px;">Need help?</p>
+			<p style="text-align: center;font-size: 16px;color: #999999;margin-top: 20px;">Don’t have an account? Join Filtwhal Japan</p>
+		</div>
+	</div>
+	<div class="router">
+		<div style="width: 960px;height: 100%;margin: 0 auto;">
+			<a class="r_a" href="index.html">Home</a>
+			<span style="font-size: 14px;margin-right: 10px;">></span>
+			<a class="r_a" href="sign.html">Sign</a>
+		</div>
+	</div>
+	<div class="footer">
+		<img style="margin-bottom: 20px;width: 100px;" src="./image/logo.png">
+		<div style="width: 960px;margin: 0 auto;margin-top: 30;text-align: center;font-size: 14px;">
+			<span style="margin-right: 40px;">©filtwhal japan INC.</span>
+			<span>運営会社について&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;プライバシーポリシー&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;お問い合わせ</span>
+			<a href="#" style="margin-left: 40px;margin-right: 20px;"><img style="height: 15px;" src="./image/icon2.png"></a>
+			<a href="#" style="margin-right: 20px;"><img style="height: 15px;" src="./image/icon3.png"></a>
+			<a href="#"><img style="height: 15px;" src="./image/icon4.png"></a>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	reset();
+	window.onresize=function(){
+		reset();
+	}
+
+	$(document).ready(function(){
+		$(".sg_b_c_si").mouseover(function(){
+			$(this).css("background", "#ccc");
+			// $(this).css("color", "#000");
+		})
+		$(".sg_b_c_si").mouseout(function(){
+			$(this).css("background", "#000");
+			// $(this).css("color", "#fff");
+		})
+	})
+
+	function reset(){
+		let h = document.documentElement.clientHeight||document.body.clientHeight;
+		if(h>900){
+			let t=(h-750)/2;
+			let l=(960-300)/2;
+			$(".sg_b_cnt").css("position", "absolute");
+			$(".sg_b_cnt").css("top", t);
+			$(".sg_b_cnt").css("left", l);
+			$(".footer").css("position", "absolute");
+			$(".footer").css("bottom", "0");
+			$(".router").css("position", "absolute");
+			$(".router").css("bottom", Number.parseInt($(".footer").css("height"))+60);
+		}else{
+			$(".sg_b_cnt").css("position", "static");
+			$(".footer").css("position", "static");
+			$(".router").css("position", "static");
+		}
+	}
+</script>
+</html>

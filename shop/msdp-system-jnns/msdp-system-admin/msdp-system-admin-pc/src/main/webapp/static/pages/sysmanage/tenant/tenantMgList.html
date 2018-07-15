@@ -1,0 +1,81 @@
+<div class="layout_body" ng-controller="tenantCtrl">
+	<div class="">
+		<div class="subposition" ng-bind-html="getCurrentLoaction('')">
+        </div>
+		<form class="layui-form layui-form-pane" name="form1">
+			<div class="search_mian">
+				<div class="layui-form-item">
+					<div class="layui-inline">
+						<label class="layui-form-label">保理商名称：</label>
+						<div class="layui-input-inline">
+							<input class="layui-input" type="text" ng-model="tenantList.params.tenantNameLike">
+						</div>
+					</div>
+					<div class="layui-inline">
+						<label class="layui-form-label">社会信用代码：</label>
+						<div class="layui-input-inline">
+							<input class="layui-input" type="text" ng-model="tenantList.params.orgCode">
+						</div>
+					</div>
+				</div>
+				<div class="search_button">
+					<button class="layui-btn" ng-click="tenantList.search()">
+						<i class="layui-icon">&#xe615;</i> 查询
+					</button>
+
+					<button class="layui-btn" type="button"
+						ng-click="tenantList.params={}">
+						<i class="layui-icon">&#x1006;</i> 重置
+					</button>
+				</div>
+			</div>
+
+		</form>
+		<div class="button_contain">  
+			<div id="tenantBatchImport" url="/sysmanage/tenant/tenantImport.html" 
+			title="保理商批量导入" size="500px,400px" callback="confirmImp"></div>
+			
+			
+			<button class="layui-btn layui-btn-primary" ng-click="tenantList.turn('/tenant/tenantmg/tenantAddMsg')">
+			  <i class="layui-icon">&#xe61f;</i> 新 增
+		   </button>
+			
+			<button class="layui-btn layui-btn-primary"
+				ng-click="modify()">
+				<i class="layui-icon">&#xe642;</i> 修 改
+			</button>
+			<button class="layui-btn layui-btn-primary"
+				ng-click="deleteTenant()"><i class="layui-icon">&#xe640;</i> 删 除
+			</button>
+			<button class="layui-btn layui-btn-primary"
+				ng-click="tenantList.turn('/tenant/tenantmg/tenantViewMsg?id&tenantId')">
+				<i class="layui-icon">&#xe642;</i> 查看
+			</button>
+			<button class="layui-btn layui-btn-primary"
+				ng-click="updateInvalid()">
+				<i class="layui-icon">&#xe642;</i> 失效
+			</button>
+			<!-- <button class="layui-btn" ng-click="importDialog($event)">
+				<i class="layui-icon"></i> 批量导入
+			</button> -->
+		</div>
+		<div jf-grid="tenantList" >
+			<table>
+				<thead>
+					<tr>
+							<th align="left">保理商名称</th>
+							<th align="left">社会信用代码</th>
+							<th align="left">状态</th>
+					</tr>
+				</thead>
+				<tbody class="tbody">
+					<tr>
+						<td align="left" ng-bind="item.tenantName"></td>
+						<td align="left" ng-bind="item.orgCode"></td>
+						<td align="left" ng-bind="item.statusCd |jfConvert:'dict':'TenStCd'"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>

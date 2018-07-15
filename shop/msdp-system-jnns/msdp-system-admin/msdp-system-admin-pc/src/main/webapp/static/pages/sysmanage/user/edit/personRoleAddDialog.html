@@ -1,0 +1,37 @@
+<div ng-controller="userAndRoleRelEditCtrl">
+	<form name="userAndRoleRelForm">
+		<div class="col_tr" ng-if="false">
+			<div class="col4 text_right">
+				<i class="red_input">*</i>用户编号：
+			</div>
+			<div class="wd190 float_left">
+				<input class="layui-input" type="text" ng-model="userAndRoleRel.userNum">
+				<input class="layui-input" type="hidden" ng-model="userAndRoleRel.id">
+			</div>
+		</div>
+		<div class="col_tr">
+			<div class="col4 text_right">
+				<i class="red_input">*</i>角色名称：
+			</div>
+			<div class="wd190 float_left">
+				<input class="layui-input" type="text" ng-model="userAndRoleRel.roleName" selector="selectRole" placeholder="请选择">
+				<input class="layui-input" type="hidden" ng-model="userAndRoleRel.roleCode" name="roleCode" validator="required">
+			</div>
+		</div>
+		<div class="col_tr">
+			<div class="col4 text_right">
+				<i class="red_input">*</i>角色用户关联状态：</div>
+			<div class="wd190 float_left">
+				<select  ng-model="userAndRoleRel.statusCd" jf-select="builder.option('StCd')" class="layui-input" placeholder="请选择" name="statusCd" validator="required"></select>
+			</div>
+		</div>
+		<div class="col_tr">
+			<div class="col4 text_right">
+				<i class="red_input">*</i>是否默认角色：
+			</div>
+			<div class="wd190 float_left">
+				<select  ng-model="userAndRoleRel.defaultInd" jf-select="builder.option('Indicator')" class="layui-input" placeholder="请选择" name="defaultInd" validator="required"></select>
+			</div>
+		</div>
+	</form>
+</div>

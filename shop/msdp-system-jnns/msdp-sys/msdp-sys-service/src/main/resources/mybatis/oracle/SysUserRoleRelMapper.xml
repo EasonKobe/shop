@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jeedev.msdp.sys.user.dao.ISysUserRoleRelDao">
+	<resultMap  id="sysUserRoleRelMap" type="java.util.Map" >
+		<result column="ID" property="id" javaType="java.lang.Integer" />
+		<result column="ROLE_CODE" property="roleCode" javaType="java.lang.String" />
+		<result column="CREATE_TIME" property="createTime" javaType="java.util.Date" />
+		<result column="USER_NUM" property="userNum" javaType="java.lang.String" />
+		<result column="CREATE_USER" property="createUser" javaType="java.lang.String" />
+		<result column="UPDATE_TIME" property="updateTime" javaType="java.util.Date" />
+		<result column="UPDATE_USER" property="updateUser" javaType="java.lang.String" />
+		<result column="EXPD_ID" property="expdId" javaType="java.lang.String" />
+		<result column="DEL_IND" property="delInd" javaType="java.lang.String" />
+		<result column="VERSION" property="version" javaType="java.lang.Integer" />
+		<result column="STATUS_CD" property="statusCd" javaType="java.lang.String" />
+		<result column="DEFAULT_IND" property="defaultInd" javaType="java.lang.String" />
+		
+		<result column="ROLE_NAME" property="roleName" javaType="java.lang.String"/>
+		<!--关联用户字段-->
+		<result column="USER_REALNAME" property="userRealname" javaType="java.lang.String" />
+		<result column="USER_LOGIN_NAME" property="userLoginName" javaType="java.lang.String" />
+		<result column="USER_STATUS_CD" property="userStatusCd" javaType="java.lang.String" />
+		<result column="USER_SEX_CD" property="userSexCd" javaType="java.lang.String" />
+		<result column="USER_CITY" property="userCity" javaType="java.lang.String" />
+		<result column="USER_EMAIL" property="userEmail" javaType="java.lang.String" />
+		<result column="USER_MOBILE" property="userMobile" javaType="java.lang.String" />
+		<result column="USER_TELEPHONE" property="userTelephone" javaType="java.lang.String" />
+	</resultMap>
+
+	<sql id="column_list">
+		SURR.ID, SURR.ROLE_CODE, SURR.USER_NUM, SURR.CREATE_TIME, SURR.CREATE_USER, SURR.UPDATE_TIME,
+		SURR.UPDATE_USER, SURR.EXPD_ID, SURR.DEL_IND, SURR.VERSION,SURR.STATUS_CD,SURR.DEFAULT_IND
+		,SR.ROLE_NAME
+		,SU.REALNAME AS USER_REALNAME
+		,SU.LOGIN_NAME AS USER_LOGIN_NAME
+		,SU.STATUS_CD AS USER_STATUS_CD
+		,SU.SEX_CD AS USER_SEX_CD
+		,SU.EMAIL AS USER_EMAIL
+		,SU.CITY AS USER_CITY
+		,SU.TELEPHONE AS USER_TELEPHONE
+		,SU.MOBILE AS USER_MOBILE
+	</sql>
+
+	<sql id="where_filters">
+		<where>
+			SURR.ROLE_CODE=SR.ROLE_CODE
+			AND SURR.USER_NUM=SU.USER_NUM
+			<if test="id!=null and id!=''">
+				AND SURR.ID = #{id}
+			</if>
+			<if test="roleCode!=null and roleCode!=''">
+				AND SURR.ROLE_CODE = #{roleCode}
+			</if>
+			<if test="roleName!=null and roleName!=''">
+				AND SR.ROLE_NAME LIKE concat(concat('%',#{roleName}),'%')
+			</if>
+			<if test="userNum!=null and userNum!=''">
+				AND SURR.USER_NUM = #{userNum}
+			</if>
+			<if test="userNums != null and userNums.size() > 0">
+				AND SURR.USER_NUM IN
+				<foreach collection="userNums" item="userNum" index="index" open="(" close=")" separator=",">
+					#{userNum}
+				</foreach>
+			</if>
+			<if test="delInd!=null and delInd!=''">
+				AND SURR.DEL_IND = #{delInd}
+				AND SR.DEL_IND = #{delInd}
+				AND SU.DEL_IND = #{delInd}
+			</if>
+			<if test="version!=null and version!=''">
+				AND SURR.VERSION = #{version}
+			</if>
+			<if test="defaultInd!=null and defaultInd!=''">
+				AND SURR.DEFAULT_IND = #{defaultInd}
+			</if>
+			<if test="userRealname!=null and userRealname!=''">
+				AND SU.REALNAME LIKE concat(concat('%',#{userRealname}),'%')
+			</if>
+			<if test="userLoginName!=null and userLoginName!=''">
+				AND SU.LOGIN_NAME LIKE concat(concat('%',#{userLoginName}),'%')
+			</if>
+			<if test="userLoginName!=null and userLoginName!=''">
+				AND SU.LOGIN_NAME LIKE concat(concat('%',#{userLoginName}),'%')
+			</if>
+			<if test="tenantId!=null and tenantId!=''">
+				AND SU.TENANT_ID =#{tenantId}
+			</if>
+		</where>
+	</sql>
+
+	<!--根据条件查询列表 -->
+	<select id="findUserRoleRelList" parameterType="map" resultMap="sysUserRoleRelMap">
+		SELECT
+		<include refid="column_list" />
+		FROM SYS_USER_ROLE_REL SURR,SYS_ROLE SR,SYS_USER SU
+		<include refid="where_filters" />
+		ORDER BY SURR.ID DESC
+	</select>
+</mapper>

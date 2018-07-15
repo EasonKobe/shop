@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jeedev.msdp.sys.user.dao.ISysUserDeptRelDao">
+	<resultMap  id="sysUserDeptRelMap" type="java.util.Map" >
+		<result column="ID" property="id" javaType="java.lang.Integer" />
+		<result column="DEPT_CODE" property="deptCode" javaType="java.lang.String" />
+		<result column="ORG_CODE" property="orgCode" javaType="java.lang.String" />
+		<result column="USER_NUM" property="userNum" javaType="java.lang.String" />
+		<result column="CREATE_TIME" property="createTime" javaType="java.util.Date" />
+		<result column="CREATE_USER" property="createUser" javaType="java.lang.String" />
+		<result column="UPDATE_TIME" property="updateTime" javaType="java.util.Date" />
+		<result column="UPDATE_USER" property="updateUser" javaType="java.lang.String" />
+		<result column="EXPD_ID" property="expdId" javaType="java.lang.String" />
+		<result column="DEL_IND" property="delInd" javaType="java.lang.String" />
+		<result column="VERSION" property="version" javaType="java.lang.Integer" />
+		<result column="STATUS_CD" property="statusCd" javaType="java.lang.String" />
+		
+		<result column="DEPT_NAME" property="deptName" javaType="java.lang.String" />
+		<result column="ORG_NAME" property="orgName" javaType="java.lang.String" />
+		
+		<result column="USER_REALNAME" property="userRealname" javaType="java.lang.String" />
+		<result column="USER_LOGIN_NAME" property="userLoginName" javaType="java.lang.String" />
+		<result column="USER_STATUS_CD" property="userStatusCd" javaType="java.lang.String" />
+		<result column="USER_SEX_CD" property="userSexCd" javaType="java.lang.String" />
+		<result column="USER_EMAIL" property="userEmail" javaType="java.lang.String" />
+		<result column="USER_CITY" property="userCity" javaType="java.lang.String" />
+		<result column="USER_MOBILE" property="userMobile" javaType="java.lang.String" />
+		<result column="USER_TELEPHONE" property="userTelephone" javaType="java.lang.String" />
+		
+	</resultMap>
+
+	<sql id="column_list">
+		SUDR.ID, SUDR.DEPT_CODE,SUDR.ORG_CODE, SUDR.USER_NUM, SUDR.CREATE_TIME, SUDR.CREATE_USER, SUDR.UPDATE_TIME,
+		SUDR.UPDATE_USER, SUDR.EXPD_ID, SUDR.DEL_IND, SUDR.VERSION,SUDR.STATUS_CD
+		,SD.DEPT_NAME
+		,SO.ORG_NAME
+		
+		,SU.REALNAME AS USER_REALNAME
+		,SU.LOGIN_NAME AS USER_LOGIN_NAME
+		,SU.STATUS_CD AS USER_STATUS_CD
+		,SU.SEX_CD AS USER_SEX_CD
+		,SU.EMAIL AS USER_EMAIL
+		,SU.CITY AS USER_CITY
+		,SU.TELEPHONE AS USER_TELEPHONE
+		,SU.MOBILE AS USER_MOBILE
+	</sql>
+
+	<sql id="where_filters">
+		<where>
+			SUDR.DEPT_CODE=SD.DEPT_CODE and SU.USER_NUM=SUDR.USER_NUM
+			<if test="id!=null and id!=''">
+				AND SUDR.ID = #{id}
+			</if>
+			<if test="deptCode!=null and deptCode!=''">
+				AND SUDR.DEPT_CODE = #{deptCode}
+			</if>
+			<if test="userNum!=null and userNum!=''">
+				AND SUDR.USER_NUM = #{userNum}
+			</if>
+			<if test="orgCode!=null and orgCode!=''">
+				AND SUDR.ORG_CODE = #{orgCode}
+			</if>
+			<if test="delInd!=null and delInd!=''">
+				AND SUDR.DEL_IND = #{delInd}
+				AND SO.DEL_IND = #{delInd}
+				AND SD.DEL_IND = #{delInd}
+				AND SU.DEL_IND = #{delInd}
+			</if>
+			<if test="version!=null and version!=''">
+				AND SUDR.VERSION = #{version}
+			</if>
+		</where>
+	</sql>
+
+	<!--根据条件查询列表 -->
+	<select id="findUserDeptRelList" parameterType="map" resultMap="sysUserDeptRelMap">
+		SELECT
+		<include refid="column_list" />
+		FROM SYS_USER_DEPT_REL SUDR 
+		LEFT JOIN SYS_ORGANIZATION SO ON SUDR.ORG_CODE=SO.ORG_CODE,
+		SYS_DEPARTMENT SD,SYS_USER SU
+		<include refid="where_filters" />
+		ORDER BY SUDR.ID DESC
+	</select>
+	<!-- 根据userNum,deptCode，作唯一性判断使用 -->
+	<select id="countNum" parameterType="java.lang.String" resultType="java.lang.Integer">
+		SELECT
+		COUNT(*)
+		FROM SYS_USER_DEPT_REL
+		WHERE 1=1 AND DEL_IND=0
+		<if test="deptCode!=null and deptCode!=''">
+				AND DEPT_CODE = #{deptCode}
+		</if>
+		<if test="userNum!=null and userNum!=''">
+				AND USER_NUM = #{userNum}
+		</if>
+		<if test="orgCode!=null and orgCode!=''">
+				AND ORG_CODE = #{orgCode}
+		</if> 
+	</select>
+	<resultMap type="java.util.Map" id="userRoleMap">
+		<result column="USER_NUM" property="userNum" javaType="java.lang.String" />
+		<result column="REALNAME" property="realName" javaType="java.lang.String" />
+		<result column="ROLE_CODE" property="roleCode" javaType="java.lang.String" />
+		<result column="DEPT_CODE" property="deptCode" javaType="java.lang.String" />
+		<result column="DEPT_NAME" property="deptName" javaType="java.lang.String" />
+	</resultMap>
+	
+	<select id="findUserByDeptRoleRel" parameterType="map" resultMap="userRoleMap">
+		SELECT
+			U.USER_NUM,
+			U.REALNAME,
+			DEPTREL.DEPT_CODE,
+			RLREL.ROLE_CODE,
+			DEPT.DEPT_NAME
+		FROM
+			SYS_USER U,
+			SYS_USER_DEPT_REL DEPTREL,
+			SYS_USER_ROLE_REL RLREL,
+			SYS_DEPARTMENT DEPT
+		WHERE
+			U.USER_NUM = RLREL.USER_NUM
+			AND U.USER_NUM = DEPTREL.USER_NUM
+			AND DEPT.DEPT_CODE = DEPTREL.DEPT_CODE
+			AND U.DEL_IND= '0'
+			AND DEPTREL.DEL_IND='0'
+			AND RLREL.DEL_IND='0'
+			AND DEPT.DEL_IND='0'
+		<if test="deptCodes != null and deptCodes.size>0">
+			AND DEPTREL.DEPT_CODE IN 
+			<foreach item="item" index="index" collection="deptCodes" open="("  
+	            separator="," close=")">  
+	            #{item}  
+	        </foreach> 
+		</if>
+		<if test="roleCodes != null and roleCodes.size>0">
+			AND RLREL.ROLE_CODE IN 
+		 	<foreach item="item" index="index" collection="roleCodes" open="("  
+	            separator="," close=")">  
+	            #{item}  
+	        </foreach> 
+		</if>
+	</select>
+
+	
+</mapper>

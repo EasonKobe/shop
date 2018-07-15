@@ -1,0 +1,51 @@
+<div ng-controller="dataauthAddCtrl">
+	<form name="dataauthForm" class="layui-form" >
+		<div class="col_tr">
+			<div class="col3 text_right">
+				<i class="red_input">*</i>数据权限模式：
+			</div>
+			<div class="wd190 float_left">
+				<input class="layui-input"  type="text"ng-model="dataauth.modelName"  name="modelName" selector="selectModel" placeholder="请选择"></input>
+				<input class="layui-input" type="hidden" ng-model="dataauth.modelCode" name="modelCode" validator="required">
+			</div>
+		</div>
+		<div class="col_tr">
+			<div class="col_td2 " style="margin-left: 85px;">匹配规则（<i class="red_input">以下条件都满足才启用该模式</i>）</div>
+		</div>
+		<div class="col_tr">
+			<div class="col3 text_right">用户：</div>
+			<div class="wd190 float_left">
+				<input class="layui-input"  type="text" ng-model="dataauth.loginName"  name="loginName" selector="selectUser" placeholder="*" ></input>
+				<input class="layui-input"  type="hidden" ng-model="dataauth.userNum" name="userNum">
+			</div>
+		</div>
+		<div class="col_tr">
+			<div class="col3 text_right">场景：</div>
+			<div class="wd190 float_left">
+				<select ng-model="dataauth.bizScene" jf-select="builder.option('BizSceneType')" class="layui-input" placeholder="请选择" name="bizScene"></select>
+			</div>
+		</div>
+		<div class="col_tr">
+			<div class="col3 text_right">角色：</div>
+			<div class="wd190 float_left">
+				<input class="layui-input" type="text" ng-model="dataauth.roleName" selector="selectRole" placeholder="*" >
+				<input class="layui-input" type="hidden" ng-model="dataauth.roleCode" name="roleCode">
+			</div>
+		</div>
+		
+		<div class="col_tr">
+			<div class="col3 text_right">部门：</div>
+			<div class="wd190 float_left">
+				<input class="layui-input" type="text" ng-model="dataauth.deptName" selector="selectDept" placeholder="*" >
+				<input class="layui-input" type="hidden" ng-model="dataauth.deptCode" name="deptCode">
+			</div>
+		</div>
+		<div class="col_tr">
+			<div class="col3 text_right">机构：</div>
+			<div class="wd190 float_left">
+				<input class="layui-input" type="text" ng-model="dataauth.orgName" selector="selectOrg" placeholder="*" >
+				<input class="layui-input" type="hidden" ng-model="dataauth.orgCode" name="orgCode">
+			</div>
+		</div>
+	</form>
+</div>

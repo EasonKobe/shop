@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jeedev.msdp.sys.event.dao.ISysResEventDao">
+	<resultMap id="sysResEventMap" type="java.util.Map" >
+		<result column="ID" property="id" javaType="java.lang.Integer" />
+		<result column="EVENT_CODE" property="eventCode" javaType="java.lang.String" />
+		<result column="EVENT_NAME" property="eventName" javaType="java.lang.String" />
+		<result column="URL" property="url" javaType="java.lang.String" />
+		<result column="CLNTEND_ID" property="clntendId" javaType="java.lang.String" />
+		<result column="STATUS_CD" property="statusCd" javaType="java.lang.String" />
+		<result column="REMARK" property="remark" javaType="java.lang.String" />
+		<result column="CREATE_TIME" property="createTime" javaType="java.util.Date" />
+		<result column="CREATE_USER" property="createUser" javaType="java.lang.String" />
+		<result column="UPDATE_TIME" property="updateTime" javaType="java.util.Date" />
+		<result column="UPDATE_USER" property="updateUser" javaType="java.lang.String" />
+		<result column="EXPD_ID" property="expdId" javaType="java.lang.String" />
+		<result column="DEL_IND" property="delInd" javaType="java.lang.String" />
+		<result column="VERSION" property="version" javaType="java.lang.Integer" />
+	</resultMap>
+
+	<sql id="column_list">
+		ID, EVENT_CODE, EVENT_NAME, URL, CLNTEND_ID, STATUS_CD, REMARK, CREATE_TIME,
+		CREATE_USER, UPDATE_TIME, UPDATE_USER, EXPD_ID, DEL_IND, VERSION
+	</sql>
+
+	<sql id="where_filters">
+		<where>
+			<if test="id!=null and id!=''">
+				AND ID = #{id}
+			</if>
+			<if test="eventCode!=null and eventCode!=''">
+				AND EVENT_CODE = #{eventCode}
+			</if>
+			<if test="eventName!=null and eventName!=''">
+				AND EVENT_NAME = #{eventName}
+			</if>
+			<if test="url!=null and url!=''">
+				AND URL = #{url}
+			</if>
+			<if test="eventCodes != null and eventCodes.size() > 0">
+				AND EVENT_CODE IN
+				<foreach collection="eventCodes" item="eventCode" index="index" open="(" close=")" separator=",">
+					#{eventCode}
+				</foreach>
+			</if>
+			
+			<if test="clntendId!=null and clntendId!=''">
+				AND CLNTEND_ID = #{clntendId}
+			</if>
+			<if test="statusCd!=null and statusCd!=''">
+				AND STATUS_CD = #{statusCd}
+			</if>
+			<if test="delInd!=null and delInd!=''">
+				AND DEL_IND = #{delInd}
+			</if>
+			<if test="version!=null and version!=''">
+				AND VERSION = #{version}
+			</if>
+		</where>
+	</sql>
+	<select id="findEventList" parameterType="map" resultMap="sysResEventMap">
+		SELECT
+		<include refid="column_list" />
+		FROM SYS_RES_EVENT
+		<include refid="where_filters" />
+	</select>	
+</mapper>

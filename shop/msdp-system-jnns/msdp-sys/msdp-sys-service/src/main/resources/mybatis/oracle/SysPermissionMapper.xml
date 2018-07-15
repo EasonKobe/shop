@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jeedev.msdp.sys.perm.dao.ISysPermissionDao">
+	<resultMap id="sysPermissionMap" type="java.util.Map" >
+		<result column="ID" property="id" javaType="java.lang.Integer" />
+		<result column="PERMISSION_CODE" property="permissionCode"
+			javaType="java.lang.String" />
+		<result column="PERMISSION_TYPE_CD" property="permissionTypeCd"
+			javaType="java.lang.String" />
+		<result column="RES_CODE" property="resCode" javaType="java.lang.String" />
+		<result column="PERMISSION_NAME" property="permissionName"
+			javaType="java.lang.String" />
+		<result column="IS_BUILT_IN" property="isBuiltIn" javaType="java.lang.String" />
+		<result column="STATUS_CD" property="statusCd" javaType="java.lang.String" />
+		<result column="REMARK" property="remark" javaType="java.lang.String" />
+		<result column="CREATE_TIME" property="createTime" javaType="java.util.Date" />
+		<result column="CREATE_USER" property="createUser" javaType="java.lang.String" />
+		<result column="UPDATE_TIME" property="updateTime" javaType="java.util.Date" />
+		<result column="UPDATE_USER" property="updateUser" javaType="java.lang.String" />
+		<result column="EXPD_ID" property="expdId" javaType="java.lang.String" />
+		<result column="DEL_IND" property="delInd" javaType="java.lang.String" />
+		<result column="VERSION" property="version" javaType="java.lang.Integer" />
+		<result column="TENANT_ID" property="tenantId" javaType="java.lang.String" /> 
+		<result column="CLNTEND_ID" property="clntendId" javaType="java.lang.String" />
+	</resultMap>
+
+	<sql id="column_list">
+		ID,PERMISSION_CODE, PERMISSION_TYPE_CD, RES_CODE, PERMISSION_NAME,
+		IS_BUILT_IN, STATUS_CD, REMARK, CREATE_TIME,
+		CREATE_USER, UPDATE_TIME, UPDATE_USER, EXPD_ID, DEL_IND, VERSION,CLNTEND_ID
+	</sql>
+
+	<sql id="where_filters">
+		<where>
+			<if test="id!=null and id!=''">
+				AND ID = #{id}
+			</if>
+			<if test="permissionCode!=null and permissionCode!=''">
+				AND PERMISSION_CODE = #{permissionCode}
+			</if>
+			<if test="permissionCodes != null and permissionCodes.size() > 0">
+				AND PERMISSION_CODE IN
+				<foreach collection="permissionCodes" item="permissionCode" index="index" open="(" close=")" separator=",">
+					#{permissionCode}
+				</foreach>
+			</if>
+			<if test="permissionTypeCd!=null and permissionTypeCd!=''">
+				AND PERMISSION_TYPE_CD = #{permissionTypeCd}
+			</if>
+			<if test="resCode!=null and resCode!=''">
+				AND RES_CODE = #{resCode}
+			</if>
+			<if test="resCodes != null and resCodes.size() > 0">
+				AND RES_CODE IN
+				<foreach collection="resCodes" item="resCode" index="index" open="(" close=")" separator=",">
+					#{resCode}
+				</foreach>
+			</if>
+			<if test="permissionName!=null and permissionName!=''">
+				AND PERMISSION_NAME = #{permissionName}
+			</if>
+			<if test="isBuiltIn!=null and isBuiltIn!=''">
+				AND IS_BUILT_IN = #{isBuiltIn}
+			</if> 
+			<if test="statusCd!=null and statusCd!=''">
+				AND STATUS_CD = #{statusCd}
+			</if>
+			<if test="delInd!=null and delInd!=''">
+				AND DEL_IND = #{delInd}
+			</if>
+			<if test="tenantId!=null and tenantId!=''">
+				AND TENANT_ID = #{tenantId}
+			</if>
+			<if test="tenantIdIsNull==true">
+				AND TENANT_ID IS NULL
+			</if>
+			<if test="clntendId!=null and clntendId!=''">
+				AND CLNTEND_ID = #{clntendId}
+			</if>
+		</where>
+	</sql>
+
+	<!--根据条件查询列表 -->
+	<select id="findPermList" parameterType="map" resultMap="sysPermissionMap">
+		SELECT
+		<include refid="column_list" />
+		FROM SYS_PERMISSION
+		<include refid="where_filters" />
+		ORDER BY ID DESC
+	</select>
+
+</mapper>

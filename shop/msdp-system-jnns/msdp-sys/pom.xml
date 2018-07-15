@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>msdp-system</artifactId>
+        <groupId>com.jeedev.msdp.system</groupId>
+        <version>2.0.0-jnns-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <name>msdp-sys</name>
+    <groupId>com.jeedev.msdp.system</groupId>
+    <artifactId>msdp-sys</artifactId>
+    <packaging>pom</packaging>
+
+    <!-- 子模块 -->
+    <modules>
+        <module>msdp-sys-api</module>
+        <module>msdp-sys-api-dubbo-client</module>
+        <module>msdp-sys-service</module>
+        <module>msdp-sys-service-dubbo-boot</module>
+        <module>msdp-system-spi</module>
+    </modules>
+</project>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eason.lj.contact.dao.ILjContactUsInfoDao">
+	<resultMap type="java.util.Map" id="ljContactUsInfoMap">
+		<result column="BRAND" property="brand"/>
+		<result column="EMAIL" property="email"/>
+		<result column="TELEPHONE" property="telephone"/>
+		<result column="FIRST_NAME" property="firstName"/>
+		<result column="LAST_NAME" property="lastName"/>
+		<result column="MESSAGE" property="message"/>
+        <result column="ID" property="id" />
+        <result column="CREATE_TIME" property="createTime" />
+        <result column="UPDATE_TIME" property="updateTime" />
+        <result column="CREATE_USER" property="createUser" />
+        <result column="UPDATE_USER" property="updateUser" />
+        <result column="EXPD_ID" property="expdId" />
+        <result column="DEL_IND" property="delInd" />
+        <result column="VERSION" property="version" />
+	</resultMap>
+
+    <sql id="column_list">
+        ID,  BRAND, EMAIL, TELEPHONE, FIRST_NAME, LAST_NAME, MESSAGE, TENANT_ID,CREATE_TIME, UPDATE_TIME, CREATE_USER, UPDATE_USER, EXPD_ID, DEL_IND, VERSION
+	</sql>
+	
+    <sql id="where_filters">
+        <where>
+        	<if test="1==1">
+        		AND DEL_IND = '0'
+			</if>
+        	<if test="id!=null and id!=''">
+				AND ID = #{id}
+			</if>
+			<if test="brand!=null and brand!=''">
+				AND BRAND LIKE CONCAT('%',#{brand},'%')
+			</if>
+			<if test="email!=null and email!=''">
+				AND EMAIL = #{email}
+			</if>
+			<if test="telephone!=null and telephone!=''">
+				AND TELEPHONE LIKE CONCAT('%',#{telephone},'%')
+			</if>
+			<if test="firstName!=null and firstName!=''">
+				AND FIRST_NAME LIKE CONCAT('%',#{firstName},'%')
+			</if>
+			<if test="lastName!=null and lastName!=''">
+				AND LAST_NAME LIKE CONCAT('%',#{lastName},'%')
+			</if>
+			<if test="message!=null and message!=''">
+				AND MESSAGE LIKE CONCAT('%',#{message},'%')
+			</if>
+        </where>
+    </sql>
+
+    <!--根据条件查询列表-->
+    <select id="findLjContactUsInfoList" parameterType="map" resultMap="ljContactUsInfoMap">
+        SELECT <include refid="column_list"/> FROM lj_contact_us_info <include refid="where_filters"/>
+    </select>
+
+</mapper>

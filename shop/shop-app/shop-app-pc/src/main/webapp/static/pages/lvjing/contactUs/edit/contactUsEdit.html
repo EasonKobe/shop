@@ -1,0 +1,74 @@
+<div ng-controller="contactUsCtrl">
+	<div>
+		<div class="leftmenu_navtitle">联系我们详情信息</div>
+		<div class="allcontent">
+			<form class="layui-form" name="contactUsEdit">
+				<div class="col_td">
+					<div class="col4 text_right">
+						<i class="red_input">*</i>品牌：
+					</div>
+					<div class="wd190 float_left">
+						<input class="layui-input" ng-disabled="contactUs.id" type="text"
+							ng-model="contactUs.brand" name="brand" validator="required">
+					</div>
+				</div>
+				<div class="col_td">
+					<div class="col4 text_right">
+						<i class="red_input">*</i>邮箱：
+					</div>
+					<div class="wd190 float_left">
+						<input class="layui-input" ng-disabled="contactUs.id" type="text"
+							ng-model="contactUs.email" name="email" validator="required">
+					</div>
+				</div>
+				<div class="col_td">
+					<div class="col4 text_right">
+						<i class="red_input">*</i>联系方式：
+					</div>
+					<div class="wd190 float_left">
+						<input class="layui-input" ng-disabled="contactUs.id" type="text"
+							ng-model="contactUs.telephone" name="telephone" validator="required">
+					</div>
+				</div>
+				<div class="col_td">
+					<div class="col4 text_right">
+						<i class="red_input">*</i>姓氏：
+					</div>
+					<div class="wd190 float_left">
+						<input class="layui-input" ng-disabled="contactUs.id" type="text"
+							ng-model="contactUs.firstName" name="firstName" validator="required">
+					</div>
+				</div>
+				<div class="col_td">
+					<div class="col4 text_right">
+						<i class="red_input">*</i>名字：
+					</div>
+					<div class="wd190 float_left">
+						<input class="layui-input" ng-disabled="contactUs.id" type="text"
+							ng-model="contactUs.lastName" name="lastName" validator="required">
+					</div>
+				</div>
+				<div class="col_td">
+					<div class="col4 text_right">
+						<i class="red_input">*</i>留言内容：
+					</div>
+					<div class="wd190 float_left">
+						<textarea class="layui-input" ng-disabled="contactUs.id"
+							type="text" ng-model="contactUs.message" name="message"
+							validator="required"></textarea>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="float_btnfoot">
+			<!-- <button class="layui-btn" validation-submit="contactUsEdit"
+				ng-click="save()">
+				<i class="layui-icon"> &#x1005;</i> 保存
+			</button> -->
+			<button class="layui-btn" ng-click="turn('/lvjing/contactUs/contactUsList')"">
+				<i class="layui-icon">&#x1006;</i> 返回
+			</button>
+		</div>
+
+	</div>
+</div>

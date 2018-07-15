@@ -1,0 +1,21 @@
+<div ng-controller="docAtchCtrl">
+    <form name="atchForm" class="layui-form">
+    	<div class="col_tr">
+			<div class="col4 text_right">
+				<i class="red_input">*</i>文件名称：
+			</div>
+			<div class="wd190 float_left">
+				<file-uploader ng-model="atch.atchInf" uploader-conf="uploadAtch"></file-uploader>
+                <input validator="required" type="hidden" ng-model="atch.atchInf" class="layui-input" name="atchInf" required-error-message="请选择文件">			
+			</div>
+		</div>
+		<div class="col_tr">
+			<div class="col4 text_right">
+				<i class="red_input">*</i>文件类型：
+			</div>
+			<div class="wd190 float_left">
+				<select  ng-model="atchIf.fileTpCd" jf-select="builder.option('DocType')"  class="layui-input" validator="required" name="docType" required-error-message="请选择文件类型"></select>
+			</div>
+		</div>
+    </form>
+</div>

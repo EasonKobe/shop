@@ -1,0 +1,30 @@
+<div ng-controller="tenantMenuCtrl">
+	<div class="section">
+		<div class="leftmenu_navtitle">
+			菜单信息 
+		</div>
+		<form name="tenantForm">
+			<div class="allcontent ">
+				<div class="col_tr">
+					<div class="col4 text_right" title="aaa">
+						<div jf-ztree="menu" ng-class="maintree_content"
+							node-check="menuNodeClick" params="queryMenu"
+							reload="menuReloadTree" resource="tenantRoleMenu.query"></div>
+					</div>
+					<!-- <div class="col3 float_left">
+									<div jf-ztree="checkmenu" ng-class="maintree_content" node-click="menuNodeClick" reload="reloadCheckmenuTree" resource="menuManage.query"></div>
+								</div> -->
+				</div>
+				<div class="col_tr">
+					<div class="col4 text_right">
+						<button class="layui-btn "
+							ng-click="$goto($event, '/tenant/tenantmg/tenantMgList')">
+							<i class="layui-icon">&#xe60c;</i> 返回
+						</button>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+

@@ -1,0 +1,87 @@
+html,body{
+	/* font-family: "STHeiti"; */
+	width: 100%;
+	/* height: 100%; */
+	background: #fff;
+	font-family: arial;
+	overflow-x: hidden;
+}
+.cnt{
+	width: 960px;
+	margin: 0 auto;
+}
+.head{
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100px;
+	box-shadow: 0px 5px 10px #999999;
+	background: #fff;
+	z-index: 999999;
+	transition: height .5s;
+	-moz-transition: height .5s;	/* Firefox 4 */
+	-webkit-transition: height .5s;	/* Safari 和 Chrome */
+	-o-transition: height .5s;	/* Opera */
+}
+.h_cnt{
+	height: 100%;
+	margin: 0 auto;
+}
+.logo{
+	float: left;
+	margin-top: 21.5px;
+	transition: margin-top .5s;
+	-moz-transition: margin-top .5s;	/* Firefox 4 */
+	-webkit-transition: margin-top .5s;	/* Safari 和 Chrome */
+	-o-transition: margin-top .5s;	/* Opera */
+}
+.h_rcnt{
+	float: right;
+	padding: 39px 0px;
+	transition: padding .5s;
+	-moz-transition: padding .5s;	/* Firefox 4 */
+	-webkit-transition: padding .5s;	/* Safari 和 Chrome */
+	-o-transition: padding .5s;	/* Opera */
+}
+.h_rcnt a{
+	font-size: 16px;
+	margin: 0 10px;
+	color: #000;
+	text-decoration: none;
+}
+.h_rcnt a:hover{
+	text-decoration: underline;
+}
+.btn{
+	width: 200px;
+	height: 40px;
+	border: 2px solid #000;
+	cursor: pointer;
+	text-align: center;
+}
+.btn p{
+	line-height: 40px;
+	font-size: 15px;
+}
+.footer{
+	width: 100%;
+	min-width: 960px;
+	padding: 40px 0px;
+	background: #eeeded;
+	text-align: center;
+}
+.footer span{
+	font-size: 13px;
+	color: #000;
+}
+.router{
+	width: 100%;
+	height: 60px;
+}
+.r_a{
+	color: #8c8c8c;
+	font-size: 14px;
+	margin-right: 10px;
+	text-decoration: none;
+}

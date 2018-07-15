@@ -1,0 +1,25 @@
+<div ng-controller="lawValidationCtrl">
+  <form name="codeFrom">
+    <div class="trn-cont">
+      <div class="col10">
+        <div class="col5 height52 text_right"><span class="phcolor-red">*</span>请先获取授权码 ：</div>
+        <div class="col3 height52">
+        <button class="btn btn-getcode" jf-code="mobile" mode="SMS" target="security.mobile" handle="preHandleMobile()"
+                ng-click="getCode()" ng-model="phoneCode.mobile">获取授权码</button>
+      </div>
+      </div>
+      <div class="input-pwd">
+        <input type="text" ng-model="phoneCode.oriCode" class="inputclass ng-valid-minlength ng-valid-maxlength"
+               validator="required,minlength,maxlength" minlength="6"  name="oriCode"
+               minlength-error-message="手机验证码由6个字符组成" maxlength="6"
+               maxlength-error-message="手机验证码由6个字符组成" required-error-message="请输入短信验证码"
+               placeholder="请输入验证码" autocomplete="off">
+      </div>
+    </div>
+    <div class="win-btn-table">
+      <button class="btn btn-cancle" ng-click="backCode()">取消</button>
+      <button class="btn btn-sure" validation-submit="codeFrom"  ng-click="confirmCode()">确认</button>
+    </div>
+  </form>
+</div>
+

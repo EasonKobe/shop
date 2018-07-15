@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>日本滤鲸官网-注册</title>
+	<link rel="shortcut icon" href="favicon.ico">
+	<link rel="stylesheet" type="text/css" href="./css/reset.css">
+	<link rel="stylesheet" type="text/css" href="./css/common.css">
+	<link rel="stylesheet" type="text/css" href="./css/register.css">
+	<script type="text/javascript" src="./js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="./js/common.js"></script>
+	<!-- <script type="text/javascript" src="./js/register.js"></script> -->
+</head>
+<body>
+	<div class="head">
+		<div class="h_cnt cnt">
+			<a href="index.html" class="logo">
+				<img src="./image/logo.png">
+			</a>
+			<div class="h_rcnt">
+				<a href="main.html">Works</a>
+				<a href="service.html">Services</a>
+				<a href="about.html">About</a>
+				<a href="contactus.html">Contact</a>
+				<a href="sign.html" style="margin-right: 0px;margin-left: 50px;">Sign in</a>
+				<img src="./image/icon0.png" style="width: 16px;height: 16px">
+			</div>
+		</div>
+	</div>
+	<div class="re_body cnt">
+		<div class="re_b_cnt">
+			<div style="width: 100%;border-bottom: 1px solid #000;overflow: hidden;">
+				<a class="re_b_c_btn" href="sign.html">Sign in</a>
+				<a class="re_b_c_btn re_a_sted" href="register.html">Register</a>
+			</div>
+			<div style="margin-top: 35px;">
+				<p class="re_b_c_at">Nickname<span style="font-size:12px;color: red;">*</span></p>
+				<input class="re_b_c_ipt" type="text" name="nickname">
+				<p class="re_b_c_at">Phone number<span style="font-size:12px;color: red;">*</span></p>
+				<input class="re_b_c_ipt" type="text" name="phonum" >
+				<p class="re_b_c_at">Mail-address<span style="font-size:12px;color: red;">*</span></p>
+				<input class="re_b_c_ipt" type="text" name="email" >
+				<p class="re_b_c_at">Line-ID</p>
+				<input class="re_b_c_ipt" type="text" name="lineid" >
+				<p class="re_b_c_at">Password <span style="font-size:12px;color: red;">*</span></p>
+				<input class="re_b_c_ipt" type="text" name="password" >
+				<p class="re_b_c_at">Confirm password <span style="font-size:12px;color: red;">*</span> </p>
+				<input class="re_b_c_ipt" type="text" name="password0" >
+			</div>
+			<div style="overflow: hidden;padding: 10px 0px;">
+				 <input style="float: left;width: 20px;height: 20px;cursor: pointer;" type="checkbox" name="checkbox">
+				<p style="margin-left:10px;width: 260px;float: left;font-size: 15px;color: #666666;line-height: 20px;">I have read and agree with the  <a style="color:#666;" href="#">Filtwhal Japan terms</a>  and <a style="color:#666;" href="#">conditions</a></p>
+			</div>
+			<div class="re_b_c_si">Join Filtwhal Japan</div>
+		</div>
+		<div class="re_b_tips">
+			<p style="font-size: 15px;">Filtwhal Japan member benefits</p>
+			<p style="font-size: 13px;margin-top: 10px;line-height: 20px;color: #333333;">When you are old and grey and full of 
+sleep, And nodding by the fi<br>When you are old and grey and full of 
+sleep, And nodding by the fi<br>When you are old and grey and full of 
+sleep, And nodding by the fiWhen you are old and grey and full of 
+sleep, And nodding by the fiWhen you are old and grey and full of 
+sleep, And nodding by the fiWhen you are old and grey and full of 
+sleep, And nodding by the fiWhen you are old and grey and full of 
+sleep, And nodding by the fiWhen you are old and grey and full of 
+sleep, And nodding by the fiWhen you are old and grey and full of 
+sleep, And nodding by the fi</p>
+		</div>
+	</div>
+	<div class="router">
+		<div style="width: 960px;height: 100%;margin: 0 auto;">
+			<a class="r_a" href="index.html">Home</a>
+			<span style="font-size: 14px;margin-right: 10px;">></span>
+			<a class="r_a" href="register.html">Register</a>
+		</div>
+	</div>
+	<div class="footer">
+		<img style="margin-bottom: 20px;width: 100px;" src="./image/logo.png">
+		<div style="width: 960px;margin: 0 auto;margin-top: 30;text-align: center;font-size: 14px;">
+			<span style="margin-right: 40px;">©filtwhal japan INC.</span>
+			<span>運営会社について&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;プライバシーポリシー&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;お問い合わせ</span>
+			<a href="#" style="margin-left: 40px;margin-right: 20px;"><img style="height: 15px;" src="./image/icon2.png"></a>
+			<a href="#" style="margin-right: 20px;"><img style="height: 15px;" src="./image/icon3.png"></a>
+			<a href="#"><img style="height: 15px;" src="./image/icon4.png"></a>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".re_b_c_si").mouseover(function(){
+			$(this).css("background", "#fff");
+			$(this).css("color", "#000");
+		})
+		$(".re_b_c_si").mouseout(function(){
+			$(this).css("background", "#000");
+			$(this).css("color", "#fff");
+		})
+	})
+</script>
+</html>

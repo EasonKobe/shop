@@ -1,0 +1,76 @@
+<div ng-controller="tenantAddCtrl">
+	<div class="section">
+		<div class="leftmenu_navtitle">
+			保理商信息 <i class="follow_icon" title="关注该业务"></i>
+		</div>
+		<form name="tenantForm">
+			<div class="allcontent">
+							<div class="col_td">
+					<div class="col4 text_right">
+					<i class="red_input">*</i>保理商名称：</div>
+					<div class="wd190 float_left">
+						<input class="layui-input" type="text" name="tenantName"
+							ng-model="tenant.tenantName" validator="required">
+						<input type="hidden" ng-model="tenant.roleId">
+					</div>
+				</div>
+								<div class="col_td">
+					<div class="col4 text_right">
+					<i class="red_input">*</i>社会信用代码：</div>
+					<div class="wd190 float_left">
+						<input class="layui-input" type="text" name="orgCode"
+							ng-model="tenant.orgCode" validator="required,creditCode">
+					</div>
+				</div>
+				<div class="col_td">
+					<div class="col4 text_right">
+					<i class="red_input">*</i>管理员名称：</div>
+					<div class="wd190 float_left">
+						<input class="layui-input" type="text" name="managerName"
+							ng-model="tenant.managerName" validator="required">
+					</div>
+				</div>
+				<div class="col_td">
+					<div class="col4 text_right">
+					<i class="red_input">*</i>登录名：</div>
+					<div class="wd190 float_left">
+						<input class="layui-input" type="text" name="loginName"
+							ng-model="tenant.loginName" validator="required">
+					</div>
+				</div>
+				<div class="col_td"  ng-if="!tenant.id">
+					<div class="col4 text_right">
+						<i class="red_input">*</i>密码：
+					</div>
+					<div class="wd190 float_left">
+						<input class="layui-input" type="password" name="password"
+							ng-model="tenant.password" validator="required,password">
+					</div>
+				</div>
+				<div class="col_td"  ng-if="!tenant.id">
+					<div class="col4 text_right">
+						<i class="red_input">*</i>密码确认：
+					</div>
+					<div class="wd190 float_left">
+						<input class="layui-input" type="password" name="repassword"
+							ng-model="tenant.repassword" validator="required,password">
+					</div>
+				</div>
+				<div class="col_td">
+					<div class="col4 text_right">手机号码：</div>
+					<div class="wd190 float_left">
+						<input class="layui-input" type="text" ng-model="tenant.mobile" validator="telephone" tel-error-message="移动电话号码输入格式错误">
+					</div>
+				</div>
+			</div>
+		</form>
+
+		<div class="float_btnfoot">
+			<div>
+			<button class="layui-btn"
+				ng-click="turn('/tenant/tenantmg/tenantMgList')">
+				<i class="layui-icon">&#xe60c;</i> 返回
+			</button>
+		</div>
+	</div>
+</div>

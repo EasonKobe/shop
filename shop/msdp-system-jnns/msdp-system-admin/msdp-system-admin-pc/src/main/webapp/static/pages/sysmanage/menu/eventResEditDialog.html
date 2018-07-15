@@ -1,0 +1,27 @@
+<div  ng-controller="eventResEditDialogCtrl">
+	<form name="eventResEditDialogForm">
+            	<div class="col_td">
+                    <div class="col4 text_right"><i class="red_input">*</i>事件编号：</div>
+                    <div class="wd190 float_left">
+                    	<input type="hidden" ng-model="eventResInfo.id">
+                        <input class="layui-input" type="text" ng-model="eventResInfo.eventCode"
+                        disabled="disabled">
+                    </div>
+                </div>
+            	<div class="col_td">
+                    <div class="col4 text_right"><i class="red_input">*</i>事件名称：</div>
+                    <div class="wd190 float_left">
+                        <input class="layui-input" type="text" ng-model="eventResInfo.eventName"
+                        validator="required" name="eventName">
+                    </div>
+                </div>
+                
+                <div class="col_td">
+                    <div class="col4 text_right"><i class="red_input">*</i>事件url：</div>
+                    <div class="wd190 float_left">
+                        <input class="layui-input" type="text" ng-model="eventResInfo.url"
+                        validator="required" name="url">
+                    </div>
+                </div>
+        </form>
+</div>

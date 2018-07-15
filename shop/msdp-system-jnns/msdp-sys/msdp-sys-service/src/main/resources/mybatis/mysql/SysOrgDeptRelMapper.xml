@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jeedev.msdp.sys.org.dao.ISysOrgDeptRelDao">
+	<resultMap id="sysOrgDeptRelMap" type="java.util.Map" >
+		<result column="ID" property="id" javaType="java.lang.String" />
+		<result column="ORG_CODE" property="orgCode" javaType="java.lang.String" />
+		<result column="DEPT_CODE" property="deptCode" javaType="java.lang.String" />
+		<result column="STATUS_CD" property="statusCd" javaType="java.lang.String" />
+		<result column="REMARK" property="remark" javaType="java.lang.String" />
+		<result column="DEL_IND" property="delInd" javaType="java.lang.String" />
+		<result column="CREATE_USER" property="createUser" javaType="java.lang.String" />
+		<result column="CREATE_TIME" property="createTime" javaType="java.util.Date" />
+		<result column="UPDATE_USER" property="updateUser" javaType="java.lang.String" />
+		<result column="UPDATE_TIME" property="updateTime" javaType="java.util.Date" />
+		<result column="EXPD_ID" property="expdId" javaType="java.lang.String" />
+		<result column="VERSION" property="version" javaType="java.lang.Integer" />
+		<result column="TENANT_ID" property="tenantId" javaType="java.lang.String" /> 
+		
+		<result column="ORG_NAME" property="orgName" javaType="java.lang.String" />
+	</resultMap>
+
+	<sql id="column_list">
+		SODR.ID, SODR.ORG_CODE, SODR.DEPT_CODE, SODR.STATUS_CD, SODR.REMARK, SODR.DEL_IND, SODR.CREATE_USER,
+		SODR.CREATE_TIME, SODR.UPDATE_USER, SODR.UPDATE_TIME, SODR.EXPD_ID, SODR.VERSION, SODR.TENANT_ID
+		,SO.ORG_NAME
+	</sql>
+
+	<sql id="where_filters">
+		<where>
+			SO.ORG_CODE=SODR.ORG_CODE
+			<if test="id!=null and id!=''">
+				AND SODR.ID = #{id}
+			</if>
+			<if test="orgCode!=null and orgCode!=''">
+				AND SODR.ORG_CODE = #{orgCode}
+			</if>
+			<if test="deptCode!=null and deptCode!=''">
+				AND SODR.DEPT_CODE = #{deptCode}
+			</if>
+			<if test="statusCd!=null and statusCd!=''">
+				AND SODR.STATUS_CD = #{statusCd}
+			</if>
+			<if test="delInd!=null and delInd!=''">
+				AND SODR.DEL_IND = #{delInd}
+				AND SO.DEL_IND = #{delInd}
+			</if>
+			<if test="tenantId!=null and tenantId!=''">
+				AND SODR.TENANT_ID = #{tenantId}
+			</if>
+		</where>
+	</sql>
+
+	<!--根据条件查询列表 -->
+	<select id="findOrgDeptRelList" parameterType="map" resultMap="sysOrgDeptRelMap">
+		SELECT
+		<include refid="column_list" />
+		FROM SYS_ORG_DEPT_REL SODR,SYS_ORGANIZATION SO
+		<include refid="where_filters" />
+		ORDER BY SODR.ID DESC
+	</select>
+
+</mapper>

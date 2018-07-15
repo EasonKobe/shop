@@ -1,0 +1,17 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	
+	<!-- 默认消费者端口和IP采用与提供者一致 ，如需配置多个注册地址，请独立配置-->
+<!--   	<dubbo:application name="scf-sys-service" /> -->
+	<!-- 使用zookeeper注册中心暴露服务地址 -->
+<!--     <dubbo:registry address="${dubbo.registry.address}" file="${dubbo.registry.file}"/> -->
+	<!-- 消费者配置  -->
+	<dubbo:consumer check="false" timeout="30000" retries="0"/>	
+    <!-- 延迟加载超时不重试 -->
+    <dubbo:provider delay="-1" timeout="30000"  retries="0"/>	
+	<import resource="classpath*:/dubbo/consumer-*.xml"/>
+</beans>
