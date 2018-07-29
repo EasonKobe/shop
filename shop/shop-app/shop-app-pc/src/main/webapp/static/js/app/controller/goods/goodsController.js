@@ -22,7 +22,7 @@ define(function (require){
 			jfRest.request('goods','save', $scope.goods).then(function(data) {
 				if (data.status == 200) {
 					jfLayer.success("保存成功");
-					$rootScope.turn("/user/goods/goodsList");
+					$rootScope.turn("/public/goods/goodsList");
 				} else {
 					jfLayer.fail(data.description);
 				}

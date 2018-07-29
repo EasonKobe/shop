@@ -1,0 +1,83 @@
+<div class="layout_body" ng-controller="goodsListCtrl">
+	<div class="body_mg20">
+		<div class="subposition" ng-bind-html="getCurrentLoaction('商品列表')">
+        </div>
+		<form class="layui-form layui-form-pane" name="form1">
+			<div class="search_mian">
+				<div class="layui-form-item">
+					<div class="layui-inline">
+						<label class="layui-form-label">商品编号：</label>
+						<div class="layui-input-inline">
+							<input class="layui-input" type="text"
+								ng-model="goodsList.params.goodsId">
+						</div>
+					</div>
+					<div class="layui-inline">
+						<label class="layui-form-label">商品名称：</label>
+						<div class="layui-input-inline">
+							<input class="layui-input" type="text"
+								ng-model="goodsList.params.goodsName">
+						</div>
+					</div>
+					<div class="layui-inline">
+						<label class="layui-form-label">商品类别：</label>
+						<div class="layui-input-inline">
+							<input class="layui-input" type="text"
+								ng-model="goodsList.params.catalogId">
+						</div>
+					</div>
+				</div>
+				<div class="search_button">
+					<button class="layui-btn" ng-click="goodsList.search()">
+						<i class="layui-icon">&#xe615;</i> 查询
+					</button>
+	
+					<button class="layui-btn" type="button" ng-click="goodsList.params={}">
+						<i class="layui-icon">&#x1002;</i> 重置
+					</button>
+				</div>
+			</div>
+		</form>
+		
+		<div class="button_contain">
+			<button class="layui-btn layui-btn-primary"
+				ng-click="goodsList.turn('/public/goods/goodsEdit?id')">
+				<i class="layui-icon">&#xe61f;</i> 详情
+			</button>
+			<!-- <button class="layui-btn layui-btn-primary"
+				ng-click="goodsList.request('goodsList.delete?id&accState','确认解绑该账户？')">
+				<i class="layui-icon">&#xe642;</i> 解绑
+			</button> -->
+		</div>
+		
+		<div jf-grid="goodsList">
+			<table>
+				<thead>
+					<tr>
+						<th align="center" class="nosort">商品编号</th>
+						<th align="center" class="nosort">商品名称</th>
+						<th align="center" class="nosort">商品类别</th>
+						<th align="center" class="nosort">价格</th>
+						<th align="center" class="nosort">折扣</th>
+						<th align="center" class="nosort">销量</th>
+						<th align="center" class="nosort">库存</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td align="center" ng-bind="item.goodsId"></td>
+						<td align="center" ng-bind="item.goodsName"></td>
+						<td align="center" ng-bind="item.catalogId"></td>
+						<td align="center" ng-bind="item.goodsPrice"></td>
+						<td align="center" ng-bind="item.goodsDiscount"></td>
+						<td align="center" ng-bind="item.goodsSale"></td>
+						<td align="center" ng-bind="item.goodsNum"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	<!--body_mg20end-->
+</div>
+
+
+

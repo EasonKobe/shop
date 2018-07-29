@@ -1,0 +1,120 @@
+<div ng-controller="goodsCtrl">
+	<div>
+		<div class="leftmenu_navtitle">商品详情</div>
+		<div class="allcontent">
+			<form class="layui-form" name="goodsEdit">
+				<div class="col_td">
+					<div class="col4 text_right">
+						<i class="red_input">*</i>商品名称：
+					</div>
+					<div class="wd190 float_left">
+						<input class="layui-input" ng-disabled="goods.id" type="text"
+							ng-model="goods.goodsName" name="goodsName" validator="required">
+					</div>
+				</div>
+				<div class="col_td">
+					<div class="col4 text_right">
+						<i class="red_input">*</i>商品价格：
+					</div>
+					<div class="wd190 float_left">
+						<input class="layui-input" ng-disabled="goods.id" type="text"
+							ng-model="goods.goodsPrice" name="goodsPrice"
+							validator="required">
+					</div>
+				</div>
+				<div class="col_td">
+					<div class="col4 text_right">
+						<i class="red_input">*</i>商品折扣：
+					</div>
+					<div class="wd190 float_left">
+						<input class="layui-input" ng-disabled="goods.id" type="text"
+							ng-model="goods.goodsDiscount" name="goodsDiscount"
+							validator="required">
+					</div>
+				</div>
+				<div class="col_td">
+					<div class="col4 text_right">
+						<i class="red_input">*</i>商品销量：
+					</div>
+					<div class="wd190 float_left">
+						<input class="layui-input" ng-disabled="goods.id" type="text"
+							ng-model="goods.goodsSale" name="goodsSale" validator="required">
+					</div>
+				</div>
+				<div class="col_td">
+					<div class="col4 text_right">
+						<i class="red_input">*</i>商品库存：
+					</div>
+					<div class="wd190 float_left">
+						<input class="layui-input" ng-disabled="goods.id" type="text"
+							ng-model="goods.goodsNum" name="goodsNum" validator="required">
+					</div>
+				</div>
+				<div class="col_td">
+					<div class="col4 text_right">
+						<i class="red_input">*</i>商品描述：
+					</div>
+					<div class="wd190 float_left">
+						<textarea class="layui-input" ng-disabled="goods.id" type="text"
+							ng-model="goods.abstract" name="abstract" validator="required"></textarea>
+					</div>
+				</div>
+				<div class="col_td">
+					<div class="col4 text_right">
+						<i class="red_input">*</i>运费标识：
+					</div>
+					<div class="wd190 float_left">
+						<textarea class="layui-input" ng-disabled="goods.id" type="text"
+							ng-model="goods.freeInd" name="freeInd" validator="required"></textarea>
+					</div>
+				</div>
+				<div class="col_td">
+					<div class="col4 text_right">
+						<i class="red_input">*</i>热销标识：
+					</div>
+					<div class="wd190 float_left">
+						<textarea class="layui-input" ng-disabled="goods.id" type="text"
+							ng-model="goods.hotInd" name="hotInd" validator="required"></textarea>
+					</div>
+				</div>
+				<div class="col_td">
+					<div class="col4 text_right">
+						<i class="red_input">*</i>新品标识：
+					</div>
+					<div class="wd190 float_left">
+						<textarea class="layui-input" ng-disabled="goods.id" type="text"
+							ng-model="goods.newInd" name="newInd" validator="required"></textarea>
+					</div>
+				</div>
+				<div class="col_td">
+					<div class="col4 text_right">
+						<i class="red_input">*</i>上架标识：
+					</div>
+					<div class="wd190 float_left">
+						<textarea class="layui-input" ng-disabled="goods.id" type="text"
+							ng-model="goods.status" name="status" validator="required"></textarea>
+					</div>
+				</div>
+				<div class="col_td">
+					<div class="col4 text_right">
+						<i class="red_input">*</i>商品品牌：
+					</div>
+					<div class="wd190 float_left">
+						<textarea class="layui-input" ng-disabled="goods.id" type="text"
+							ng-model="goods.goodsBrands" name="goodsBrands" validator="required"></textarea>
+					</div>
+				</div>
+			</form>
+		</div>
+		<div class="float_btnfoot">
+			<button class="layui-btn" validation-submit="goodsEdit"
+				ng-click="save()">
+				<i class="layui-icon"> &#x1005;</i> 保存
+			</button>
+			<button class="layui-btn" ng-click="turn('/public/goods/goodsList')"">
+				<i class="layui-icon">&#x1006;</i> 返回
+			</button>
+		</div>
+
+	</div>
+</div>
