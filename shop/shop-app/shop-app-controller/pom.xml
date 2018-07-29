@@ -23,6 +23,10 @@
 			<groupId>com.tansun.tb</groupId>
 			<artifactId>misu-cst-service</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.tansun.tb</groupId>
+			<artifactId>misu-goods-service</artifactId>
+		</dependency>
     
 		<!-- 业务模块api end -->
         

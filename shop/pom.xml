@@ -1309,6 +1309,11 @@
 				<artifactId>misu-cst-service</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>com.tansun.tb</groupId>
+				<artifactId>misu-goods-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 
         </dependencies>
     </dependencyManagement>

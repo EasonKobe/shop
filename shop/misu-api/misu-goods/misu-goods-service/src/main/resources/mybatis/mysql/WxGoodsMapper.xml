@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eason.wx.goods.dao.WxGoodsDao">
+	<resultMap type="java.util.Map" id="wxGoodsMap">
+		<result column="GOODS_ID" property="goodsId"/>
+		<result column="CATALOG_ID" property="catalogId"/>
+		<result column="GOODS_NAME" property="goodsName"/>
+		<result column="GOODS_PRICE" property="goodsPrice"/>
+		<result column="GOODS_DISCOUNT" property="goodsDiscount"/>
+		<result column="GOODS_SALE" property="goodsSale"/>
+		<result column="GOODS_NUM" property="goodsNum"/>
+		<result column="GOODS_TITLE" property="goodsTitle"/>
+		<result column="DESCRIPTION" property="description"/>
+		<result column="FREE_IND" property="freeInd"/>
+		<result column="HOT_IND" property="hotInd"/>
+		<result column="GOODS_BRANDS" property="goodsBrands"/>
+		<result column="NEW_IND" property="newInd"/>
+		<result column="BENEFIT" property="benefit"/>
+		<result column="STATUS" property="status"/>
+		<result column="GOODS_SCORE" property="goodsScore"/>
+		<result column="REMARK_1" property="remark1"/>
+		<result column="REMARK_2" property="remark2"/>
+		<result column="REMARK_3" property="remark3"/>
+        <result column="ID" property="id" />
+        <result column="CREATE_TIME" property="createTime" />
+        <result column="UPDATE_TIME" property="updateTime" />
+        <result column="CREATE_USER" property="createUser" />
+        <result column="UPDATE_USER" property="updateUser" />
+        <result column="EXPD_ID" property="expdId" />
+        <result column="DEL_IND" property="delInd" />
+        <result column="VERSION" property="version" />
+	</resultMap>
+
+    <sql id="column_list">
+        ID,  GOODS_ID, CATALOG_ID, GOODS_NAME, GOODS_PRICE, GOODS_DISCOUNT, GOODS_SALE, GOODS_NUM, GOODS_TITLE, DESCRIPTION, FREE_IND, HOT_IND, GOODS_BRANDS, NEW_IND, BENEFIT, STATUS, GOODS_SCORE, REMARK_1, REMARK_2, REMARK_3, TENANT_ID,CREATE_TIME, UPDATE_TIME, CREATE_USER, UPDATE_USER, EXPD_ID, DEL_IND, VERSION
+	</sql>
+	
+    <sql id="where_filters">
+        <where>
+        	<if test="1==1">
+        		AND DEL_IND = '0'
+			</if>
+        	<if test="id!=null and id!=''">
+				AND ID = #{id}
+			</if>
+			<if test="goodsId!=null and goodsId!=''">
+				AND GOODS_ID = #{goodsId}
+			</if>
+			<if test="catalogId!=null and catalogId!=''">
+				AND CATALOG_ID = #{catalogId}
+			</if>
+			<if test="goodsName!=null and goodsName!=''">
+				AND GOODS_NAME = #{goodsName}
+			</if>
+			<if test="goodsPrice!=null and goodsPrice!=''">
+				AND GOODS_PRICE = #{goodsPrice}
+			</if>
+			<if test="goodsDiscount!=null and goodsDiscount!=''">
+				AND GOODS_DISCOUNT = #{goodsDiscount}
+			</if>
+			<if test="goodsSale!=null and goodsSale!=''">
+				AND GOODS_SALE = #{goodsSale}
+			</if>
+			<if test="goodsNum!=null and goodsNum!=''">
+				AND GOODS_NUM = #{goodsNum}
+			</if>
+			<if test="goodsTitle!=null and goodsTitle!=''">
+				AND GOODS_TITLE = #{goodsTitle}
+			</if>
+			<if test="description!=null and description!=''">
+				AND DESCRIPTION = #{description}
+			</if>
+			<if test="freeInd!=null and freeInd!=''">
+				AND FREE_IND = #{freeInd}
+			</if>
+			<if test="hotInd!=null and hotInd!=''">
+				AND HOT_IND = #{hotInd}
+			</if>
+			<if test="goodsBrands!=null and goodsBrands!=''">
+				AND GOODS_BRANDS = #{goodsBrands}
+			</if>
+			<if test="newInd!=null and newInd!=''">
+				AND NEW_IND = #{newInd}
+			</if>
+			<if test="benefit!=null and benefit!=''">
+				AND BENEFIT = #{benefit}
+			</if>
+			<if test="status!=null and status!=''">
+				AND STATUS = #{status}
+			</if>
+			<if test="goodsScore!=null and goodsScore!=''">
+				AND GOODS_SCORE = #{goodsScore}
+			</if>
+			<if test="remark1!=null and remark1!=''">
+				AND REMARK_1 = #{remark1}
+			</if>
+			<if test="remark2!=null and remark2!=''">
+				AND REMARK_2 = #{remark2}
+			</if>
+			<if test="remark3!=null and remark3!=''">
+				AND REMARK_3 = #{remark3}
+			</if>
+        </where>
+    </sql>
+
+    <!--根据条件查询列表-->
+    <select id="findGoodsList" parameterType="map" resultMap="wxGoodsMap">
+        SELECT <include refid="column_list"/> FROM wx_goods <include refid="where_filters"/>
+    </select>
+
+</mapper>
