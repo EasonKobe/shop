@@ -1,0 +1,318 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<templateGroups>
+  <mode id="oneQuery" name="单表查询" isLayout="true">
+ 	<group name="CT单表查询方案">
+		<template>
+			<name>queryConditionView.java</name>
+			<desc>查询条件视图 Bean</desc>
+			<path>templates/oneQuery/scc/queryConditionView.ftl</path>
+			<target>${project.path}/src/${package.name}/view/${table.name}QueryConditionView.java</target>
+		</template>
+		<template>
+			<name>queryItemView.java</name>
+			<desc>查询结果视图 Bean</desc>
+			<path>templates/oneQuery/scc/queryItemView.ftl</path>
+			<target>${project.path}/src/${package.name}/view/${table.name}QueryItemView.java</target>
+		</template>	
+		<template>
+			<name>mapper.java</name>
+			<desc>MyBatis数据库操作的接口类</desc>
+			<path>templates/oneQuery/scc/mapperJava.ftl</path>
+			<target>${project.path}/src/${package.name}/mapper/${table.name}Mapper.java</target>
+		</template>	
+		<template>
+			<name>mapper.xml</name>
+			<desc>MyBatis数据库操作的XML配置</desc>
+			<path>templates/oneQuery/scc/mapperXml.ftl</path>
+			<target>${project.path}/resources/${package.name}/mapper/${table.name}Mapper.xml</target>
+		</template>	
+		<template>
+			<name>manager.java</name>
+			<desc>业务接口</desc>
+			<path>templates/oneQuery/scc/manager.ftl</path>
+			<target>${project.path}/src/${package.name}/services/${table.name}Manager.java</target>
+		</template>	
+		<template>
+			<name>managerImpl.java</name>
+			<desc>业务接口实现类</desc>
+			<path>templates/oneQuery/scc/managerImpl.ftl</path>
+			<target>${project.path}/src/${package.name}/services/impl/${table.name}ManagerImpl.java</target>
+		</template>	
+		<template>
+			<name>action.java</name>
+			<desc>查询操作的action类</desc>
+			<path>templates/oneQuery/scc/action.ftl</path>
+			<target>${project.path}/src/${package.name}/controllers/${table.name}Action.java</target>
+		</template>	
+		<template>
+			<name>jsp</name>
+			<desc>前台展示的页面jsp</desc>
+			<path>templates/oneQuery/scc/jsp.ftl</path>
+			<target>${project.path}/WebContent/${module.name}/jsp/${table.name?uncap_first}Query.jsp</target>
+		</template>	
+		<template>
+			<name>js</name>
+			<desc>前台展示的页面js</desc>
+			<path>templates/oneQuery/scc/js.ftl</path>
+			<target>${project.path}/WebContent/${module.name}/js/${table.name?uncap_first}Query.js</target>
+		</template>		
+	</group>
+	<group name="APP单表查询方案" mode="oneQuery">
+		<template>
+			<name>model.java</name>
+			<desc>后台实体类</desc>
+			<path>templates/oneQuery/app/model.ftl</path>
+			<target>${project.path}/src/${package.name}/model/${table.name}Model.java</target>
+		</template>
+		<template>
+			<name>queryCondition.java</name>
+			<desc>查询条件视图 Bean</desc>
+			<path>templates/oneQuery/app/queryCondition.ftl</path>
+			<target>${project.path}/src/${package.name}/query/${table.name}QueryCondition.java</target>
+		</template>
+		<template>
+			<name>queryItem.java</name>
+			<desc>查询结果视图 Bean</desc>
+			<path>templates/oneQuery/app/queryItem.ftl</path>
+			<target>${project.path}/src/${package.name}/query/${table.name}QueryItem.java</target>
+		</template>
+		<template>
+			<name>manager.java</name>
+			<desc>业务接口</desc>
+			<path>templates/oneQuery/app/manager.ftl</path>
+			<target>${project.path}/src/${package.name}/service/${table.name}Manager.java</target>
+		</template>	
+		<template>
+			<name>managerImpl.java</name>
+			<desc>业务接口实现类</desc>
+			<path>templates/oneQuery/app/managerImpl.ftl</path>
+			<target>${project.path}/src/${package.name}/service/impl/${table.name}ManagerImpl.java</target>
+		</template>	
+		<template>
+			<name>queryHbmXml</name>
+			<desc>查询SQL语句</desc>
+			<path>templates/oneQuery/app/queryHbmXml.ftl</path>
+			<target>${project.path}/src/${package.name}/query/${table.name}ListQuery.hbm.xml</target>
+		</template>
+		<template>
+			<name>model.as</name>
+			<desc>前台实体类</desc>
+			<path>templates/oneQuery/app/modelAs.ftl</path>
+			<target>${project.path}/flex_src/${package.name}/model/${table.name}Model.as</target>
+		</template>
+		<template>
+			<name>list.mxml</name>
+			<desc>页面</desc>
+			<path>templates/oneQuery/app/listMxml.ftl</path>
+			<target>${project.path}/flex_src/${package.name}/view/${table.name}List.mxml</target>
+		</template>
+		<template>
+			<name>listAction.as</name>
+			<desc>前台action</desc>
+			<path>templates/oneQuery/app/listActionAs.ftl</path>
+			<target>${project.path}/flex_src/${package.name}/action/${table.name}ListAction.as</target>
+		</template>
+	</group>
+  </mode>
+  <mode id="oneEdit" name="单表编辑" isLayout="true">
+	<group name="SCC单表编辑方案">
+		<template>
+			<name>action.java</name>
+			<desc>查询操作的action类</desc>
+			<path>templates/oneEdit/scc/action.ftl</path>
+			<target>${project.path}/src/${package.name}/controllers/${table.name}EditAction.java</target>
+		</template>
+		<template>
+			<name>model.java</name>
+			<desc>对应的JAVA Bean</desc>
+			<path>templates/oneEdit/scc/model.ftl</path>
+			<target>${project.path}/src/${package.name}/model/${table.name}Model.java</target>
+		</template>
+		<template>
+			<name>manager.java</name>
+			<desc>业务接口</desc>
+			<path>templates/oneEdit/scc/manager.ftl</path>
+			<target>${project.path}/src/${package.name}/services/${table.name}Manager.java</target>
+		</template>	
+		<template>
+			<name>managerImpl.java</name>
+			<desc>业务接口实现类</desc>
+			<path>templates/oneEdit/scc/managerImpl.ftl</path>
+			<target>${project.path}/src/${package.name}/services/impl/${table.name}ManagerImpl.java</target>
+		</template>		
+		<template>
+			<name>mapper.java</name>
+			<desc>MyBatis数据库操作的接口类</desc>
+			<path>templates/oneEdit/scc/mapperJava.ftl</path>
+			<target>${project.path}/src/${package.name}/mapper/${table.name}Mapper.java</target>
+		</template>	
+		<template>
+			<name>mapper.xml</name>
+			<desc>MyBatis数据库操作的XML配置</desc>
+			<path>templates/oneEdit/scc/mapperXml.ftl</path>
+			<target>${project.path}/resources/${package.name}/mapper/${table.name}Mapper.xml</target>
+		</template>	
+		<template>
+			<name>jsp</name>
+			<desc>前台展示的页面jsp</desc>
+			<path>templates/oneEdit/scc/jsp.ftl</path>
+			<target>${project.path}/WebContent/${module.name}/jsp/${table.name?uncap_first}Edit.jsp</target>
+		</template>	
+		<template>
+			<name>js</name>
+			<desc>前台展示的页面js</desc>
+			<path>templates/oneEdit/scc/js.ftl</path>
+			<target>${project.path}/WebContent/${module.name}/js/${table.name?uncap_first}Edit.js</target>
+		</template>	
+	</group>
+	<group name="APP单表编辑方案">
+		<template>
+			<name>model.java</name>
+			<desc>后台实体类</desc>
+			<path>templates/oneEdit/app/model.ftl</path>
+			<target>${project.path}/src/${package.name}/model/${table.name}Model.java</target>
+		</template>
+		<template>
+			<name>manager.java</name>
+			<desc>业务接口</desc>
+			<path>templates/oneEdit/app/manager.ftl</path>
+			<target>${project.path}/src/${package.name}/service/${table.name}Manager.java</target>
+		</template>	
+		<template>
+			<name>managerImpl.java</name>
+			<desc>业务接口实现类</desc>
+			<path>templates/oneEdit/app/managerImpl.ftl</path>
+			<target>${project.path}/src/${package.name}/service/impl/${table.name}ManagerImpl.java</target>
+		</template>		
+		<template>
+			<name>model.as</name>
+			<desc>前台实体类</desc>
+			<path>templates/oneEdit/app/modelAs.ftl</path>
+			<target>${project.path}/flex_src/${package.name}/model/${table.name}Model.as</target>
+		</template>
+		<template>
+			<name>edit.mxml</name>
+			<desc>页面</desc>
+			<path>templates/oneEdit/app/editMxml.ftl</path>
+			<target>${project.path}/flex_src/${package.name}/view/${table.name}Edit.mxml</target>
+		</template>
+		<template>
+			<name>editAction.as</name>
+			<desc>前台action</desc>
+			<path>templates/oneEdit/app/editActionAs.ftl</path>
+			<target>${project.path}/flex_src/${package.name}/action/${table.name}EditAction.as</target>
+		</template>
+	</group>
+  </mode>
+  <mode id="multiQuery" name="多表关联查询" isLayout="true">
+	<group name="SCC多表关联查询方案"></group>
+  </mode>
+  <mode id="multiEdit" name="一对多编辑" isLayout="true">
+	<group name="SCC一对多编译方案"></group>
+  </mode>
+  <mode id="pure" name="后台文件" isLayout="false">
+	  <group name ="Tansun后台文件">
+		  <!-- 		<template> -->
+		  <!-- 			<name>controller.java</name> -->
+		  <!-- 			<desc>查询操作的action类</desc> -->
+		  <!-- 			<path>templates/pure/ct/controller.ftl</path> -->
+		  <!-- 			<target>${project.path}/src/${package.name}/web/controller/${table.name}Controller.java</target> -->
+		  <!-- 		</template> -->
+		  <template>
+			  <name>Service.java</name>
+			  <desc>业务接口</desc>
+			  <path>templates/pure/ct/service.ftl</path>
+			  <target>${project.path}/src/${package.name}/service/I${table.name}Service.java</target>
+		  </template>
+		  <template>
+			  <name>serviceImpl.java</name>
+			  <desc>业务接口实现类</desc>
+			  <path>templates/pure/ct/serviceImpl.ftl</path>
+			  <target>${project.path}/src/${package.name}/service/impl/${table.name}ServiceImpl.java</target>
+		  </template>
+		  <template>
+			  <name>Dao.java</name>
+			  <desc>MyBatis数据库操作的接口类</desc>
+			  <path>templates/pure/ct/Dao.ftl</path>
+			  <target>${project.path}/src/${package.name}/dao/${table.name}Dao.java</target>
+		  </template>
+		  <!--<template>-->
+			  <!--<name>DaoImpl.java</name>-->
+			  <!--<desc>MyBatis数据库操作的接口实现类</desc>-->
+			  <!--<path>templates/pure/ct/DaoImpl.ftl</path>-->
+			  <!--<target>${project.path}/src/${package.name}/dao/impl/${table.name}DaoImpl.java</target>-->
+		  <!--</template>-->
+		  <template>
+			  <name>mapper.xml</name>
+			  <desc>MyBatis数据库操作的XML配置</desc>
+			  <path>templates/pure/ct/mapperXml.ftl</path>
+			  <target>${project.path}/src/${package.name}/mapping/${table.name}Mapper.xml</target>
+		  </template>
+		  <template>
+			  <name>model.java</name>
+			  <desc>对应的JAVA Bean</desc>
+			  <path>templates/pure/ct/model.ftl</path>
+			  <target>${project.path}/src/${package.name}/pojo/${table.name}.java</target>
+		  </template>
+	  </group>
+	  <group name="SCC后台文件">
+		<template>
+			<name>action.java</name>
+			<desc>查询操作的action类</desc>
+			<path>templates/pure/scc/action.ftl</path>
+			<target>${project.path}/src/${package.name}/controllers/${table.name}Action.java</target>
+		</template>
+		<template>
+			<name>manager.java</name>
+			<desc>业务接口</desc>
+			<path>templates/pure/scc/manager.ftl</path>
+			<target>${project.path}/src/${package.name}/services/${table.name}Manager.java</target>
+		</template>	
+		<template>
+			<name>managerImpl.java</name>
+			<desc>业务接口实现类</desc>
+			<path>templates/pure/scc/managerImpl.ftl</path>
+			<target>${project.path}/src/${package.name}/services/impl/${table.name}ManagerImpl.java</target>
+		</template>		
+		<template>
+			<name>mapper.java</name>
+			<desc>MyBatis数据库操作的接口类</desc>
+			<path>templates/pure/scc/mapperJava.ftl</path>
+			<target>${project.path}/src/${package.name}/mapper/${table.name}Mapper.java</target>
+		</template>	
+		<template>
+			<name>mapper.xml</name>
+			<desc>MyBatis数据库操作的XML配置</desc>
+			<path>templates/pure/scc/mapperXml.ftl</path>
+			<target>${project.path}/resources/${package.name}/mapper/${table.name}Mapper.xml</target>
+		</template>	
+		<template>
+			<name>model.java</name>
+			<desc>对应的JAVA Bean</desc>
+			<path>templates/pure/scc/model.ftl</path>
+			<target>${project.path}/src/${package.name}/model/${table.name}Model.java</target>
+		</template>	
+	</group>
+	<group name="APP后台文件">
+		<template>
+			<name>model.java</name>
+			<desc>对应的JAVA Bean</desc>
+			<path>templates/pure/app/model.ftl</path>
+			<target>${project.path}/src/${package.name}/model/${table.name}Action.java</target>
+		</template>
+		<template>
+			<name>manager.java</name>
+			<desc>业务接口</desc>
+			<path>templates/pure/app/manager.ftl</path>
+			<target>${project.path}/src/${package.name}/service/${table.name}Manager.java</target>
+		</template>	
+		<template>
+			<name>managerImpl.java</name>
+			<desc>业务接口实现类</desc>
+			<path>templates/pure/app/managerImpl.ftl</path>
+			<target>${project.path}/src/${package.name}/service/impl/${table.name}ManagerImpl.java</target>
+		</template>	
+	</group>	
+
+  </mode>	
+  </templateGroups>

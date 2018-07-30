@@ -31,7 +31,7 @@ import com.jeedev.msdp.core.web.action.BaseAppAction;
  * </pre>
  */
 @Controller
-@RequestMapping("public/goods")
+@RequestMapping("/public/goods")
 public class GoodsAction extends BaseAppAction{
 	
 	@Autowired
